@@ -1,4 +1,4 @@
-<xml xmlns="https://developers.google.com/blockly/xml" is_dbot="true" collection="false">
+<xml xmlns="https://www.w3.org/1999/xhtml" collection="false">
   <variables>
     <variable id="6o_9Nu#$3m#.?zV=ahjK">Prediction</variable>
     <variable id="rUPB[)tUi3we;byHr`7]">Time</variable>
@@ -31,7 +31,7 @@
                 <field name="TYPE_LIST">both</field>
                 <next>
                   <block type="trade_definition_candleinterval" id="pWG0b-IhqM5@^[$tvSxM" deletable="false" movable="false">
-                    <field name="CANDLEINTERVAL_LIST">60</field>
+                    <field name="CANDLEINTERVAL_LIST">30</field>
                     <next>
                       <block type="trade_definition_restartbuysell" id=";c+c9u)IGsNJn.dg5#C)" deletable="false" movable="false">
                         <field name="TIME_MACHINE_ENABLED">FALSE</field>
