@@ -108,16 +108,16 @@
                                 </value>
                                 <next>
                                   <!-- Fixed Fibonacci initialization -->
-                                  <block type="variables_set" id="fib_init1">
-                                    <field name="VAR" id="fib_prev">FibPrev</field>
+                                  <block type="variables_set">
+                                    <field name="VAR">FibPrev</field>
                                     <value name="VALUE">
                                       <block type="math_number">
-                                        <field name="NUM">0</field>
+                                        <field name="NUM">1</field>
                                       </block>
                                     </value>
                                     <next>
-                                      <block type="variables_set" id="fib_init2">
-                                        <field name="VAR" id="fib_current">FibCurrent</field>
+                                      <block type="variables_set">
+                                        <field name="VAR">FibCurrent</field>
                                         <value name="VALUE">
                                           <block type="math_number">
                                             <field name="NUM">1</field>
