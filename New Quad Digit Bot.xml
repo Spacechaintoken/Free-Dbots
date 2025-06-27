@@ -18,7 +18,6 @@
     <variable id="bb_lower">BB_Lower</variable>
     <variable id="rsi_value">RSI</variable>
   </variables>
-  
   <!-- Original trade_definition block (unchanged) -->
   <block type="trade_definition" id="a?yA2gg3)09S3:h%hM[6" deletable="false" x="0" y="110">
     <statement name="TRADE_OPTIONS">
@@ -169,7 +168,6 @@
       </block>
     </statement>
   </block>
-  
   <!-- Original after_purchase block (unchanged) -->
   <block type="after_purchase" id="SkH.c=32mX]?E$G,}igM" x="899" y="110">
     <statement name="AFTERPURCHASE_STACK">
@@ -762,8 +760,7 @@
       </block>
     </statement>
   </block>
-  
   <block type="math_number" id="$uo}R3sNp{Vp$J%B(dBa" disabled="true" x="0" y="6088">
     <field name="NUM">0</field>
   </block>
-</xml>
+</xmls
