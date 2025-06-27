@@ -18,8 +18,7 @@
     <variable id="RSI">RSI</variable>
   </variables>
   
-  <!-- Trade Definition Block -->
-  <block type="trade_definition" id="trade_def" x="0" y="110">
+  <block type="trade_definition" id="trade_def">
     <statement name="TRADE_OPTIONS">
       <block type="trade_definition_market">
         <field name="MARKET_LIST">synthetic_index</field>
@@ -166,8 +165,7 @@
     </statement>
   </block>
   
-  <!-- After Purchase Block -->
-  <block type="after_purchase" id="after_purchase" x="899" y="110">
+  <block type="after_purchase" id="after_purchase">
     <statement name="AFTERPURCHASE_STACK">
       <block type="controls_if">
         <mutation else="1"></mutation>
@@ -413,12 +411,180 @@
             </next>
           </block>
         </statement>
+        <next>
+          <block type="text_join">
+            <field name="VARIABLE" id="text2">text2</field>
+            <statement name="STACK">
+              <block type="text_statement">
+                <value name="TEXT">
+                  <block type="text">
+                    <field name="TEXT">•Evans Eteng's FX Bot • Total Profit :$</field>
+                  </block>
+                </value>
+                <next>
+                  <block type="text_statement">
+                    <value name="TEXT">
+                      <block type="total_profit"></block>
+                    </value>
+                  </block>
+                </next>
+              </block>
+            </statement>
+            <next>
+              <block type="notify">
+                <field name="NOTIFICATION_TYPE">info</field>
+                <field name="NOTIFICATION_SOUND">silent</field>
+                <value name="MESSAGE">
+                  <block type="variables_get">
+                    <field name="VAR" id="text2">text2</field>
+                  </block>
+                </value>
+                <next>
+                  <block type="controls_if">
+                    <mutation else="1"></mutation>
+                    <value name="IF0">
+                      <block type="logic_compare">
+                        <field name="OP">LT</field>
+                        <value name="A">
+                          <block type="total_profit"></block>
+                        </value>
+                        <value name="B">
+                          <block type="variables_get">
+                            <field name="VAR" id="Expected_Profit">Expected Profit</field>
+                          </block>
+                        </value>
+                      </block>
+                    </value>
+                    <statement name="DO0">
+                      <block type="controls_if">
+                        <mutation else="1"></mutation>
+                        <value name="IF0">
+                          <block type="logic_operation">
+                            <field name="OP">AND</field>
+                            <value name="A">
+                              <block type="math_number_property">
+                                <field name="PROPERTY">NEGATIVE</field>
+                                <value name="NUMBER_TO_CHECK">
+                                  <block type="total_profit"></block>
+                                </value>
+                              </block>
+                            </value>
+                            <value name="B">
+                              <block type="logic_compare">
+                                <field name="OP">GTE</field>
+                                <value name="A">
+                                  <block type="math_single">
+                                    <field name="OP">ABS</field>
+                                    <value name="NUM">
+                                      <block type="total_profit"></block>
+                                    </value>
+                                  </block>
+                                </value>
+                                <value name="B">
+                                  <block type="variables_get">
+                                    <field name="VAR" id="Stop_Loss">Stop Loss</field>
+                                  </block>
+                                </value>
+                              </block>
+                            </value>
+                          </block>
+                        </value>
+                        <statement name="DO0">
+                          <block type="text_print">
+                            <value name="TEXT">
+                              <block type="text">
+                                <field name="TEXT">Stop Loss</field>
+                              </block>
+                            </value>
+                          </block>
+                        </statement>
+                        <statement name="ELSE">
+                          <block type="text_join">
+                            <field name="VARIABLE" id="text2">text2</field>
+                            <statement name="STACK">
+                              <block type="text_statement">
+                                <value name="TEXT">
+                                  <block type="text">
+                                    <field name="TEXT">•Evans Eteng's FX Bot • Total Profit :$</field>
+                                  </block>
+                                </value>
+                                <next>
+                                  <block type="text_statement">
+                                    <value name="TEXT">
+                                      <block type="total_profit"></block>
+                                    </value>
+                                  </block>
+                                </next>
+                              </block>
+                            </statement>
+                            <next>
+                              <block type="notify">
+                                <field name="NOTIFICATION_TYPE">info</field>
+                                <field name="NOTIFICATION_SOUND">silent</field>
+                                <value name="MESSAGE">
+                                  <block type="variables_get">
+                                    <field name="VAR" id="text2">text2</field>
+                                  </block>
+                                </value>
+                                <next>
+                                  <block type="timeout">
+                                    <statement name="TIMEOUTSTACK">
+                                      <block type="trade_again"></block>
+                                    </statement>
+                                    <value name="SECONDS">
+                                      <block type="math_number">
+                                        <field name="NUM">1</field>
+                                      </block>
+                                    </value>
+                                  </block>
+                                </next>
+                              </block>
+                            </next>
+                          </block>
+                        </statement>
+                      </block>
+                    </statement>
+                    <statement name="ELSE">
+                      <block type="text_join">
+                        <field name="VARIABLE" id="text3">text3</field>
+                        <statement name="STACK">
+                          <block type="text_statement">
+                            <value name="TEXT">
+                              <block type="text">
+                                <field name="TEXT">•Evans Eteng's FX Bot • Total Profit :$</field>
+                              </block>
+                            </value>
+                            <next>
+                              <block type="text_statement">
+                                <value name="TEXT">
+                                  <block type="total_profit"></block>
+                                </value>
+                              </block>
+                            </next>
+                          </block>
+                        </statement>
+                        <next>
+                          <block type="text_print">
+                            <value name="TEXT">
+                              <block type="variables_get">
+                                <field name="VAR" id="text3">text3</field>
+                              </block>
+                            </value>
+                          </block>
+                        </next>
+                      </block>
+                    </statement>
+                  </block>
+                </next>
+              </block>
+            </next>
+          </block>
+        </next>
       </block>
     </statement>
   </block>
   
-  <!-- Before Purchase Block with Technical Indicators -->
-  <block type="before_purchase" id="before_purchase" x="0" y="1160">
+  <block type="before_purchase" id="before_purchase">
     <statement name="BEFOREPURCHASE_STACK">
       <block type="variables_set">
         <field name="VAR" id="BB_Upper">BB_Upper</field>
