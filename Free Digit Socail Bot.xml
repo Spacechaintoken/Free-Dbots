@@ -684,18 +684,4 @@
       </block>
     </statement>
   </block>
-  <block type="variables_set" id="J|_mXt.z~H/0z{N,D|gQ" x="106" y="2646">
-    <field name="VAR" id="6o_9Nu#$3m#.?zV=ahjK">Prediction</field>
-    <value name="VALUE">
-      <block type="math_number" id="XL@).Hv*6Rerc_L=KaW#">
-        <field name="NUM">5</field>
-      </block>
-    </value>
-  </block>
-  <block type="math_number" id="6C?{u1qr=NHF++i/Gx}j" disabled="true" x="0" y="6124">
-    <field name="NUM">5</field>
-  </block>
-  <block type="math_number" id="$uo}R3sNp{Vp$J%B(dBa" disabled="true" x="0" y="6212">
-    <field name="NUM">0</field>
-  </block>
 </xml>
