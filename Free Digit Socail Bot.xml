@@ -14,8 +14,6 @@
     <variable id="fib_current">FibCurrent</variable>
     <variable id="fib_prev">FibPrev</variable>
     <variable id="LossStreak">LossStreak</variable>
-    <variable id="stoch_k">%K</variable>
-    <variable id="stoch_d">%D</variable>
     <variable id="stoch_period">Stoch Period</variable>
   </variables>
   <block type="trade_definition" id="a?yA2gg3)09S3:h%hM[6" deletable="false" x="0" y="60">
