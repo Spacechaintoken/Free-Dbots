@@ -14,7 +14,6 @@
     <variable id="fib_current">FibCurrent</variable>
     <variable id="fib_prev">FibPrev</variable>
     <variable id="LossStreak">LossStreak</variable>
-    <!-- ADDED STOCHASTIC VARIABLES -->
     <variable id="stoch_k">%K</variable>
     <variable id="stoch_d">%D</variable>
     <variable id="stoch_period">Stoch Period</variable>
@@ -807,7 +806,6 @@
           <block type="last_digit" id=".6Jt.0{m|L._2aMl3$r#"></block>
         </value>
         <next>
-          <!-- ADDED STOCHASTIC CALCULATION -->
           <block type="variables_set" id="set_stoch_k">
             <field name="VAR" id="stoch_k">%K</field>
             <value name="VALUE">
@@ -872,7 +870,6 @@
                       </block>
                     </value>
                     <statement name="DO0">
-                      <!-- ORIGINAL LOGIC STARTS HERE -->
                       <block type="controls_if" id="$o2oeKoC.TPwSj.n~wsP">
                         <mutation xmlns="http://www.w3.org/1999/xhtml" else="1"></mutation>
                         <value name="IF0">
