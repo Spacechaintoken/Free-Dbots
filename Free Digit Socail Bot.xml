@@ -54,8 +54,27 @@
       <block type="variables_set" id="g9Z}qF{^TQOBv[~M-z/g">
         <field name="VAR" id="6o_9Nu#$3m#.?zV=ahjK">Prediction</field>
         <value name="VALUE">
-          <block type="math_number" id="m}e-Um?4n%R?#=WLCa*B">
-            <field name="NUM">3</field>
+          <block type="math_arithmetic" id="prediction_init_rand">
+            <field name="OP">ADD</field>
+            <value name="A">
+              <block type="math_number" id="prediction_init_base">
+                <field name="NUM">3</field>
+              </block>
+            </value>
+            <value name="B">
+              <block type="math_random_int" id="prediction_init_randval">
+                <value name="FROM">
+                  <block type="math_number" id="prediction_init_min">
+                    <field name="NUM">-1</field>
+                  </block>
+                </value>
+                <value name="TO">
+                  <block type="math_number" id="prediction_init_max">
+                    <field name="NUM">1</field>
+                  </block>
+                </value>
+              </block>
+            </value>
           </block>
         </value>
         <next>
@@ -307,8 +326,27 @@
                               <block type="variables_set" id="20$@?y[Lni:*PT9A{I[q">
                                 <field name="VAR" id="6o_9Nu#$3m#.?zV=ahjK">Prediction</field>
                                 <value name="VALUE">
-                                  <block type="math_number" id="8V]iyEFd;d$ew:EE#mMl">
-                                    <field name="NUM">4</field>
+                                  <block type="math_arithmetic" id="prediction_win_rand">
+                                    <field name="OP">ADD</field>
+                                    <value name="A">
+                                      <block type="math_number" id="prediction_win_base">
+                                        <field name="NUM">4</field>
+                                      </block>
+                                    </value>
+                                    <value name="B">
+                                      <block type="math_random_int" id="prediction_win_randval">
+                                        <value name="FROM">
+                                          <block type="math_number" id="prediction_win_min">
+                                            <field name="NUM">-1</field>
+                                          </block>
+                                        </value>
+                                        <value name="TO">
+                                          <block type="math_number" id="prediction_win_max">
+                                            <field name="NUM">1</field>
+                                          </block>
+                                        </value>
+                                      </block>
+                                    </value>
                                   </block>
                                 </value>
                                 <next>
@@ -417,8 +455,27 @@
                               <block type="variables_set" id="reset_prediction">
                                 <field name="VAR" id="6o_9Nu#$3m#.?zV=ahjK">Prediction</field>
                                 <value name="VALUE">
-                                  <block type="math_number" id="base_prediction">
-                                    <field name="NUM">5</field>
+                                  <block type="math_arithmetic" id="prediction_reset_rand">
+                                    <field name="OP">ADD</field>
+                                    <value name="A">
+                                      <block type="math_number" id="prediction_reset_base">
+                                        <field name="NUM">5</field>
+                                      </block>
+                                    </value>
+                                    <value name="B">
+                                      <block type="math_random_int" id="prediction_reset_randval">
+                                        <value name="FROM">
+                                          <block type="math_number" id="prediction_reset_min">
+                                            <field name="NUM">-1</field>
+                                          </block>
+                                        </value>
+                                        <value name="TO">
+                                          <block type="math_number" id="prediction_reset_max">
+                                            <field name="NUM">1</field>
+                                          </block>
+                                        </value>
+                                      </block>
+                                    </value>
                                   </block>
                                 </value>
                                 <next>
@@ -511,8 +568,27 @@
                                       <block type="variables_set" id="$~c2QUMm2gI?t[^:-$wB">
                                         <field name="VAR" id="6o_9Nu#$3m#.?zV=ahjK">Prediction</field>
                                         <value name="VALUE">
-                                          <block type="math_number" id="}D{-??}[$*0e8Ek;1.Gp">
-                                            <field name="NUM">5</field>
+                                          <block type="math_arithmetic" id="prediction_loss_rand">
+                                            <field name="OP">ADD</field>
+                                            <value name="A">
+                                              <block type="math_number" id="prediction_loss_base">
+                                                <field name="NUM">5</field>
+                                              </block>
+                                            </value>
+                                            <value name="B">
+                                              <block type="math_random_int" id="prediction_loss_randval">
+                                                <value name="FROM">
+                                                  <block type="math_number" id="prediction_loss_min">
+                                                    <field name="NUM">-1</field>
+                                                  </block>
+                                                </value>
+                                                <value name="TO">
+                                                  <block type="math_number" id="prediction_loss_max">
+                                                    <field name="NUM">1</field>
+                                                  </block>
+                                                </value>
+                                              </block>
+                                            </value>
                                           </block>
                                         </value>
                                         <next>
