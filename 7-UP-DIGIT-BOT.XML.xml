@@ -21,8 +21,6 @@
     <variable id="WinAmountCycle">WinAmountCycle</variable>
     <variable id="ema_period">EMA Period</variable>
     <variable id="rsi_period">RSI Period</variable>
-    <variable id="ema_value">EMA Value</variable>
-    <variable id="rsi_value">RSI Value</variable>
   </variables>
   <block type="trade_definition" id="a?yA2gg3)09S3:h%hM[6" deletable="false" x="0" y="60">
     <statement name="TRADE_OPTIONS">
@@ -56,6 +54,35 @@
             </next>
           </block>
         </next>
+      </block>
+    </statement>
+    <statement name="INDICATORS">
+      <block type="indicators" id="indicators_block">
+        <mutation items="2"></mutation>
+        <value name="INDICATOR0">
+          <block type="indicator_ema">
+            <value name="INPUT">
+              <block type="candle_close"></block>
+            </value>
+            <value name="PERIOD">
+              <block type="variables_get">
+                <field name="VAR">ema_period</field>
+              </block>
+            </value>
+          </block>
+        </value>
+        <value name="INDICATOR1">
+          <block type="indicator_rsi">
+            <value name="INPUT">
+              <block type="candle_close"></block>
+            </value>
+            <value name="PERIOD">
+              <block type="variables_get">
+                <field name="VAR">rsi_period</field>
+              </block>
+            </value>
+          </block>
+        </value>
       </block>
     </statement>
     <statement name="INITIALIZATION">
@@ -1074,206 +1101,71 @@
   </block>
   <block type="before_purchase" id="UN)tN3Ck),E3CYdT]:[)" deletable="false" x="0" y="1604">
     <statement name="BEFOREPURCHASE_STACK">
-      <block type="variables_set" id="set_ema_period">
-        <field name="VAR" id="ema_period">EMA Period</field>
-        <value name="VALUE">
-          <block type="math_number" id="ema_period_value">
-            <field name="NUM">3</field>
-          </block>
-        </value>
-        <next>
-          <block type="variables_set" id="set_rsi_period">
-            <field name="VAR" id="rsi_period">RSI Period</field>
-            <value name="VALUE">
-              <block type="math_number" id="rsi_period_value">
-                <field name="NUM">3</field>
+      <block type="controls_if" id="set_current_prediction">
+        <mutation xmlns="http://www.w3.org/1999/xhtml" else="1"></mutation>
+        <value name="IF0">
+          <block type="logic_compare" id="is_over_contract_before">
+            <field name="OP">EQ</field>
+            <value name="A">
+              <block type="variables_get" id="get_contract_before">
+                <field name="VAR" id="ContractType">ContractType</field>
               </block>
             </value>
-            <next>
-              <block type="variables_set" id="calculate_ema">
-                <field name="VAR" id="ema_value">EMA Value</field>
-                <value name="VALUE">
-                  <block type="indicator_ema" id="ema_indicator">
-                    <value name="INPUT">
-                      <block type="candle_close" id="close_price"></block>
-                    </value>
-                    <value name="PERIOD">
-                      <block type="variables_get" id="get_ema_period">
-                        <field name="VAR" id="ema_period">EMA Period</field>
-                      </block>
-                    </value>
+            <value name="B">
+              <block type="text" id="8,;m3V5_$y}LeQn7aJUQ">
+                <field name="TEXT">DIGITOVER</field>
+              </block>
+            </value>
+          </block>
+        </value>
+        <statement name="DO0">
+          <block type="variables_set" id="use_over_prediction">
+            <field name="VAR" id="CurrentPrediction">Current Prediction</field>
+            <value name="VALUE">
+              <block type="variables_get" id="get_over_prediction">
+                <field name="VAR" id="PredictionUnder">Prediction Under</field>
+              </block>
+            </value>
+          </block>
+        </statement>
+        <statement name="ELSE">
+          <block type="variables_set" id="use_under_prediction">
+            <field name="VAR" id="CurrentPrediction">Current Prediction</field>
+            <value name="VALUE">
+              <block type="variables_get" id="get_under_prediction">
+                <field name="VAR" id="PredictionOver">Prediction Over</field>
+              </block>
+            </value>
+          </block>
+        </statement>
+        <next>
+          <block type="controls_if" id="purchase_based_on_contract">
+            <mutation xmlns="http://www.w3.org/1999/xhtml" else="1"></mutation>
+            <value name="IF0">
+              <block type="logic_compare" id="is_over_contract">
+                <field name="OP">EQ</field>
+                <value name="A">
+                  <block type="variables_get" id="get_contract_type_before">
+                    <field name="VAR" id="ContractType">ContractType</field>
                   </block>
                 </value>
-                <next>
-                  <block type="variables_set" id="calculate_rsi">
-                    <field name="VAR" id="rsi_value">RSI Value</field>
-                    <value name="VALUE">
-                      <block type="indicator_rsi" id="rsi_indicator">
-                        <value name="INPUT">
-                          <block type="candle_close" id="close_price_rsi"></block>
-                        </value>
-                        <value name="PERIOD">
-                          <block type="variables_get" id="get_rsi_period">
-                            <field name="VAR" id="rsi_period">RSI Period</field>
-                          </block>
-                        </value>
-                      </block>
-                    </value>
-                    <next>
-                      <block type="controls_if" id="entry_decision">
-                        <mutation elseif="1" else="1"></mutation>
-                        <value name="IF0">
-                          <block type="logic_operation" id="buy_condition">
-                            <field name="OP">AND</field>
-                            <value name="A">
-                              <block type="logic_compare" id="rsi_oversold">
-                                <field name="OP">LT</field>
-                                <value name="A">
-                                  <block type="variables_get" id="get_rsi_value">
-                                    <field name="VAR" id="rsi_value">RSI Value</field>
-                                  </block>
-                                </value>
-                                <value name="B">
-                                  <block type="math_number" id="oversold_level">
-                                    <field name="NUM">30</field>
-                                  </block>
-                                </value>
-                              </block>
-                            </value>
-                            <value name="B">
-                              <block type="logic_compare" id="price_above_ema">
-                                <field name="OP">GT</field>
-                                <value name="A">
-                                  <block type="candle_close" id="current_close"></block>
-                                </value>
-                                <value name="B">
-                                  <block type="variables_get" id="get_ema_value">
-                                    <field name="VAR" id="ema_value">EMA Value</field>
-                                  </block>
-                                </value>
-                              </block>
-                            </value>
-                          </block>
-                        </value>
-                        <statement name="DO0">
-                          <block type="variables_set" id="set_contract_rise">
-                            <field name="VAR" id="ContractType">ContractType</field>
-                            <value name="VALUE">
-                              <block type="text" id="contract_rise">
-                                <field name="TEXT">DIGITOVER</field>
-                              </block>
-                            </value>
-                            <next>
-                              <block type="purchase" id="purchase_rise">
-                                <field name="PURCHASE_LIST">CALL</field>
-                              </block>
-                            </next>
-                          </block>
-                        </statement>
-                        <value name="IF1">
-                          <block type="logic_operation" id="sell_condition">
-                            <field name="OP">AND</field>
-                            <value name="A">
-                              <block type="logic_compare" id="rsi_overbought">
-                                <field name="OP">GT</field>
-                                <value name="A">
-                                  <block type="variables_get" id="get_rsi_value2">
-                                    <field name="VAR" id="rsi_value">RSI Value</field>
-                                  </block>
-                                </value>
-                                <value name="B">
-                                  <block type="math_number" id="overbought_level">
-                                    <field name="NUM">70</field>
-                                  </block>
-                                </value>
-                              </block>
-                            </value>
-                            <value name="B">
-                              <block type="logic_compare" id="price_below_ema">
-                                <field name="OP">LT</field>
-                                <value name="A">
-                                  <block type="candle_close" id="current_close2"></block>
-                                </value>
-                                <value name="B">
-                                  <block type="variables_get" id="get_ema_value2">
-                                    <field name="VAR" id="ema_value">EMA Value</field>
-                                  </block>
-                                </value>
-                              </block>
-                            </value>
-                          </block>
-                        </value>
-                        <statement name="DO1">
-                          <block type="variables_set" id="set_contract_fall">
-                            <field name="VAR" id="ContractType">ContractType</field>
-                            <value name="VALUE">
-                              <block type="text" id="contract_fall">
-                                <field name="TEXT">DIGITUNDER</field>
-                              </block>
-                            </value>
-                            <next>
-                              <block type="purchase" id="purchase_fall">
-                                <field name="PURCHASE_LIST">PUT</field>
-                              </block>
-                            </next>
-                          </block>
-                        </statement>
-                        <statement name="ELSE">
-                          <block type="controls_if" id="fallback_strategy">
-                            <mutation xmlns="http://www.w3.org/1999/xhtml" else="1"></mutation>
-                            <value name="IF0">
-                              <block type="logic_compare" id="is_over_contract_before">
-                                <field name="OP">EQ</field>
-                                <value name="A">
-                                  <block type="variables_get" id="get_contract_before">
-                                    <field name="VAR" id="ContractType">ContractType</field>
-                                  </block>
-                                </value>
-                                <value name="B">
-                                  <block type="text" id="8,;m3V5_$y}LeQn7aJUQ">
-                                    <field name="TEXT">DIGITOVER</field>
-                                  </block>
-                                </value>
-                              </block>
-                            </value>
-                            <statement name="DO0">
-                              <block type="variables_set" id="use_over_prediction">
-                                <field name="VAR" id="CurrentPrediction">Current Prediction</field>
-                                <value name="VALUE">
-                                  <block type="variables_get" id="get_over_prediction">
-                                    <field name="VAR" id="PredictionUnder">Prediction Under</field>
-                                  </block>
-                                </value>
-                                <next>
-                                  <block type="purchase" id="purchase_over">
-                                    <field name="PURCHASE_LIST">CALL</field>
-                                  </block>
-                                </next>
-                              </block>
-                            </statement>
-                            <statement name="ELSE">
-                              <block type="variables_set" id="use_under_prediction">
-                                <field name="VAR" id="CurrentPrediction">Current Prediction</field>
-                                <value name="VALUE">
-                                  <block type="variables_get" id="get_under_prediction">
-                                    <field name="VAR" id="PredictionOver">Prediction Over</field>
-                                  </block>
-                                </value>
-                                <next>
-                                  <block type="purchase" id="purchase_under">
-                                    <field name="PURCHASE_LIST">PUT</field>
-                                  </block>
-                                </next>
-                              </block>
-                            </statement>
-                          </block>
-                        </statement>
-                      </block>
-                    </next>
+                <value name="B">
+                  <block type="text" id="over_text">
+                    <field name="TEXT">DIGITOVER</field>
                   </block>
-                </next>
+                </value>
               </block>
-            </next>
+            </value>
+            <statement name="DO0">
+              <block type="purchase" id="purchase_over">
+                <field name="PURCHASE_LIST">CALL</field>
+              </block>
+            </statement>
+            <statement name="ELSE">
+              <block type="purchase" id="purchase_under">
+                <field name="PURCHASE_LIST">PUT</field>
+              </block>
+            </statement>
           </block>
         </next>
       </block>
