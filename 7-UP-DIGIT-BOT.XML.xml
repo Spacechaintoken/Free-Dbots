@@ -15,6 +15,8 @@
     <variable id="fib_prev">FibPrev</variable>
     <variable id="fib_current">FibCurrent</variable>
     <variable id="LossStreak">LossStreak</variable>
+    <variable id="MarketTrend">MarketTrend</variable>
+    <variable id="LastDigit">LastDigit</variable>
   </variables>
   <block type="trade_definition" id="a?yA2gg3)09S3:h%hM[6" deletable="false" x="0" y="60">
     <statement name="TRADE_OPTIONS">
@@ -62,7 +64,7 @@
             </value>
             <value name="TO">
               <block type="math_number" id="WNj/g:5JS[3[`:T:i;bp">
-                <field name="NUM">2</field>
+                <field name="NUM">3</field>
               </block>
             </value>
           </block>
@@ -74,7 +76,7 @@
               <block type="math_random_int" id="prediction_under_init">
                 <value name="FROM">
                   <block type="math_number" id="}-IJP6=-*k,E:jg5%kDZ">
-                    <field name="NUM">8</field>
+                    <field name="NUM">7</field>
                   </block>
                 </value>
                 <value name="TO">
@@ -165,60 +167,70 @@
                                                       </block>
                                                     </value>
                                                     <next>
-                                                      <block type="variables_set" id="init_contract_type">
-                                                        <field name="VAR" id="ContractType">ContractType</field>
+                                                      <block type="variables_set" id="init_market_trend">
+                                                        <field name="VAR" id="MarketTrend">MarketTrend</field>
                                                         <value name="VALUE">
-                                                          <block type="math_random_int" id="contract_type_random">
-                                                            <value name="FROM">
-                                                              <block type="math_number" id="contract_from">
-                                                                <field name="NUM">1</field>
-                                                              </block>
-                                                            </value>
-                                                            <value name="TO">
-                                                              <block type="math_number" id="contract_to">
-                                                                <field name="NUM">2</field>
-                                                              </block>
-                                                            </value>
+                                                          <block type="math_number" id="market_trend_neutral">
+                                                            <field name="NUM">0</field>
                                                           </block>
                                                         </value>
                                                         <next>
-                                                          <block type="controls_if" id="contract_type_condition">
-                                                            <mutation xmlns="http://www.w3.org/1999/xhtml" else="1"></mutation>
-                                                            <value name="IF0">
-                                                              <block type="logic_compare" id="contract_compare">
-                                                                <field name="OP">EQ</field>
-                                                                <value name="A">
-                                                                  <block type="variables_get" id="get_contract_init">
-                                                                    <field name="VAR" id="ContractType">ContractType</field>
+                                                          <block type="variables_set" id="init_contract_type">
+                                                            <field name="VAR" id="ContractType">ContractType</field>
+                                                            <value name="VALUE">
+                                                              <block type="math_random_int" id="contract_type_random">
+                                                                <value name="FROM">
+                                                                  <block type="math_number" id="contract_from">
+                                                                    <field name="NUM">1</field>
                                                                   </block>
                                                                 </value>
-                                                                <value name="B">
-                                                                  <block type="math_number" id="contract_num1">
+                                                                <value name="TO">
+                                                                  <block type="math_number" id="contract_to">
                                                                     <field name="NUM">2</field>
                                                                   </block>
                                                                 </value>
                                                               </block>
                                                             </value>
-                                                            <statement name="DO0">
-                                                              <block type="variables_set" id="set_contract_over">
-                                                                <field name="VAR" id="ContractType">ContractType</field>
-                                                                <value name="VALUE">
-                                                                  <block type="text" id="contract_text_over">
-                                                                    <field name="TEXT">DIGITOVER</field>
+                                                            <next>
+                                                              <block type="controls_if" id="contract_type_condition">
+                                                                <mutation xmlns="http://www.w3.org/1999/xhtml" else="1"></mutation>
+                                                                <value name="IF0">
+                                                                  <block type="logic_compare" id="contract_compare">
+                                                                    <field name="OP">EQ</field>
+                                                                    <value name="A">
+                                                                      <block type="variables_get" id="get_contract_init">
+                                                                        <field name="VAR" id="ContractType">ContractType</field>
+                                                                      </block>
+                                                                    </value>
+                                                                    <value name="B">
+                                                                      <block type="math_number" id="contract_num1">
+                                                                        <field name="NUM">2</field>
+                                                                      </block>
+                                                                    </value>
                                                                   </block>
                                                                 </value>
-                                                              </block>
-                                                            </statement>
-                                                            <statement name="ELSE">
-                                                              <block type="variables_set" id="set_contract_under">
-                                                                <field name="VAR" id="ContractType">ContractType</field>
-                                                                <value name="VALUE">
-                                                                  <block type="text" id="contract_text_under">
-                                                                    <field name="TEXT">DIGITUNDER</field>
+                                                                <statement name="DO0">
+                                                                  <block type="variables_set" id="set_contract_over">
+                                                                    <field name="VAR" id="ContractType">ContractType</field>
+                                                                    <value name="VALUE">
+                                                                      <block type="text" id="contract_text_over">
+                                                                        <field name="TEXT">DIGITOVER</field>
+                                                                      </block>
+                                                                    </value>
                                                                   </block>
-                                                                </value>
+                                                                </statement>
+                                                                <statement name="ELSE">
+                                                                  <block type="variables_set" id="set_contract_under">
+                                                                    <field name="VAR" id="ContractType">ContractType</field>
+                                                                    <value name="VALUE">
+                                                                      <block type="text" id="contract_text_under">
+                                                                        <field name="TEXT">DIGITUNDER</field>
+                                                                      </block>
+                                                                    </value>
+                                                                  </block>
+                                                                </statement>
                                                               </block>
-                                                            </statement>
+                                                            </next>
                                                           </block>
                                                         </next>
                                                       </block>
@@ -266,195 +278,282 @@
   </block>
   <block type="after_purchase" id="SkH.c=32mX]?E$G,}igM" x="765" y="60">
     <statement name="AFTERPURCHASE_STACK">
-      <block type="controls_if" id="2JE6kMLWnzy@ChtSwR!u">
-        <mutation xmlns="http://www.w3.org/1999/xhtml" else="1"></mutation>
-        <value name="IF0">
-          <block type="contract_check_result" id="7i2w4^3jpl+6Xr1=D2pG">
-            <field name="CHECK_RESULT">win</field>
+      <block type="variables_set" id="store_last_digit">
+        <field name="VAR" id="LastDigit">LastDigit</field>
+        <value name="VALUE">
+          <block type="read_details" id="read_last_digit">
+            <field name="DETAIL_INDEX">7</field>
           </block>
         </value>
-        <statement name="DO0">
-          <block type="text_join" id="2f6/jkt73_GsbPY|3U./">
-            <field name="VARIABLE" id="xV_U%|)8aXeCh,BU{Q$:">text</field>
-            <statement name="STACK">
-              <block type="text_statement" id="(V|Gbv^T+jzC%UF2R%l/">
-                <value name="TEXT">
-                  <shadow type="text" id="nXiuNBlmb!f]q(vd0zG6">
-                    <field name="TEXT"></field>
-                  </shadow>
-                  <block type="text" id="d3lyeOh;q$LnhZqnHAeX">
-                    <field name="TEXT">Won:</field>
-                  </block>
-                </value>
-                <next>
-                  <block type="text_statement" id="(JMu[}lR$RS_6N/DWWC$">
+        <next>
+          <block type="controls_if" id="2JE6kMLWnzy@ChtSwR!u">
+            <mutation xmlns="http://www.w3.org/1999/xhtml" else="1"></mutation>
+            <value name="IF0">
+              <block type="contract_check_result" id="7i2w4^3jpl+6Xr1=D2pG">
+                <field name="CHECK_RESULT">win</field>
+              </block>
+            </value>
+            <statement name="DO0">
+              <block type="text_join" id="2f6/jkt73_GsbPY|3U./">
+                <field name="VARIABLE" id="xV_U%|)8aXeCh,BU{Q$:">text</field>
+                <statement name="STACK">
+                  <block type="text_statement" id="(V|Gbv^T+jzC%UF2R%l/">
                     <value name="TEXT">
-                      <shadow type="text" id=".d1:M.uTQdG2~tJz(^H0">
+                      <shadow type="text" id="nXiuNBlmb!f]q(vd0zG6">
                         <field name="TEXT"></field>
                       </shadow>
-                      <block type="read_details" id="lD!e^p1+{/vh_!t@9uu;">
-                        <field name="DETAIL_INDEX">4</field>
-                      </block>
-                    </value>
-                  </block>
-                </next>
-              </block>
-            </statement>
-            <next>
-              <block type="notify" id="t}uRqH8oAcvV+;J/]+w,">
-                <field name="NOTIFICATION_TYPE">success</field>
-                <field name="NOTIFICATION_SOUND">silent</field>
-                <value name="MESSAGE">
-                  <block type="variables_get" id=";hq-4ILY?=Fjl+LkLfK^">
-                    <field name="VAR" id="xV_U%|)8aXeCh,BU{Q$:">text</field>
-                  </block>
-                </value>
-                <next>
-                  <!-- RESET AFTER WIN START -->
-                  <block type="variables_set" id="reset_win_amount">
-                    <field name="VAR" id="(obU$~2J]hr/k0`hgX8/">Win Amount</field>
-                    <value name="VALUE">
-                      <block type="math_number" id="reset_win_amt">
-                        <field name="NUM">0.5</field>
+                      <block type="text" id="d3lyeOh;q$LnhZqnHAeX">
+                        <field name="TEXT">Won:</field>
                       </block>
                     </value>
                     <next>
-                      <block type="variables_set" id="reset_initial_after_win">
-                        <field name="VAR" id="RHgF*C%#h{|Ha5u;#5j?">Initial Amount</field>
+                      <block type="text_statement" id="(JMu[}lR$RS_6N/DWWC$">
+                        <value name="TEXT">
+                          <shadow type="text" id=".d1:M.uTQdG2~tJz(^H0">
+                            <field name="TEXT"></field>
+                          </shadow>
+                          <block type="read_details" id="lD!e^p1+{/vh_!t@9uu;">
+                            <field name="DETAIL_INDEX">4</field>
+                          </block>
+                        </value>
+                      </block>
+                    </next>
+                  </block>
+                </statement>
+                <next>
+                  <block type="notify" id="t}uRqH8oAcvV+;J/]+w,">
+                    <field name="NOTIFICATION_TYPE">success</field>
+                    <field name="NOTIFICATION_SOUND">silent</field>
+                    <value name="MESSAGE">
+                      <block type="variables_get" id=";hq-4ILY?=Fjl+LkLfK^">
+                        <field name="VAR" id="xV_U%|)8aXeCh,BU{Q$:">text</field>
+                      </block>
+                    </value>
+                    <next>
+                      <!-- SMART RESET AFTER WIN -->
+                      <block type="variables_set" id="reset_win_amount">
+                        <field name="VAR" id="(obU$~2J]hr/k0`hgX8/">Win Amount</field>
                         <value name="VALUE">
-                          <block type="variables_get" id="get_reset_win_amt">
-                            <field name="VAR" id="(obU$~2J]hr/k0`hgX8/">Win Amount</field>
+                          <block type="math_number" id="reset_win_amt">
+                            <field name="NUM">0.5</field>
                           </block>
                         </value>
                         <next>
-                          <block type="variables_set" id="reset_fib_prev_win">
-                            <field name="VAR" id="fib_prev">FibPrev</field>
+                          <block type="variables_set" id="reset_initial_after_win">
+                            <field name="VAR" id="RHgF*C%#h{|Ha5u;#5j?">Initial Amount</field>
                             <value name="VALUE">
-                              <block type="math_number" id="fib_prev_win_reset">
-                                <field name="NUM">0</field>
+                              <block type="variables_get" id="get_reset_win_amt">
+                                <field name="VAR" id="(obU$~2J]hr/k0`hgX8/">Win Amount</field>
                               </block>
                             </value>
                             <next>
-                              <block type="variables_set" id="reset_fib_current_win">
-                                <field name="VAR" id="fib_current">FibCurrent</field>
+                              <block type="variables_set" id="reset_fib_prev_win">
+                                <field name="VAR" id="fib_prev">FibPrev</field>
                                 <value name="VALUE">
-                                  <block type="math_number" id="fib_current_win_reset">
-                                    <field name="NUM">0.71</field>
+                                  <block type="math_number" id="fib_prev_win_reset">
+                                    <field name="NUM">0</field>
                                   </block>
                                 </value>
                                 <next>
-                                  <block type="variables_set" id="reset_loss_streak_win">
-                                    <field name="VAR" id="LossStreak">LossStreak</field>
+                                  <block type="variables_set" id="reset_fib_current_win">
+                                    <field name="VAR" id="fib_current">FibCurrent</field>
                                     <value name="VALUE">
-                                      <block type="math_number" id="loss_streak_win_reset">
-                                        <field name="NUM">0</field>
+                                      <block type="math_number" id="fib_current_win_reset">
+                                        <field name="NUM">0.71</field>
                                       </block>
                                     </value>
                                     <next>
-                                      <block type="variables_set" id="reset_win_streak_win">
-                                        <field name="VAR" id="WinStreak">WinStreak</field>
+                                      <block type="variables_set" id="reset_loss_streak_win">
+                                        <field name="VAR" id="LossStreak">LossStreak</field>
                                         <value name="VALUE">
-                                          <block type="math_number" id="win_streak_win_reset">
+                                          <block type="math_number" id="loss_streak_win_reset">
                                             <field name="NUM">0</field>
                                           </block>
                                         </value>
                                         <next>
-                                          <block type="variables_set" id="reset_time_win">
-                                            <field name="VAR" id="rUPB[)tUi3we;byHr`7]">Time</field>
+                                          <block type="variables_set" id="reset_win_streak_win">
+                                            <field name="VAR" id="WinStreak">WinStreak</field>
                                             <value name="VALUE">
-                                              <block type="math_number" id="time_win_reset">
-                                                <field name="NUM">1</field>
+                                              <block type="math_number" id="win_streak_win_reset">
+                                                <field name="NUM">0</field>
                                               </block>
                                             </value>
                                             <next>
-                                              <block type="variables_set" id="reset_prediction_over">
-                                                <field name="VAR" id="PredictionOver">Prediction Over</field>
+                                              <block type="variables_set" id="reset_time_win">
+                                                <field name="VAR" id="rUPB[)tUi3we;byHr`7]">Time</field>
                                                 <value name="VALUE">
-                                                  <block type="math_random_int" id="pred_over_reset">
-                                                    <value name="FROM">
-                                                      <block type="math_number" id="from_over_reset">
-                                                        <field name="NUM">1</field>
-                                                      </block>
-                                                    </value>
-                                                    <value name="TO">
-                                                      <block type="math_number" id="to_over_reset">
-                                                        <field name="NUM">2</field>
-                                                      </block>
-                                                    </value>
+                                                  <block type="math_number" id="time_win_reset">
+                                                    <field name="NUM">1</field>
                                                   </block>
                                                 </value>
                                                 <next>
-                                                  <block type="variables_set" id="reset_prediction_under">
-                                                    <field name="VAR" id="PredictionUnder">Prediction Under</field>
+                                                  <!-- ADAPTIVE PREDICTION RANGE BASED ON LAST DIGIT -->
+                                                  <block type="variables_set" id="reset_prediction_over">
+                                                    <field name="VAR" id="PredictionOver">Prediction Over</field>
                                                     <value name="VALUE">
-                                                      <block type="math_random_int" id="pred_under_reset">
+                                                      <block type="math_random_int" id="pred_over_reset">
                                                         <value name="FROM">
-                                                          <block type="math_number" id="from_under_reset">
-                                                            <field name="NUM">8</field>
+                                                          <block type="math_max">
+                                                            <value name="NUM1">
+                                                              <block type="math_number">
+                                                                <field name="NUM">1</field>
+                                                              </block>
+                                                            </value>
+                                                            <value name="NUM2">
+                                                              <block type="math_arithmetic">
+                                                                <field name="OP">MINUS</field>
+                                                                <value name="A">
+                                                                  <block type="variables_get" id="get_last_digit_win">
+                                                                    <field name="VAR" id="LastDigit">LastDigit</field>
+                                                                  </block>
+                                                                </value>
+                                                                <value name="B">
+                                                                  <block type="math_number">
+                                                                    <field name="NUM">1</field>
+                                                                  </block>
+                                                                </value>
+                                                              </block>
+                                                            </value>
                                                           </block>
                                                         </value>
                                                         <value name="TO">
-                                                          <block type="math_number" id="to_under_reset">
-                                                            <field name="NUM">9</field>
+                                                          <block type="math_min">
+                                                            <value name="NUM1">
+                                                              <block type="math_number">
+                                                                <field name="NUM">3</field>
+                                                              </block>
+                                                            </value>
+                                                            <value name="NUM2">
+                                                              <block type="math_arithmetic">
+                                                                <field name="OP">ADD</field>
+                                                                <value name="A">
+                                                                  <block type="variables_get" id="get_last_digit_win2">
+                                                                    <field name="VAR" id="LastDigit">LastDigit</field>
+                                                                  </block>
+                                                                </value>
+                                                                <value name="B">
+                                                                  <block type="math_number">
+                                                                    <field name="NUM">1</field>
+                                                                  </block>
+                                                                </value>
+                                                              </block>
+                                                            </value>
                                                           </block>
                                                         </value>
                                                       </block>
                                                     </value>
                                                     <next>
-                                                      <block type="variables_set" id="reset_contract_win">
-                                                        <field name="VAR" id="ContractType">ContractType</field>
+                                                      <block type="variables_set" id="reset_prediction_under">
+                                                        <field name="VAR" id="PredictionUnder">Prediction Under</field>
                                                         <value name="VALUE">
-                                                          <block type="math_random_int" id="contract_random_win">
+                                                          <block type="math_random_int" id="pred_under_reset">
                                                             <value name="FROM">
-                                                              <block type="math_number" id="contract_from_win">
-                                                                <field name="NUM">1</field>
+                                                              <block type="math_max">
+                                                                <value name="NUM1">
+                                                                  <block type="math_number">
+                                                                    <field name="NUM">7</field>
+                                                                  </block>
+                                                                </value>
+                                                                <value name="NUM2">
+                                                                  <block type="math_arithmetic">
+                                                                    <field name="OP">MINUS</field>
+                                                                    <value name="A">
+                                                                      <block type="variables_get" id="get_last_digit_win3">
+                                                                        <field name="VAR" id="LastDigit">LastDigit</field>
+                                                                      </block>
+                                                                    </value>
+                                                                    <value name="B">
+                                                                      <block type="math_number">
+                                                                        <field name="NUM">1</field>
+                                                                      </block>
+                                                                    </value>
+                                                                  </block>
+                                                                </value>
                                                               </block>
                                                             </value>
                                                             <value name="TO">
-                                                              <block type="math_number" id="contract_to_win">
-                                                                <field name="NUM">2</field>
+                                                              <block type="math_min">
+                                                                <value name="NUM1">
+                                                                  <block type="math_number">
+                                                                    <field name="NUM">9</field>
+                                                                  </block>
+                                                                </value>
+                                                                <value name="NUM2">
+                                                                  <block type="math_arithmetic">
+                                                                    <field name="OP">ADD</field>
+                                                                    <value name="A">
+                                                                      <block type="variables_get" id="get_last_digit_win4">
+                                                                        <field name="VAR" id="LastDigit">LastDigit</field>
+                                                                      </block>
+                                                                    </value>
+                                                                    <value name="B">
+                                                                      <block type="math_number">
+                                                                        <field name="NUM">1</field>
+                                                                      </block>
+                                                                    </value>
+                                                                  </block>
+                                                                </value>
                                                               </block>
                                                             </value>
                                                           </block>
                                                         </value>
                                                         <next>
-                                                          <block type="controls_if" id="contract_condition_win">
-                                                            <mutation xmlns="http://www.w3.org/1999/xhtml" else="1"></mutation>
-                                                            <value name="IF0">
-                                                              <block type="logic_compare" id="contract_compare_win">
-                                                                <field name="OP">EQ</field>
-                                                                <value name="A">
-                                                                  <block type="variables_get" id="get_contract_win">
-                                                                    <field name="VAR" id="ContractType">ContractType</field>
+                                                          <block type="variables_set" id="reset_contract_win">
+                                                            <field name="VAR" id="ContractType">ContractType</field>
+                                                            <value name="VALUE">
+                                                              <block type="math_random_int" id="contract_random_win">
+                                                                <value name="FROM">
+                                                                  <block type="math_number" id="contract_from_win">
+                                                                    <field name="NUM">1</field>
                                                                   </block>
                                                                 </value>
-                                                                <value name="B">
-                                                                  <block type="math_number" id="contract_num_win">
+                                                                <value name="TO">
+                                                                  <block type="math_number" id="contract_to_win">
                                                                     <field name="NUM">2</field>
                                                                   </block>
                                                                 </value>
                                                               </block>
                                                             </value>
-                                                            <statement name="DO0">
-                                                              <block type="variables_set" id="set_over_after_win">
-                                                                <field name="VAR" id="ContractType">ContractType</field>
-                                                                <value name="VALUE">
-                                                                  <block type="text" id="contract_over_win">
-                                                                    <field name="TEXT">DIGITOVER</field>
+                                                            <next>
+                                                              <block type="controls_if" id="contract_condition_win">
+                                                                <mutation xmlns="http://www.w3.org/1999/xhtml" else="1"></mutation>
+                                                                <value name="IF0">
+                                                                  <block type="logic_compare" id="contract_compare_win">
+                                                                    <field name="OP">EQ</field>
+                                                                    <value name="A">
+                                                                      <block type="variables_get" id="get_contract_win">
+                                                                        <field name="VAR" id="ContractType">ContractType</field>
+                                                                      </block>
+                                                                    </value>
+                                                                    <value name="B">
+                                                                      <block type="math_number" id="contract_num_win">
+                                                                        <field name="NUM">2</field>
+                                                                      </block>
+                                                                    </value>
                                                                   </block>
                                                                 </value>
-                                                              </block>
-                                                            </statement>
-                                                            <statement name="ELSE">
-                                                              <block type="variables_set" id="set_under_after_win">
-                                                                <field name="VAR" id="ContractType">ContractType</field>
-                                                                <value name="VALUE">
-                                                                  <block type="text" id="contract_under_win">
-                                                                    <field name="TEXT">DIGITUNDER</field>
+                                                                <statement name="DO0">
+                                                                  <block type="variables_set" id="set_over_after_win">
+                                                                    <field name="VAR" id="ContractType">ContractType</field>
+                                                                    <value name="VALUE">
+                                                                      <block type="text" id="contract_over_win">
+                                                                        <field name="TEXT">DIGITOVER</field>
+                                                                      </block>
+                                                                    </value>
                                                                   </block>
-                                                                </value>
+                                                                </statement>
+                                                                <statement name="ELSE">
+                                                                  <block type="variables_set" id="set_under_after_win">
+                                                                    <field name="VAR" id="ContractType">ContractType</field>
+                                                                    <value name="VALUE">
+                                                                      <block type="text" id="contract_under_win">
+                                                                        <field name="TEXT">DIGITUNDER</field>
+                                                                      </block>
+                                                                    </value>
+                                                                  </block>
+                                                                </statement>
                                                               </block>
-                                                            </statement>
+                                                            </next>
                                                           </block>
                                                         </next>
                                                       </block>
@@ -476,287 +575,364 @@
                       </block>
                     </next>
                   </block>
-                  <!-- RESET AFTER WIN END -->
                 </next>
               </block>
-            </next>
-          </block>
-        </statement>
-        <statement name="ELSE">
-          <block type="variables_set" id="reset_time">
-            <field name="VAR" id="rUPB[)tUi3we;byHr`7]">Time</field>
-            <value name="VALUE">
-              <block type="math_number" id="rL.Xga|uxmEEQDl0~uZ}">
-                <field name="NUM">1</field>
-              </block>
-            </value>
-            <next>
-              <block type="variables_set" id="set_contract_after_loss">
-                <field name="VAR" id="ContractType">ContractType</field>
+            </statement>
+            <statement name="ELSE">
+              <block type="variables_set" id="reset_time">
+                <field name="VAR" id="rUPB[)tUi3we;byHr`7]">Time</field>
                 <value name="VALUE">
-                  <block type="math_random_int" id="contract_random_loss">
-                    <value name="FROM">
-                      <block type="math_number" id="contract_from_loss">
-                        <field name="NUM">1</field>
-                      </block>
-                    </value>
-                    <value name="TO">
-                      <block type="math_number" id="contract_to_loss">
-                        <field name="NUM">2</field>
-                      </block>
-                    </value>
+                  <block type="math_number" id="rL.Xga|uxmEEQDl0~uZ}">
+                    <field name="NUM">1</field>
                   </block>
                 </value>
                 <next>
-                  <block type="controls_if" id="contract_condition_loss">
-                    <mutation xmlns="http://www.w3.org/1999/xhtml" else="1"></mutation>
-                    <value name="IF0">
-                      <block type="logic_compare" id="contract_compare_loss">
-                        <field name="OP">EQ</field>
-                        <value name="A">
-                          <block type="variables_get" id="get_contract_loss">
-                            <field name="VAR" id="ContractType">ContractType</field>
+                  <block type="variables_set" id="set_contract_after_loss">
+                    <field name="VAR" id="ContractType">ContractType</field>
+                    <value name="VALUE">
+                      <block type="math_random_int" id="contract_random_loss">
+                        <value name="FROM">
+                          <block type="math_number" id="contract_from_loss">
+                            <field name="NUM">1</field>
                           </block>
                         </value>
-                        <value name="B">
-                          <block type="math_number" id="contract_num_loss">
+                        <value name="TO">
+                          <block type="math_number" id="contract_to_loss">
                             <field name="NUM">2</field>
                           </block>
                         </value>
                       </block>
                     </value>
-                    <statement name="DO0">
-                      <block type="variables_set" id="set_over_after_loss">
-                        <field name="VAR" id="ContractType">ContractType</field>
-                        <value name="VALUE">
-                          <block type="text" id="contract_over_loss">
-                            <field name="TEXT">DIGITOVER</field>
-                          </block>
-                        </value>
-                      </block>
-                    </statement>
-                    <statement name="ELSE">
-                      <block type="variables_set" id="set_under_after_loss">
-                        <field name="VAR" id="ContractType">ContractType</field>
-                        <value name="VALUE">
-                          <block type="text" id="contract_under_loss">
-                            <field name="TEXT">DIGITUNDER</field>
-                          </block>
-                        </value>
-                      </block>
-                    </statement>
                     <next>
-                      <block type="controls_if" id="set_new_prediction_loss">
+                      <block type="controls_if" id="contract_condition_loss">
                         <mutation xmlns="http://www.w3.org/1999/xhtml" else="1"></mutation>
                         <value name="IF0">
-                          <block type="logic_compare" id="is_over_contract_loss">
+                          <block type="logic_compare" id="contract_compare_loss">
                             <field name="OP">EQ</field>
                             <value name="A">
-                              <block type="variables_get" id="get_new_contract_type">
+                              <block type="variables_get" id="get_contract_loss">
                                 <field name="VAR" id="ContractType">ContractType</field>
                               </block>
                             </value>
                             <value name="B">
-                              <block type="text" id="x4$zfDCE1?bZHn2J?o9k">
-                                <field name="TEXT">DIGITOVER</field>
+                              <block type="math_number" id="contract_num_loss">
+                                <field name="NUM">2</field>
                               </block>
                             </value>
                           </block>
                         </value>
                         <statement name="DO0">
-                          <block type="variables_set" id="set_over_prediction_loss">
-                            <field name="VAR" id="PredictionOver">Prediction Over</field>
+                          <block type="variables_set" id="set_over_after_loss">
+                            <field name="VAR" id="ContractType">ContractType</field>
                             <value name="VALUE">
-                              <block type="math_random_int" id="new_over_prediction_loss">
-                                <value name="FROM">
-                                  <block type="math_number" id=";JzUy[U}#(DvQ3?W4u3;">
-                                    <field name="NUM">2</field>
-                                  </block>
-                                </value>
-                                <value name="TO">
-                                  <block type="math_number" id="qY5FuZ@w5zp?8oQ8OUh0">
-                                    <field name="NUM">4</field>
-                                  </block>
-                                </value>
+                              <block type="text" id="contract_over_loss">
+                                <field name="TEXT">DIGITOVER</field>
                               </block>
                             </value>
                           </block>
                         </statement>
                         <statement name="ELSE">
-                          <block type="variables_set" id="set_under_prediction_loss">
-                            <field name="VAR" id="PredictionUnder">Prediction Under</field>
+                          <block type="variables_set" id="set_under_after_loss">
+                            <field name="VAR" id="ContractType">ContractType</field>
                             <value name="VALUE">
-                              <block type="math_random_int" id="new_under_prediction_loss">
-                                <value name="FROM">
-                                  <block type="math_number" id="Gt9-sVkVdSd%#)^c+TJ+">
-                                    <field name="NUM">5</field>
-                                  </block>
-                                </value>
-                                <value name="TO">
-                                  <block type="math_number" id="K6}n5Kp_jzCv.4SXQGc9">
-                                    <field name="NUM">7</field>
-                                  </block>
-                                </value>
+                              <block type="text" id="contract_under_loss">
+                                <field name="TEXT">DIGITUNDER</field>
                               </block>
                             </value>
                           </block>
                         </statement>
                         <next>
-                          <block type="controls_if" id="loss_streak_check">
+                          <block type="controls_if" id="set_new_prediction_loss">
                             <mutation xmlns="http://www.w3.org/1999/xhtml" else="1"></mutation>
                             <value name="IF0">
-                              <block type="logic_compare" id="loss_eq_5">
+                              <block type="logic_compare" id="is_over_contract_loss">
                                 <field name="OP">EQ</field>
                                 <value name="A">
-                                  <block type="variables_get" id="get_updated_loss_streak">
-                                    <field name="VAR" id="LossStreak">LossStreak</field>
+                                  <block type="variables_get" id="get_new_contract_type">
+                                    <field name="VAR" id="ContractType">ContractType</field>
                                   </block>
                                 </value>
                                 <value name="B">
-                                  <block type="math_number" id="max_loss_streak">
-                                    <field name="NUM">10</field>
+                                  <block type="text" id="x4$zfDCE1?bZHn2J?o9k">
+                                    <field name="TEXT">DIGITOVER</field>
                                   </block>
                                 </value>
                               </block>
                             </value>
                             <statement name="DO0">
-                              <block type="variables_set" id="reset_fib_prev">
-                                <field name="VAR" id="fib_prev">FibPrev</field>
+                              <!-- ADAPTIVE OVER PREDICTION AFTER LOSS -->
+                              <block type="variables_set" id="set_over_prediction_loss">
+                                <field name="VAR" id="PredictionOver">Prediction Over</field>
                                 <value name="VALUE">
-                                  <block type="math_number" id="fib_prev_reset">
-                                    <field name="NUM">0</field>
+                                  <block type="math_random_int" id="new_over_prediction_loss">
+                                    <value name="FROM">
+                                      <block type="math_max">
+                                        <value name="NUM1">
+                                          <block type="math_number">
+                                            <field name="NUM">2</field>
+                                          </block>
+                                        </value>
+                                        <value name="NUM2">
+                                          <block type="math_arithmetic">
+                                            <field name="OP">MINUS</field>
+                                            <value name="A">
+                                              <block type="variables_get" id="get_last_digit_loss_over">
+                                                <field name="VAR" id="LastDigit">LastDigit</field>
+                                              </block>
+                                            </value>
+                                            <value name="B">
+                                              <block type="math_number">
+                                                <field name="NUM">1</field>
+                                              </block>
+                                            </value>
+                                          </block>
+                                        </value>
+                                      </block>
+                                    </value>
+                                    <value name="TO">
+                                      <block type="math_min">
+                                        <value name="NUM1">
+                                          <block type="math_number">
+                                            <field name="NUM">5</field>
+                                          </block>
+                                        </value>
+                                        <value name="NUM2">
+                                          <block type="math_arithmetic">
+                                            <field name="OP">ADD</field>
+                                            <value name="A">
+                                              <block type="variables_get" id="get_last_digit_loss_over2">
+                                                <field name="VAR" id="LastDigit">LastDigit</field>
+                                              </block>
+                                            </value>
+                                            <value name="B">
+                                              <block type="math_number">
+                                                <field name="NUM">1</field>
+                                              </block>
+                                            </value>
+                                          </block>
+                                        </value>
+                                      </block>
+                                    </value>
                                   </block>
                                 </value>
-                                <next>
-                                  <block type="variables_set" id="reset_fib_current">
-                                    <field name="VAR" id="fib_current">FibCurrent</field>
+                              </block>
+                            </statement>
+                            <statement name="ELSE">
+                              <!-- ADAPTIVE UNDER PREDICTION AFTER LOSS -->
+                              <block type="variables_set" id="set_under_prediction_loss">
+                                <field name="VAR" id="PredictionUnder">Prediction Under</field>
+                                <value name="VALUE">
+                                  <block type="math_random_int" id="new_under_prediction_loss">
+                                    <value name="FROM">
+                                      <block type="math_max">
+                                        <value name="NUM1">
+                                          <block type="math_number">
+                                            <field name="NUM">4</field>
+                                          </block>
+                                        </value>
+                                        <value name="NUM2">
+                                          <block type="math_arithmetic">
+                                            <field name="OP">MINUS</field>
+                                            <value name="A">
+                                              <block type="variables_get" id="get_last_digit_loss_under">
+                                                <field name="VAR" id="LastDigit">LastDigit</field>
+                                              </block>
+                                            </value>
+                                            <value name="B">
+                                              <block type="math_number">
+                                                <field name="NUM">1</field>
+                                              </block>
+                                            </value>
+                                          </block>
+                                        </value>
+                                      </block>
+                                    </value>
+                                    <value name="TO">
+                                      <block type="math_min">
+                                        <value name="NUM1">
+                                          <block type="math_number">
+                                            <field name="NUM">8</field>
+                                          </block>
+                                        </value>
+                                        <value name="NUM2">
+                                          <block type="math_arithmetic">
+                                            <field name="OP">ADD</field>
+                                            <value name="A">
+                                              <block type="variables_get" id="get_last_digit_loss_under2">
+                                                <field name="VAR" id="LastDigit">LastDigit</field>
+                                              </block>
+                                            </value>
+                                            <value name="B">
+                                              <block type="math_number">
+                                                <field name="NUM">1</field>
+                                              </block>
+                                            </value>
+                                          </block>
+                                        </value>
+                                      </block>
+                                    </value>
+                                  </block>
+                                </value>
+                              </block>
+                            </statement>
+                            <next>
+                              <block type="controls_if" id="loss_streak_check">
+                                <mutation xmlns="http://www.w3.org/1999/xhtml" else="1"></mutation>
+                                <value name="IF0">
+                                  <block type="logic_compare" id="loss_eq_5">
+                                    <field name="OP">EQ</field>
+                                    <value name="A">
+                                      <block type="variables_get" id="get_updated_loss_streak">
+                                        <field name="VAR" id="LossStreak">LossStreak</field>
+                                      </block>
+                                    </value>
+                                    <value name="B">
+                                      <block type="math_number" id="max_loss_streak">
+                                        <field name="NUM">10</field>
+                                      </block>
+                                    </value>
+                                  </block>
+                                </value>
+                                <statement name="DO0">
+                                  <block type="variables_set" id="reset_fib_prev">
+                                    <field name="VAR" id="fib_prev">FibPrev</field>
                                     <value name="VALUE">
-                                      <block type="math_number" id="fib_current_reset">
-                                        <field name="NUM">0.71</field>
+                                      <block type="math_number" id="fib_prev_reset">
+                                        <field name="NUM">0</field>
                                       </block>
                                     </value>
                                     <next>
-                                      <block type="variables_set" id="?0d9T7)T5p)#eVaR@944">
-                                        <field name="VAR" id="RHgF*C%#h{|Ha5u;#5j?">Initial Amount</field>
+                                      <block type="variables_set" id="reset_fib_current">
+                                        <field name="VAR" id="fib_current">FibCurrent</field>
                                         <value name="VALUE">
-                                          <block type="math_number" id="F.y!:Vb1i$0)59:w+-C[">
-                                            <field name="NUM">0.5</field>
+                                          <block type="math_number" id="fib_current_reset">
+                                            <field name="NUM">0.71</field>
                                           </block>
                                         </value>
                                         <next>
-                                          <block type="variables_set" id="reset_loss_streak">
-                                            <field name="VAR" id="LossStreak">LossStreak</field>
+                                          <block type="variables_set" id="?0d9T7)T5p)#eVaR@944">
+                                            <field name="VAR" id="RHgF*C%#h{|Ha5u;#5j?">Initial Amount</field>
                                             <value name="VALUE">
-                                              <block type="math_number" id="CtrRbz}p=ZYgDn7qxMbL">
-                                                <field name="NUM">0</field>
+                                              <block type="math_number" id="F.y!:Vb1i$0)59:w+-C[">
+                                                <field name="NUM">0.5</field>
                                               </block>
                                             </value>
+                                            <next>
+                                              <block type="variables_set" id="reset_loss_streak">
+                                                <field name="VAR" id="LossStreak">LossStreak</field>
+                                                <value name="VALUE">
+                                                  <block type="math_number" id="CtrRbz}p=ZYgDn7qxMbL">
+                                                    <field name="NUM">0</field>
+                                                  </block>
+                                                </value>
+                                              </block>
+                                            </next>
                                           </block>
                                         </next>
                                       </block>
                                     </next>
                                   </block>
-                                </next>
-                              </block>
-                            </statement>
-                            <statement name="ELSE">
-                              <block type="variables_set" id="fib_step1">
-                                <field name="VAR" id="fib_current">FibCurrent</field>
-                                <value name="VALUE">
-                                  <block type="math_arithmetic" id="-S2.;IdTv1#2;~m{r=Ls">
-                                    <field name="OP">ADD</field>
-                                    <value name="A">
-                                      <block type="variables_get" id="zFa)P%g3{}$(l%H[`H_o">
-                                        <field name="VAR" id="fib_prev">FibPrev</field>
-                                      </block>
-                                    </value>
-                                    <value name="B">
-                                      <block type="variables_get" id="y2F=N,.cKK{yo=p#Qwr7">
-                                        <field name="VAR" id="fib_current">FibCurrent</field>
-                                      </block>
-                                    </value>
-                                  </block>
-                                </value>
-                                <next>
-                                  <block type="variables_set" id="TXZBA6|d%W,,BNM1I0$8">
-                                    <field name="VAR" id="fib_prev">FibPrev</field>
+                                </statement>
+                                <statement name="ELSE">
+                                  <block type="variables_set" id="fib_step1">
+                                    <field name="VAR" id="fib_current">FibCurrent</field>
                                     <value name="VALUE">
-                                      <block type="math_arithmetic" id=".;5/P(%mXsm2h-tc-r42">
-                                        <field name="OP">MINUS</field>
+                                      <block type="math_arithmetic" id="-S2.;IdTv1#2;~m{r=Ls">
+                                        <field name="OP">ADD</field>
                                         <value name="A">
-                                          <block type="variables_get" id="3~N9xw%g{J$3$dkjHGny">
-                                            <field name="VAR" id="fib_current">FibCurrent</field>
+                                          <block type="variables_get" id="zFa)P%g3{}$(l%H[`H_o">
+                                            <field name="VAR" id="fib_prev">FibPrev</field>
                                           </block>
                                         </value>
                                         <value name="B">
-                                          <block type="variables_get" id="A`UWSco|:bFRyV83lZ^#">
-                                            <field name="VAR" id="fib_prev">FibPrev</field>
+                                          <block type="variables_get" id="y2F=N,.cKK{yo=p#Qwr7">
+                                            <field name="VAR" id="fib_current">FibCurrent</field>
                                           </block>
                                         </value>
                                       </block>
                                     </value>
                                     <next>
-                                      <block type="variables_set" id="g?BCmcL}hG/[$g%Am4J@">
+                                      <block type="variables_set" id="TXZBA6|d%W,,BNM1I0$8">
                                         <field name="VAR" id="fib_prev">FibPrev</field>
                                         <value name="VALUE">
-                                          <block type="math_arithmetic" id=")!VLr,HrWBTA@kVv=tDk">
-                                            <field name="OP">MULTIPLY</field>
+                                          <block type="math_arithmetic" id=".;5/P(%mXsm2h-tc-r42">
+                                            <field name="OP">MINUS</field>
                                             <value name="A">
-                                              <block type="variables_get" id="HS|GyP0.V3YaY+no%S|e">
-                                                <field name="VAR" id="(obU$~2J]hr/k0`hgX8/">Win Amount</field>
+                                              <block type="variables_get" id="3~N9xw%g{J$3$dkjHGny">
+                                                <field name="VAR" id="fib_current">FibCurrent</field>
                                               </block>
                                             </value>
                                             <value name="B">
-                                              <block type="variables_get" id="ePsO2~c_RBwo=d)pD.#@">
-                                                <field name="VAR" id="fib_current">FibCurrent</field>
+                                              <block type="variables_get" id="A`UWSco|:bFRyV83lZ^#">
+                                                <field name="VAR" id="fib_prev">FibPrev</field>
                                               </block>
                                             </value>
                                           </block>
                                         </value>
                                         <next>
-                                          <block type="variables_set" id="set_new_stake">
-                                            <field name="VAR" id="RHgF*C%#h{|Ha5u;#5j?">Initial Amount</field>
+                                          <block type="variables_set" id="g?BCmcL}hG/[$g%Am4J@">
+                                            <field name="VAR" id="fib_prev">FibPrev</field>
                                             <value name="VALUE">
-                                              <block type="math_arithmetic" id="`rD9B/yE5:Fi9.Tt4KSx">
+                                              <block type="math_arithmetic" id=")!VLr,HrWBTA@kVv=tDk">
                                                 <field name="OP">MULTIPLY</field>
                                                 <value name="A">
-                                                  <block type="variables_get" id="du9LG{g{lcSBcUAy+njB">
+                                                  <block type="variables_get" id="HS|GyP0.V3YaY+no%S|e">
                                                     <field name="VAR" id="(obU$~2J]hr/k0`hgX8/">Win Amount</field>
                                                   </block>
                                                 </value>
                                                 <value name="B">
-                                                  <block type="variables_get" id="-0f/2$|?I@j1d~k`$Dw2">
+                                                  <block type="variables_get" id="ePsO2~c_RBwo=d)pD.#@">
                                                     <field name="VAR" id="fib_current">FibCurrent</field>
                                                   </block>
                                                 </value>
                                               </block>
                                             </value>
+                                            <next>
+                                              <block type="variables_set" id="set_new_stake">
+                                                <field name="VAR" id="RHgF*C%#h{|Ha5u;#5j?">Initial Amount</field>
+                                                <value name="VALUE">
+                                                  <block type="math_arithmetic" id="`rD9B/yE5:Fi9.Tt4KSx">
+                                                    <field name="OP">MULTIPLY</field>
+                                                    <value name="A">
+                                                      <block type="variables_get" id="du9LG{g{lcSBcUAy+njB">
+                                                        <field name="VAR" id="(obU$~2J]hr/k0`hgX8/">Win Amount</field>
+                                                      </block>
+                                                    </value>
+                                                    <value name="B">
+                                                      <block type="variables_get" id="-0f/2$|?I@j1d~k`$Dw2">
+                                                        <field name="VAR" id="fib_current">FibCurrent</field>
+                                                      </block>
+                                                    </value>
+                                                  </block>
+                                                </value>
+                                              </block>
+                                            </next>
                                           </block>
                                         </next>
                                       </block>
                                     </next>
                                   </block>
-                                </next>
-                              </block>
-                            </statement>
-                            <next>
-                              <block type="variables_set" id="increment_loss_streak">
-                                <field name="VAR" id="LossStreak">LossStreak</field>
-                                <value name="VALUE">
-                                  <block type="math_arithmetic" id="loss_streak_increment">
-                                    <field name="OP">ADD</field>
-                                    <value name="A">
-                                      <block type="variables_get" id="get_loss_streak">
-                                        <field name="VAR" id="LossStreak">LossStreak</field>
-                                      </block>
-                                    </value>
-                                    <value name="B">
-                                      <block type="math_number" id="increment_by_one">
-                                        <field name="NUM">1</field>
+                                </statement>
+                                <next>
+                                  <block type="variables_set" id="increment_loss_streak">
+                                    <field name="VAR" id="LossStreak">LossStreak</field>
+                                    <value name="VALUE">
+                                      <block type="math_arithmetic" id="loss_streak_increment">
+                                        <field name="OP">ADD</field>
+                                        <value name="A">
+                                          <block type="variables_get" id="get_loss_streak">
+                                            <field name="VAR" id="LossStreak">LossStreak</field>
+                                          </block>
+                                        </value>
+                                        <value name="B">
+                                          <block type="math_number" id="increment_by_one">
+                                            <field name="NUM">1</field>
+                                          </block>
+                                        </value>
                                       </block>
                                     </value>
                                   </block>
-                                </value>
+                                </next>
                               </block>
                             </next>
                           </block>
@@ -1050,7 +1226,7 @@
             <field name="VAR" id="CurrentPrediction">Current Prediction</field>
             <value name="VALUE">
               <block type="variables_get" id="get_over_prediction">
-                <field name="VAR" id="PredictionUnder">Prediction Under</field>
+                <field name="VAR" id="PredictionOver">Prediction Over</field>
               </block>
             </value>
           </block>
@@ -1060,7 +1236,7 @@
             <field name="VAR" id="CurrentPrediction">Current Prediction</field>
             <value name="VALUE">
               <block type="variables_get" id="get_under_prediction">
-                <field name="VAR" id="PredictionOver">Prediction Over</field>
+                <field name="VAR" id="PredictionUnder">Prediction Under</field>
               </block>
             </value>
           </block>
