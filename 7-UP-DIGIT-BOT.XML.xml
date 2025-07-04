@@ -15,6 +15,7 @@
     <variable id="fib1">fib1</variable>
     <variable id="fib2">fib2</variable>
     <variable id="LossStreak">LossStreak</variable>
+    <variable id="prev_close">prev_close</variable>
   </variables>
   <block type="trade_definition" id="a?yA2gg3)09S3:h%hM[6" deletable="false" x="0" y="60">
     <statement name="TRADE_OPTIONS">
@@ -114,6 +115,16 @@
                                         <field name="NUM">0</field>
                                       </block>
                                     </value>
+                                    <next>
+                                      <block type="variables_set" id="init_prev_close">
+                                        <field name="VAR" id="prev_close">prev_close</field>
+                                        <value name="VALUE">
+                                          <block type="math_number" id="init_prev_close_val">
+                                            <field name="NUM">0</field>
+                                          </block>
+                                        </value>
+                                      </block>
+                                    </next>
                                   </block>
                                 </next>
                               </block>
@@ -727,139 +738,83 @@
   </block>
   <block type="before_purchase" id="UN)tN3Ck),E3CYdT]:[)" deletable="false" x="0" y="964">
     <statement name="BEFOREPURCHASE_STACK">
-      <!-- START: Added RSI market analysis block -->
-      <block type="variables_set" id="rsi_block1">
-        <field name="VAR" id="o-K8=quxf~RZD64#;.Kv">text3</field>
-        <value name="VALUE">
-          <block type="indicators_rsi" id="rsi_block2">
-            <value name="PERIOD">
-              <block type="math_number" id="rsi_block3">
-                <field name="NUM">3</field>
+      <!-- Market trend analysis using price comparison -->
+      <block type="controls_if" id="market_trend_block">
+        <mutation elseif="1" else="0"></mutation>
+        <value name="IF0">
+          <block type="logic_compare" id="trend_down_block">
+            <field name="OP">GT</field>
+            <value name="A">
+              <block type="variables_get" id="prev_close_val">
+                <field name="VAR" id="prev_close">prev_close</field>
+              </block>
+            </value>
+            <value name="B">
+              <block type="market_close" id="current_close">
+                <field name="CANDLEINTERVAL_LIST">60</field>
               </block>
             </value>
           </block>
         </value>
+        <statement name="DO0">
+          <block type="notify" id="down_trend_notify">
+            <field name="NOTIFICATION_TYPE">warn</field>
+            <field name="NOTIFICATION_SOUND">silent</field>
+            <value name="MESSAGE">
+              <block type="text" id="down_trend_text">
+                <field name="TEXT">Market Trend: 🩸 Downward</field>
+              </block>
+            </value>
+          </block>
+        </statement>
+        <value name="IF1">
+          <block type="logic_compare" id="trend_up_block">
+            <field name="OP">LT</field>
+            <value name="A">
+              <block type="variables_get" id="prev_close_val2">
+                <field name="VAR" id="prev_close">prev_close</field>
+              </block>
+            </value>
+            <value name="B">
+              <block type="market_close" id="current_close2">
+                <field name="CANDLEINTERVAL_LIST">60</field>
+              </block>
+            </value>
+          </block>
+        </value>
+        <statement name="DO1">
+          <block type="notify" id="up_trend_notify">
+            <field name="NOTIFICATION_TYPE">success</field>
+            <field name="NOTIFICATION_SOUND">silent</field>
+            <value name="MESSAGE">
+              <block type="text" id="up_trend_text">
+                <field name="TEXT">Market Trend: 🟢 Upward</field>
+              </block>
+            </value>
+          </block>
+        </statement>
+        <statement name="ELSE">
+          <block type="notify" id="neutral_trend_notify">
+            <field name="NOTIFICATION_TYPE">info</field>
+            <field name="NOTIFICATION_SOUND">silent</field>
+            <value name="MESSAGE">
+              <block type="text" id="neutral_trend_text">
+                <field name="TEXT">Market Trend: ↔️ Neutral</field>
+              </block>
+            </value>
+          </block>
+        </statement>
         <next>
-          <block type="controls_if" id="rsi_block4">
-            <mutation elseif="1" else="0"></mutation>
-            <value name="IF0">
-              <block type="logic_compare" id="rsi_block5">
-                <field name="OP">GT</field>
-                <value name="A">
-                  <block type="variables_get" id="rsi_block6">
-                    <field name="VAR" id="o-K8=quxf~RZD64#;.Kv">text3</field>
-                  </block>
-                </value>
-                <value name="B">
-                  <block type="math_number" id="rsi_block7">
-                    <field name="NUM">70</field>
-                  </block>
-                </value>
+          <!-- Update previous close price -->
+          <block type="variables_set" id="update_prev_close">
+            <field name="VAR" id="prev_close">prev_close</field>
+            <value name="VALUE">
+              <block type="market_close" id="new_prev_close">
+                <field name="CANDLEINTERVAL_LIST">60</field>
               </block>
             </value>
-            <statement name="DO0">
-              <block type="text_join" id="rsi_block8">
-                <field name="VARIABLE" id="xV_U%|)8aXeCh,BU{Q$:">text</field>
-                <statement name="STACK">
-                  <block type="text_statement" id="rsi_block9">
-                    <value name="TEXT">
-                      <block type="text" id="rsi_block10">
-                        <field name="TEXT">RSI: </field>
-                      </block>
-                    </value>
-                    <next>
-                      <block type="text_statement" id="rsi_block11">
-                        <value name="TEXT">
-                          <block type="variables_get" id="rsi_block12">
-                            <field name="VAR" id="o-K8=quxf~RZD64#;.Kv">text3</field>
-                          </block>
-                        </value>
-                        <next>
-                          <block type="text_statement" id="rsi_block13">
-                            <value name="TEXT">
-                              <block type="text" id="rsi_block14">
-                                <field name="TEXT"> 🩸 Downward trend</field>
-                              </block>
-                            </value>
-                          </block>
-                        </next>
-                      </block>
-                    </next>
-                  </block>
-                </statement>
-                <next>
-                  <block type="notify" id="rsi_block15">
-                    <field name="NOTIFICATION_TYPE">warn</field>
-                    <field name="NOTIFICATION_SOUND">silent</field>
-                    <value name="MESSAGE">
-                      <block type="variables_get" id="rsi_block16">
-                        <field name="VAR" id="xV_U%|)8aXeCh,BU{Q$:">text</field>
-                      </block>
-                    </value>
-                  </block>
-                </next>
-              </block>
-            </statement>
-            <value name="IF1">
-              <block type="logic_compare" id="rsi_block17">
-                <field name="OP">LT</field>
-                <value name="A">
-                  <block type="variables_get" id="rsi_block18">
-                    <field name="VAR" id="o-K8=quxf~RZD64#;.Kv">text3</field>
-                  </block>
-                </value>
-                <value name="B">
-                  <block type="math_number" id="rsi_block19">
-                    <field name="NUM">30</field>
-                  </block>
-                </value>
-              </block>
-            </value>
-            <statement name="DO1">
-              <block type="text_join" id="rsi_block20">
-                <field name="VARIABLE" id="xV_U%|)8aXeCh,BU{Q$:">text</field>
-                <statement name="STACK">
-                  <block type="text_statement" id="rsi_block21">
-                    <value name="TEXT">
-                      <block type="text" id="rsi_block22">
-                        <field name="TEXT">RSI: </field>
-                      </block>
-                    </value>
-                    <next>
-                      <block type="text_statement" id="rsi_block23">
-                        <value name="TEXT">
-                          <block type="variables_get" id="rsi_block24">
-                            <field name="VAR" id="o-K8=quxf~RZD64#;.Kv">text3</field>
-                          </block>
-                        </value>
-                        <next>
-                          <block type="text_statement" id="rsi_block25">
-                            <value name="TEXT">
-                              <block type="text" id="rsi_block26">
-                                <field name="TEXT"> 🟢 Upward trend</field>
-                              </block>
-                            </value>
-                          </block>
-                        </next>
-                      </block>
-                    </next>
-                  </block>
-                </statement>
-                <next>
-                  <block type="notify" id="rsi_block27">
-                    <field name="NOTIFICATION_TYPE">success</field>
-                    <field name="NOTIFICATION_SOUND">silent</field>
-                    <value name="MESSAGE">
-                      <block type="variables_get" id="rsi_block28">
-                        <field name="VAR" id="xV_U%|)8aXeCh,BU{Q$:">text</field>
-                      </block>
-                    </value>
-                  </block>
-                </next>
-              </block>
-            </statement>
             <next>
-              <!-- Original first block starts here -->
+              <!-- Original trading logic continues here -->
               <block type="notify" id="+tdN7%NJd52_u5qz]eHv">
                 <field name="NOTIFICATION_TYPE">success</field>
                 <field name="NOTIFICATION_SOUND">silent</field>
@@ -1271,7 +1226,6 @@
           </block>
         </next>
       </block>
-      <!-- END: Added RSI market analysis block -->
     </statement>
   </block>
   <block type="text" id="`T`6`[)_+}z%S~4@P=es" disabled="true" x="0" y="3260">
