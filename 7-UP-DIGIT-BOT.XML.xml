@@ -437,11 +437,20 @@
                             <next>
                               <block type="variables_set" id="$~c2QUMm2gI?t[^:-$wB">
                                 <field name="VAR" id="6o_9Nu#$3m#.?zV=ahjK">Prediction</field>
-                                <value name="VALUE">
-                                  <block type="math_number" id="}D{-??}[$*0e8Ek;1.Gp">
-                                    <field name="NUM">6</field>
-                                  </block>
-                                </value>
+                              <value name="VALUE">
+                               <block type="math_random_int" id="random_int_block">
+                                <value name="FROM">
+                                  <block type="math_number" id="from_num">
+                                    <field name="NUM">4</field>
+                               </block>
+                            </value>
+                            <value name="TO">
+                              <block type="math_number" id="to_num">
+                                <field name="NUM">6</field>
+                              </block>
+                            </value>
+                          </block>
+                        </value>
                                 <next>
                                   <block type="variables_set" id="fib_temp_set">
                                     <field name="VAR" id="fib_temp">fib_temp</field>
