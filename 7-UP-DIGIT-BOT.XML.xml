@@ -117,7 +117,7 @@
                                     </value>
                                     <next>
                                       <block type="variables_set" id="new3">
-                                        <field name="VAR" id="Zx4^Gm&aR3eY6bU5nK8*">Win Streak</field>
+                                        <field name="VAR" id="Zx4^GmaR3eY6bU5nK8*">Win Streak</field>
                                         <value name="VALUE">
                                           <block type="math_number" id="new4">
                                             <field name="NUM">0</field>
@@ -232,7 +232,7 @@
                     </value>
                     <next>
                       <block type="math_change" id="increment_win_streak">
-                        <field name="VAR" id="Zx4^Gm&aR3eY6bU5nK8*">Win Streak</field>
+                        <field name="VAR" id="Zx4^GmaR3eY6bU5nK8*">Win Streak</field>
                         <value name="DELTA">
                           <block type="math_number" id="win_streak_delta">
                             <field name="NUM">1</field>
@@ -246,7 +246,7 @@
                                 <field name="OP">EQ</field>
                                 <value name="A">
                                   <block type="variables_get" id="get_win_streak">
-                                    <field name="VAR" id="Zx4^Gm&aR3eY6bU5nK8*">Win Streak</field>
+                                    <field name="VAR" id="Zx4^GmaR3eY6bU5nK8*">Win Streak</field>
                                   </block>
                                 </value>
                                 <value name="B">
@@ -276,7 +276,7 @@
                                 </value>
                                 <next>
                                   <block type="variables_set" id="reset_win_streak">
-                                    <field name="VAR" id="Zx4^Gm&aR3eY6bU5nK8*">Win Streak</field>
+                                    <field name="VAR" id="Zx4^GmaR3eY6bU5nK8*">Win Streak</field>
                                     <value name="VALUE">
                                       <block type="math_number" id="reset_win_streak_val">
                                         <field name="NUM">0</field>
@@ -343,7 +343,7 @@
                 <next>
                   <!-- LOSS STREAK MANAGEMENT -->
                   <block type="variables_set" id="reset_win_streak_loss">
-                    <field name="VAR" id="Zx4^Gm&aR3eY6bU5nK8*">Win Streak</field>
+                    <field name="VAR" id="Zx4^GmaR3eY6bU5nK8*">Win Streak</field>
                     <value name="VALUE">
                       <block type="math_number" id="reset_win_streak_loss_val">
                         <field name="NUM">0</field>
