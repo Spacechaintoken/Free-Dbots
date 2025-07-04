@@ -13,7 +13,7 @@
     <variable id="o-K8=quxf~RZD64#;.Kv">text3</variable>
     <!-- New variables for streaks and Fibonacci -->
     <variable id="H7c$2@d!fD*8qV1sP{9#">Loss Streak</variable>
-    <variable id="Zx4^Gm&aR3eY6bU5nK8*">Win Streak</variable>
+    <variable id="Zx4^GmaR3eY6bU5nK8*">Win Streak</variable>
     <variable id="Tg5%hF$j#kL9mW2qN7vS">Fibonacci Value</variable>
   </variables>
   <block type="trade_definition" id="a?yA2gg3)09S3:h%hM[6" deletable="false" x="0" y="60">
