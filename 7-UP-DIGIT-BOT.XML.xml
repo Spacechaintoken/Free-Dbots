@@ -11,11 +11,9 @@
     <variable id="a?$LW}C4v+XX:Lc%6-OS">Expected Profit</variable>
     <variable id="(obU$~2J]hr/k0`hgX8/">Win Amount</variable>
     <variable id="o-K8=quxf~RZD64#;.Kv">text3</variable>
-    <!-- Fibonacci sequence variables -->
     <variable id="fib1">fib1</variable>
     <variable id="fib2">fib2</variable>
     <variable id="fib_temp">fib_temp</variable>
-    <!-- Loss streak counter -->
     <variable id="LossStreak">LossStreak</variable>
   </variables>
   <block type="trade_definition" id="a?yA2gg3)09S3:h%hM[6" deletable="false" x="0" y="60">
@@ -126,7 +124,6 @@
                                           </block>
                                         </value>
                                         <next>
-                                          <!-- Initialize LossStreak -->
                                           <block type="variables_set" id="loss_streak_init">
                                             <field name="VAR" id="LossStreak">LossStreak</field>
                                             <value name="VALUE">
@@ -249,7 +246,6 @@
                               </block>
                             </value>
                             <next>
-                              <!-- Reset Fibonacci sequence -->
                               <block type="variables_set" id="fib_reset1">
                                 <field name="VAR" id="fib1">fib1</field>
                                 <value name="VALUE">
@@ -266,7 +262,6 @@
                                       </block>
                                     </value>
                                     <next>
-                                      <!-- Reset loss streak counter -->
                                       <block type="variables_set" id="loss_streak_reset_win">
                                         <field name="VAR" id="LossStreak">LossStreak</field>
                                         <value name="VALUE">
@@ -363,7 +358,6 @@
                           </block>
                         </value>
                         <next>
-                          <!-- Increment loss streak counter -->
                           <block type="variables_change" id="increment_loss_streak">
                             <field name="VAR" id="LossStreak">LossStreak</field>
                             <value name="DELTA">
@@ -372,7 +366,6 @@
                               </shadow>
                             </value>
                             <next>
-                              <!-- Check if loss streak reached 5 -->
                               <block type="controls_if" id="check_loss_streak">
                                 <mutation else="1"></mutation>
                                 <value name="IF0">
@@ -391,7 +384,6 @@
                                   </block>
                                 </value>
                                 <statement name="DO0">
-                                  <!-- Reset on 5 losses -->
                                   <block type="variables_set" id="reset_fib1_loss">
                                     <field name="VAR" id="fib1">fib1</field>
                                     <value name="VALUE">
@@ -432,7 +424,6 @@
                                   </block>
                                 </statement>
                                 <statement name="ELSE">
-                                  <!-- Fibonacci sequence progression -->
                                   <block type="variables_set" id="fib_temp_set">
                                     <field name="VAR" id="fib_temp">fib_temp</field>
                                     <value name="VALUE">
