@@ -14,7 +14,6 @@
     <variable id="},tgHl*09-0]zt5j^)xJ">text5</variable>
     <variable id="~1cGM;duQ;iCnqHn~Z%d">text</variable>
     <variable id="1#-k9aznVA607^7go@:W">text1</variable>
-    <!-- New variables for Perrin sequence -->
     <variable id="perrin_streak">loss_streak</variable>
     <variable id="perrin_multiplier">Perrin Multiplier</variable>
   </variables>
@@ -80,16 +79,25 @@
                   <block type="variables_set" id="p#S;2E3@~OLrN|1=HaY+">
                     <field name="VAR" id="LmU[8ZH:2aZ)m-5^SQ#w">Initial Amount</field>
                     <value name="VALUE">
-                      <block type="math_number" id="JH%}0hI-Vom5/;5F@AAf">
-                        <field name="NUM">0.35</field>
+                      <block type="math_arithmetic" id="JH%}0hI-Vom5/;5F@AAf">
+                        <field name="OP">MULTIPLY</field>
+                        <value name="A">
+                          <block type="math_number" id="base_unit">
+                            <field name="NUM">0.35</field>
+                          </block>
+                        </value>
+                        <value name="B">
+                          <block type="math_number" id="perrin_start">
+                            <field name="NUM">2</field>
+                          </block>
+                        </value>
                       </block>
                     </value>
                     <next>
-                      <!-- Initialize loss streak to 0 -->
-                      <block type="variables_set" id="BkjsdHf78dhsd7H">
+                      <block type="variables_set" id="init_streak">
                         <field name="VAR" id="perrin_streak">loss_streak</field>
                         <value name="VALUE">
-                          <block type="math_number" id="nBhsd87H">
+                          <block type="math_number" id="init_streak_val">
                             <field name="NUM">0</field>
                           </block>
                         </value>
@@ -166,30 +174,28 @@
                   </block>
                 </value>
                 <next>
-                  <!-- WIN RESET: Reset to Perrin 2nd term (2 * 0.35 = $0.70) -->
                   <block type="variables_set" id="}S@a+CaMe=HA_Ks)i[Q!">
                     <field name="VAR" id="LmU[8ZH:2aZ)m-5^SQ#w">Initial Amount</field>
                     <value name="VALUE">
-                      <block type="math_arithmetic" id="WinResetStake">
+                      <block type="math_arithmetic" id="win_reset">
                         <field name="OP">MULTIPLY</field>
                         <value name="A">
-                          <block type="math_number" id="BaseUnit">
+                          <block type="math_number" id="base_win">
                             <field name="NUM">0.35</field>
                           </block>
                         </value>
                         <value name="B">
-                          <block type="math_number" id="PerrinStart">
+                          <block type="math_number" id="start_term">
                             <field name="NUM">2</field>
                           </block>
                         </value>
                       </block>
                     </value>
                     <next>
-                      <!-- Reset loss streak to 0 -->
-                      <block type="variables_set" id="ResetStreakWin">
+                      <block type="variables_set" id="reset_streak_win">
                         <field name="VAR" id="perrin_streak">loss_streak</field>
                         <value name="VALUE">
-                          <block type="math_number" id="ResetToZero">
+                          <block type="math_number" id="reset_val">
                             <field name="NUM">0</field>
                           </block>
                         </value>
@@ -246,394 +252,384 @@
                   </block>
                 </value>
                 <next>
-                  <!-- INCREASE LOSS STREAK -->
-                  <block type="math_change" id="IncrementStreak">
+                  <block type="math_change" id="inc_streak">
                     <field name="VAR" id="perrin_streak">loss_streak</field>
                     <value name="DELTA">
-                      <shadow type="math_number" id="DeltaOne">
+                      <shadow type="math_number" id="delta_one">
                         <field name="NUM">1</field>
                       </shadow>
                     </value>
                     <next>
-                      <!-- CALCULATE PERRIN STAKE -->
-                      <block type="variables_set" id="SetPerrinMultiplier">
+                      <block type="variables_set" id="set_perrin_mult">
                         <field name="VAR" id="perrin_multiplier">Perrin Multiplier</field>
                         <value name="VALUE">
-                          <block type="controls_if" id="PerrinSequence">
+                          <block type="controls_if" id="perrin_calc">
                             <mutation elseif="13" else="1"></mutation>
-                            <!-- loss_streak = 1: multiplier = 3 -->
                             <value name="IF0">
-                              <block type="logic_compare" id="streak1">
+                              <block type="logic_compare" id="s1">
                                 <field name="OP">EQ</field>
                                 <value name="A">
-                                  <block type="variables_get" id="get_streak1">
+                                  <block type="variables_get" id="gs1">
                                     <field name="VAR" id="perrin_streak">loss_streak</field>
                                   </block>
                                 </value>
                                 <value name="B">
-                                  <block type="math_number" id="num1">
+                                  <block type="math_number" id="n1">
                                     <field name="NUM">1</field>
                                   </block>
                                 </value>
                               </block>
                             </value>
                             <value name="DO0">
-                              <block type="math_number" id="mult3">
+                              <block type="math_number" id="m3">
                                 <field name="NUM">3</field>
                               </block>
                             </value>
-                            <!-- loss_streak = 2: multiplier = 2 -->
                             <value name="IF1">
-                              <block type="logic_compare" id="streak2">
+                              <block type="logic_compare" id="s2">
                                 <field name="OP">EQ</field>
                                 <value name="A">
-                                  <block type="variables_get" id="get_streak2">
+                                  <block type="variables_get" id="gs2">
                                     <field name="VAR" id="perrin_streak">loss_streak</field>
                                   </block>
                                 </value>
                                 <value name="B">
-                                  <block type="math_number" id="num2">
+                                  <block type="math_number" id="n2">
                                     <field name="NUM">2</field>
                                   </block>
                                 </value>
                               </block>
                             </value>
                             <value name="DO1">
-                              <block type="math_number" id="mult2">
+                              <block type="math_number" id="m2">
                                 <field name="NUM">2</field>
                               </block>
                             </value>
-                            <!-- loss_streak = 3: multiplier = 5 -->
                             <value name="IF2">
-                              <block type="logic_compare" id="streak3">
+                              <block type="logic_compare" id="s3">
                                 <field name="OP">EQ</field>
                                 <value name="A">
-                                  <block type="variables_get" id="get_streak3">
+                                  <block type="variables_get" id="gs3">
                                     <field name="VAR" id="perrin_streak">loss_streak</field>
                                   </block>
                                 </value>
                                 <value name="B">
-                                  <block type="math_number" id="num3">
+                                  <block type="math_number" id="n3">
                                     <field name="NUM">3</field>
                                   </block>
                                 </value>
                               </block>
                             </value>
                             <value name="DO2">
-                              <block type="math_number" id="mult5">
+                              <block type="math_number" id="m5">
                                 <field name="NUM">5</field>
                               </block>
                             </value>
-                            <!-- loss_streak = 4: multiplier = 5 -->
                             <value name="IF3">
-                              <block type="logic_compare" id="streak4">
+                              <block type="logic_compare" id="s4">
                                 <field name="OP">EQ</field>
                                 <value name="A">
-                                  <block type="variables_get" id="get_streak4">
+                                  <block type="variables_get" id="gs4">
                                     <field name="VAR" id="perrin_streak">loss_streak</field>
                                   </block>
                                 </value>
                                 <value name="B">
-                                  <block type="math_number" id="num4">
+                                  <block type="math_number" id="n4">
                                     <field name="NUM">4</field>
                                   </block>
                                 </value>
                               </block>
                             </value>
                             <value name="DO3">
-                              <block type="math_number" id="mult5_2">
+                              <block type="math_number" id="m5_2">
                                 <field name="NUM">5</field>
                               </block>
                             </value>
-                            <!-- loss_streak = 5: multiplier = 7 -->
                             <value name="IF4">
-                              <block type="logic_compare" id="streak5">
+                              <block type="logic_compare" id="s5">
                                 <field name="OP">EQ</field>
                                 <value name="A">
-                                  <block type="variables_get" id="get_streak5">
+                                  <block type="variables_get" id="gs5">
                                     <field name="VAR" id="perrin_streak">loss_streak</field>
                                   </block>
                                 </value>
                                 <value name="B">
-                                  <block type="math_number" id="num5">
+                                  <block type="math_number" id="n5">
                                     <field name="NUM">5</field>
                                   </block>
                                 </value>
                               </block>
                             </value>
                             <value name="DO4">
-                              <block type="math_number" id="mult7">
+                              <block type="math_number" id="m7">
                                 <field name="NUM">7</field>
                               </block>
                             </value>
-                            <!-- loss_streak = 6: multiplier = 10 -->
                             <value name="IF5">
-                              <block type="logic_compare" id="streak6">
+                              <block type="logic_compare" id="s6">
                                 <field name="OP">EQ</field>
                                 <value name="A">
-                                  <block type="variables_get" id="get_streak6">
+                                  <block type="variables_get" id="gs6">
                                     <field name="VAR" id="perrin_streak">loss_streak</field>
                                   </block>
                                 </value>
                                 <value name="B">
-                                  <block type="math_number" id="num6">
+                                  <block type="math_number" id="n6">
                                     <field name="NUM">6</field>
                                   </block>
                                 </value>
                               </block>
                             </value>
                             <value name="DO5">
-                              <block type="math_number" id="mult10">
+                              <block type="math_number" id="m10">
                                 <field name="NUM">10</field>
                               </block>
                             </value>
-                            <!-- loss_streak = 7: multiplier = 12 -->
                             <value name="IF6">
-                              <block type="logic_compare" id="streak7">
+                              <block type="logic_compare" id="s7">
                                 <field name="OP">EQ</field>
                                 <value name="A">
-                                  <block type="variables_get" id="get_streak7">
+                                  <block type="variables_get" id="gs7">
                                     <field name="VAR" id="perrin_streak">loss_streak</field>
                                   </block>
                                 </value>
                                 <value name="B">
-                                  <block type="math_number" id="num7">
+                                  <block type="math_number" id="n7">
                                     <field name="NUM">7</field>
                                   </block>
                                 </value>
                               </block>
                             </value>
                             <value name="DO6">
-                              <block type="math_number" id="mult12">
+                              <block type="math_number" id="m12">
                                 <field name="NUM">12</field>
                               </block>
                             </value>
-                            <!-- loss_streak = 8: multiplier = 17 -->
                             <value name="IF7">
-                              <block type="logic_compare" id="streak8">
+                              <block type="logic_compare" id="s8">
                                 <field name="OP">EQ</field>
                                 <value name="A">
-                                  <block type="variables_get" id="get_streak8">
+                                  <block type="variables_get" id="gs8">
                                     <field name="VAR" id="perrin_streak">loss_streak</field>
                                   </block>
                                 </value>
                                 <value name="B">
-                                  <block type="math_number" id="num8">
+                                  <block type="math_number" id="n8">
                                     <field name="NUM">8</field>
                                   </block>
                                 </value>
                               </block>
                             </value>
                             <value name="DO7">
-                              <block type="math_number" id="mult17">
+                              <block type="math_number" id="m17">
                                 <field name="NUM">17</field>
                               </block>
                             </value>
-                            <!-- loss_streak = 9: multiplier = 22 -->
                             <value name="IF8">
-                              <block type="logic_compare" id="streak9">
+                              <block type="logic_compare" id="s9">
                                 <field name="OP">EQ</field>
                                 <value name="A">
-                                  <block type="variables_get" id="get_streak9">
+                                  <block type="variables_get" id="gs9">
                                     <field name="VAR" id="perrin_streak">loss_streak</field>
                                   </block>
                                 </value>
                                 <value name="B">
-                                  <block type="math_number" id="num9">
+                                  <block type="math_number" id="n9">
                                     <field name="NUM">9</field>
                                   </block>
                                 </value>
                               </block>
                             </value>
                             <value name="DO8">
-                              <block type="math_number" id="mult22">
+                              <block type="math_number" id="m22">
                                 <field name="NUM">22</field>
                               </block>
                             </value>
-                            <!-- loss_streak = 10: multiplier = 29 -->
                             <value name="IF9">
-                              <block type="logic_compare" id="streak10">
+                              <block type="logic_compare" id="s10">
                                 <field name="OP">EQ</field>
                                 <value name="A">
-                                  <block type="variables_get" id="get_streak10">
+                                  <block type="variables_get" id="gs10">
                                     <field name="VAR" id="perrin_streak">loss_streak</field>
                                   </block>
                                 </value>
                                 <value name="B">
-                                  <block type="math_number" id="num10">
+                                  <block type="math_number" id="n10">
                                     <field name="NUM">10</field>
                                   </block>
                                 </value>
                               </block>
                             </value>
                             <value name="DO9">
-                              <block type="math_number" id="mult29">
+                              <block type="math_number" id="m29">
                                 <field name="NUM">29</field>
                               </block>
                             </value>
-                            <!-- loss_streak = 11: multiplier = 39 -->
                             <value name="IF10">
-                              <block type="logic_compare" id="streak11">
+                              <block type="logic_compare" id="s11">
                                 <field name="OP">EQ</field>
                                 <value name="A">
-                                  <block type="variables_get" id="get_streak11">
+                                  <block type="variables_get" id="gs11">
                                     <field name="VAR" id="perrin_streak">loss_streak</field>
                                   </block>
                                 </value>
                                 <value name="B">
-                                  <block type="math_number" id="num11">
+                                  <block type="math_number" id="n11">
                                     <field name="NUM">11</field>
                                   </block>
                                 </value>
                               </block>
                             </value>
                             <value name="DO10">
-                              <block type="math_number" id="mult39">
+                              <block type="math_number" id="m39">
                                 <field name="NUM">39</field>
                               </block>
                             </value>
-                            <!-- loss_streak = 12: multiplier = 51 -->
                             <value name="IF11">
-                              <block type="logic_compare" id="streak12">
+                              <block type="logic_compare" id="s12">
                                 <field name="OP">EQ</field>
                                 <value name="A">
-                                  <block type="variables_get" id="get_streak12">
+                                  <block type="variables_get" id="gs12">
                                     <field name="VAR" id="perrin_streak">loss_streak</field>
                                   </block>
                                 </value>
                                 <value name="B">
-                                  <block type="math_number" id="num12">
+                                  <block type="math_number" id="n12">
                                     <field name="NUM">12</field>
                                   </block>
                                 </value>
                               </block>
                             </value>
                             <value name="DO11">
-                              <block type="math_number" id="mult51">
+                              <block type="math_number" id="m51">
                                 <field name="NUM">51</field>
                               </block>
                             </value>
-                            <!-- loss_streak = 13: multiplier = 68 -->
                             <value name="IF12">
-                              <block type="logic_compare" id="streak13">
+                              <block type="logic_compare" id="s13">
                                 <field name="OP">EQ</field>
                                 <value name="A">
-                                  <block type="variables_get" id="get_streak13">
+                                  <block type="variables_get" id="gs13">
                                     <field name="VAR" id="perrin_streak">loss_streak</field>
                                   </block>
                                 </value>
                                 <value name="B">
-                                  <block type="math_number" id="num13">
+                                  <block type="math_number" id="n13">
                                     <field name="NUM">13</field>
                                   </block>
                                 </value>
                               </block>
                             </value>
                             <value name="DO12">
-                              <block type="math_number" id="mult68">
+                              <block type="math_number" id="m68">
                                 <field name="NUM">68</field>
                               </block>
                             </value>
-                            <!-- loss_streak = 14: multiplier = 90 -->
                             <value name="IF13">
-                              <block type="logic_compare" id="streak14">
+                              <block type="logic_compare" id="s14">
                                 <field name="OP">EQ</field>
                                 <value name="A">
-                                  <block type="variables_get" id="get_streak14">
+                                  <block type="variables_get" id="gs14">
                                     <field name="VAR" id="perrin_streak">loss_streak</field>
                                   </block>
                                 </value>
                                 <value name="B">
-                                  <block type="math_number" id="num14">
+                                  <block type="math_number" id="n14">
                                     <field name="NUM">14</field>
                                   </block>
                                 </value>
                               </block>
                             </value>
                             <value name="DO13">
-                              <block type="math_number" id="mult90">
+                              <block type="math_number" id="m90">
                                 <field name="NUM">90</field>
                               </block>
                             </value>
-                            <!-- Default for higher streaks -->
                             <value name="ELSE">
-                              <block type="math_number" id="defaultPerrin">
+                              <block type="math_number" id="m90d">
                                 <field name="NUM">90</field>
                               </block>
                             </value>
                           </block>
                         </value>
+                        <next>
+                          <block type="variables_set" id="set_next_stake">
+                            <field name="VAR" id="LmU[8ZH:2aZ)m-5^SQ#w">Initial Amount</field>
+                            <value name="VALUE">
+                              <block type="math_arithmetic" id="calc_stake">
+                                <field name="OP">MULTIPLY</field>
+                                <value name="A">
+                                  <block type="variables_get" id="get_mult">
+                                    <field name="VAR" id="perrin_multiplier">Perrin Multiplier</field>
+                                  </block>
+                                </value>
+                                <value name="B">
+                                  <block type="math_number" id="base_unit_loss">
+                                    <field name="NUM">0.35</field>
+                                  </block>
+                                </value>
+                              </block>
+                            </value>
+                            <next>
+                              <block type="controls_if" id="max_loss_check">
+                                <value name="IF0">
+                                  <block type="logic_compare" id="loss_compare">
+                                    <field name="OP">GTE</field>
+                                    <value name="A">
+                                      <block type="math_single" id="abs_loss">
+                                        <field name="OP">ABS</field>
+                                        <value name="NUM">
+                                          <shadow type="math_number" id="abs_shadow">
+                                            <field name="NUM">9</field>
+                                          </shadow>
+                                          <block type="read_details" id="read_loss">
+                                            <field name="DETAIL_INDEX">4</field>
+                                          </block>
+                                        </value>
+                                      </block>
+                                    </value>
+                                    <value name="B">
+                                      <block type="variables_get" id="get_max_loss">
+                                        <field name="VAR" id="]oGV^TW+pyAyI~)S*^8n">Max Loss Amount</field>
+                                      </block>
+                                    </value>
+                                  </block>
+                                </value>
+                                <statement name="DO0">
+                                  <block type="variables_set" id="reset_stake_maxloss">
+                                    <field name="VAR" id="LmU[8ZH:2aZ)m-5^SQ#w">Initial Amount</field>
+                                    <value name="VALUE">
+                                      <block type="math_arithmetic" id="reset_stake_val">
+                                        <field name="OP">MULTIPLY</field>
+                                        <value name="A">
+                                          <block type="math_number" id="reset_base">
+                                            <field name="NUM">0.35</field>
+                                          </block>
+                                        </value>
+                                        <value name="B">
+                                          <block type="math_number" id="reset_term">
+                                            <field name="NUM">2</field>
+                                          </block>
+                                        </value>
+                                      </block>
+                                    </value>
+                                    <next>
+                                      <block type="variables_set" id="reset_streak_maxloss">
+                                        <field name="VAR" id="perrin_streak">loss_streak</field>
+                                        <value name="VALUE">
+                                          <block type="math_number" id="reset_streak_val">
+                                            <field name="NUM">0</field>
+                                          </block>
+                                        </value>
+                                      </block>
+                                    </next>
+                                  </block>
+                                </statement>
+                              </block>
+                            </next>
+                          </block>
+                        </next>
                       </block>
-                      <next>
-                        <!-- SET NEXT STAKE: Perrin multiplier * 0.35 -->
-                        <block type="variables_set" id="SetNextStake">
-                          <field name="VAR" id="LmU[8ZH:2aZ)m-5^SQ#w">Initial Amount</field>
-                          <value name="VALUE">
-                            <block type="math_arithmetic" id="CalculateStake">
-                              <field name="OP">MULTIPLY</field>
-                              <value name="A">
-                                <block type="variables_get" id="GetPerrinMult">
-                                  <field name="VAR" id="perrin_multiplier">Perrin Multiplier</field>
-                                </block>
-                              </value>
-                              <value name="B">
-                                <block type="math_number" id="BaseUnitLoss">
-                                  <field name="NUM">0.35</field>
-                                </block>
-                              </value>
-                            </block>
-                          </value>
-                          <next>
-                            <!-- MAX LOSS CHECK (original functionality) -->
-                            <block type="controls_if" id="Qo65x[@bpuPTXe3icfGe">
-                              <value name="IF0">
-                                <block type="logic_compare" id="~aQnKV1=^%`=mq%~~J@~">
-                                  <field name="OP">GTE</field>
-                                  <value name="A">
-                                    <block type="math_single" id="LYfSlEV!%CzoXlxSU8HJ">
-                                      <field name="OP">ABS</field>
-                                      <value name="NUM">
-                                        <shadow type="math_number" id="}?j,)0XVl_94c::UP/T|">
-                                          <field name="NUM">9</field>
-                                        </shadow>
-                                        <block type="read_details" id="@S+a6s4@U,0z8^dMC0ac">
-                                          <field name="DETAIL_INDEX">4</field>
-                                        </block>
-                                      </value>
-                                    </block>
-                                  </value>
-                                  <value name="B">
-                                    <block type="variables_get" id="s2v4WWUB;05h=^-`y.P}">
-                                      <field name="VAR" id="]oGV^TW+pyAyI~)S*^8n">Max Loss Amount</field>
-                                    </block>
-                                  </value>
-                                </block>
-                              </value>
-                              <statement name="DO0">
-                                <block type="variables_set" id="iM75do^/FrW]TslwYpiq">
-                                  <field name="VAR" id="LmU[8ZH:2aZ)m-5^SQ#w">Initial Amount</field>
-                                  <value name="VALUE">
-                                    <block type="variables_get" id="Lb3w;Ic_H#gFT(c^.xx+">
-                                      <field name="VAR" id=".}isBXha4T:t(WP]tqFt">Win Amount</field>
-                                    </block>
-                                  </value>
-                                  <next>
-                                    <!-- Reset streak on max loss -->
-                                    <block type="variables_set" id="ResetStreakMaxLoss">
-                                      <field name="VAR" id="perrin_streak">loss_streak</field>
-                                      <value name="VALUE">
-                                        <block type="math_number" id="ResetToZeroMaxLoss">
-                                          <field name="NUM">0</field>
-                                        </block>
-                                      </value>
-                                    </block>
-                                  </next>
-                                </block>
-                              </statement>
-                            </block>
-                          </next>
-                        </block>
-                      </next>
                     </next>
                   </block>
                 </next>
@@ -742,8 +738,192 @@
       </block>
     </statement>
   </block>
-  <!-- The rest of your XML remains unchanged below this point -->
   <block type="before_purchase" id="zejUj,s9[[qBFFN10v$j" deletable="false" x="0" y="760">
-    <!-- ... (existing before_purchase blocks remain unchanged) ... -->
+    <statement name="BEFOREPURCHASE_STACK">
+      <block type="ema_statement" id="#JBqQofbr`_%sL_!Yh?-">
+        <field name="VARIABLE" id="pI}UQ(kb./.`7x5^@eq`">ema</field>
+        <statement name="STATEMENT">
+          <block type="input_list" id="jY5(A%tP=T:3tA7[9}r+" deletable="false" movable="false">
+            <value name="INPUT_LIST">
+              <block type="ticks" id="6fGJ_D!$=_5rFe]E(OFi"></block>
+            </value>
+            <next>
+              <block type="period" id="TX5N3(R,!UF_518,_12p" deletable="false" movable="false">
+                <value name="PERIOD">
+                  <shadow type="math_number" id="9,:AF7gQ.1,rXe+L3drd">
+                    <field name="NUM">34</field>
+                  </shadow>
+                </value>
+              </block>
+            </next>
+          </block>
+        </statement>
+        <next>
+          <block type="variables_set" id="Vin]=vrzUy.cMu|JO1Dz">
+            <field name="VAR" id=",`Y]gHZe/MA.H+HvjCT0">EMA-34</field>
+            <value name="VALUE">
+              <block type="variables_get" id="$rn6Q8P{SpDnj/}^YM{O">
+                <field name="VAR" id="pI}UQ(kb./.`7x5^@eq`">ema</field>
+              </block>
+            </value>
+            <next>
+              <block type="ema_statement" id="A7ywFD%w6-(U@{!MB:3w">
+                <field name="VARIABLE" id="X;sfC8!Jb{*(Z7PgkMjx">ema1</field>
+                <statement name="STATEMENT">
+                  <block type="input_list" id="%ETP_/^~:]X/*6:i9QtC" deletable="false" movable="false">
+                    <value name="INPUT_LIST">
+                      <block type="ticks" id="VjZ^NteU.0fzhEa3LHT("></block>
+                    </value>
+                    <next>
+                      <block type="period" id=",0Cb^uwBGlp_@.T{Z:F}" deletable="false" movable="false">
+                        <value name="PERIOD">
+                          <shadow type="math_number" id="*r=HNoodjR}U:U4^(a{~">
+                            <field name="NUM">13</field>
+                          </shadow>
+                        </value>
+                      </block>
+                    </next>
+                  </block>
+                </statement>
+                <next>
+                  <block type="variables_set" id="R|se$aMP$swEY%JOKzhx">
+                    <field name="VAR" id="DNib.B0%.tV1gRYu6!cy">EMA-13</field>
+                    <value name="VALUE">
+                      <block type="variables_get" id="c0BuP,scPo,)rQtx*Kw)">
+                        <field name="VAR" id="X;sfC8!Jb{*(Z7PgkMjx">ema1</field>
+                      </block>
+                    </value>
+                    <next>
+                      <block type="text_join" id="(Way%=S*vtXMcwU3YSY!">
+                        <field name="VARIABLE" id="~1cGM;duQ;iCnqHn~Z%d">text</field>
+                        <statement name="STACK">
+                          <block type="text_statement" id="1=O=6GV{^;_3?2Ii8qOn">
+                            <value name="TEXT">
+                              <shadow type="text" id="vBkmP,a@.LStlx-HZxPS">
+                                <field name="TEXT"></field>
+                              </shadow>
+                              <block type="text" id="F~m;O0]I;fae%R;XkEdK">
+                                <field name="TEXT">EMA-13</field>
+                              </block>
+                            </value>
+                            <next>
+                              <block type="text_statement" id="63Tye#7?eB2z1r!_d5jV">
+                                <value name="TEXT">
+                                  <shadow type="text" id="Q/6WN;XfL?E-_1MiN~yb">
+                                    <field name="TEXT"></field>
+                                  </shadow>
+                                  <block type="variables_get" id="QV3C/KaU**MonUmR(e7e">
+                                    <field name="VAR" id="DNib.B0%.tV1gRYu6!cy">EMA-13</field>
+                                  </block>
+                                </value>
+                              </block>
+                            </next>
+                          </block>
+                        </statement>
+                        <next>
+                          <block type="notify" id="fJs{);XEzapUI1;qgrIV">
+                            <field name="NOTIFICATION_TYPE">success</field>
+                            <field name="NOTIFICATION_SOUND">silent</field>
+                            <value name="MESSAGE">
+                              <block type="variables_get" id="p]7+|p;OHU5_]BV#/}z7">
+                                <field name="VAR" id="~1cGM;duQ;iCnqHn~Z%d">text</field>
+                              </block>
+                            </value>
+                            <next>
+                              <block type="text_join" id="V]=A5BUa*,3CZd]rR@4z">
+                                <field name="VARIABLE" id="1#-k9aznVA607^7go@:W">text1</field>
+                                <statement name="STACK">
+                                  <block type="text_statement" id="eni=[Ls!#Tp;^jY`s(Bw">
+                                    <value name="TEXT">
+                                      <shadow type="text" id="1cQu@mX#HOjU_UVRQEJK">
+                                        <field name="TEXT"></field>
+                                      </shadow>
+                                      <block type="text" id="?E(i?7]`tF6lrrj($#g3">
+                                        <field name="TEXT">EMA-34</field>
+                                      </block>
+                                    </value>
+                                    <next>
+                                      <block type="text_statement" id="*+xOyeev;6CnJ]6+kq0#">
+                                        <value name="TEXT">
+                                          <shadow type="text" id="8%mj6A-4*t`{fe7REyZ{">
+                                            <field name="TEXT"></field>
+                                          </shadow>
+                                          <block type="variables_get" id="{.l.fXZwzGO}^dL*xPdK">
+                                            <field name="VAR" id=",`Y]gHZe/MA.H+HvjCT0">EMA-34</field>
+                                          </block>
+                                        </value>
+                                      </block>
+                                    </next>
+                                  </block>
+                                </statement>
+                                <next>
+                                  <block type="notify" id="|1VFk!n9zGP27.+Vj]0w">
+                                    <field name="NOTIFICATION_TYPE">success</field>
+                                    <field name="NOTIFICATION_SOUND">silent</field>
+                                    <value name="MESSAGE">
+                                      <block type="variables_get" id="!vXWzBG{n_CDX^[Y,fUw">
+                                        <field name="VAR" id="1#-k9aznVA607^7go@:W">text1</field>
+                                      </block>
+                                    </value>
+                                    <next>
+                                      <block type="controls_if" id="PZ-)eqscRe}`X8|HB$N:">
+                                        <value name="IF0">
+                                          <block type="logic_compare" id="t)UON0l_aP!X)lBzjOzo">
+                                            <field name="OP">GTE</field>
+                                            <value name="A">
+                                              <block type="tick" id="Dj(D06bxqv4bp7(hL*d1"></block>
+                                            </value>
+                                            <value name="B">
+                                              <block type="variables_get" id="T*^]Xqmh~u)*Y%NTn+h%">
+                                                <field name="VAR" id=",`Y]gHZe/MA.H+HvjCT0">EMA-34</field>
+                                              </block>
+                                            </value>
+                                          </block>
+                                        </value>
+                                        <statement name="DO0">
+                                          <block type="purchase" id="#jr;_g=gW+`_i[JnWOj9">
+                                            <field name="PURCHASE_LIST">CALL</field>
+                                          </block>
+                                        </statement>
+                                        <next>
+                                          <block type="controls_if" id="![N(XE/U)2b29A$()HU*">
+                                            <value name="IF0">
+                                              <block type="logic_compare" id="(S?~ItlBzH~ySbTO7r5@">
+                                                <field name="OP">LTE</field>
+                                                <value name="A">
+                                                  <block type="tick" id="6S4H!3~Pdr%YSe^~JO)@"></block>
+                                                </value>
+                                                <value name="B">
+                                                  <block type="variables_get" id="s^a{vnfWC:jQJ$y$Bn-t">
+                                                    <field name="VAR" id="DNib.B0%.tV1gRYu6!cy">EMA-13</field>
+                                                  </block>
+                                                </value>
+                                              </block>
+                                            </value>
+                                            <statement name="DO0">
+                                              <block type="purchase" id="*y`P@q5p-n,?1#bU9%fo">
+                                                <field name="PURCHASE_LIST">PUT</field>
+                                              </block>
+                                            </statement>
+                                          </block>
+                                        </next>
+                                      </block>
+                                    </next>
+                                  </block>
+                                </next>
+                              </block>
+                            </next>
+                          </block>
+                        </next>
+                      </block>
+                    </next>
+                  </block>
+                </next>
+              </block>
+            </next>
+          </block>
+        </next>
+      </block>
+    </statement>
   </block>
 </xml>
