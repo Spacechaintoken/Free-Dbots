@@ -14,7 +14,6 @@
     <variable id="},tgHl*09-0]zt5j^)xJ">text5</variable>
     <variable id="~1cGM;duQ;iCnqHn~Z%d">text</variable>
     <variable id="1#-k9aznVA607^7go@:W">text1</variable>
-    <!-- Fibonacci Strategy Variables -->
     <variable id="fib_prev">fib_prev</variable>
     <variable id="fib_current">fib_current</variable>
     <variable id="LossStreak">LossStreak</variable>
@@ -86,7 +85,6 @@
                       </block>
                     </value>
                     <next>
-                      <!-- Fibonacci Initialization -->
                       <block type="variables_set" id="fib_prev_init">
                         <field name="VAR" id="fib_prev">fib_prev</field>
                         <value name="VALUE">
@@ -195,7 +193,6 @@
                       </block>
                     </value>
                     <next>
-                      <!-- Reset Fibonacci on Win -->
                       <block type="variables_set" id="reset_fib_prev_win">
                         <field name="VAR" id="fib_prev">fib_prev</field>
                         <value name="VALUE">
@@ -276,7 +273,6 @@
                   </block>
                 </value>
                 <next>
-                  <!-- Fibonacci Loss Recovery Start -->
                   <block type="controls_if" id="loss_streak_check">
                     <mutation else="1"></mutation>
                     <value name="IF0">
@@ -295,7 +291,6 @@
                       </block>
                     </value>
                     <statement name="DO0">
-                      <!-- Reset after 3 losses -->
                       <block type="variables_set" id="reset_fib_prev">
                         <field name="VAR" id="fib_prev">fib_prev</field>
                         <value name="VALUE">
@@ -336,7 +331,6 @@
                       </block>
                     </statement>
                     <statement name="ELSE">
-                      <!-- Fibonacci progression -->
                       <block type="variables_set" id="update_fib_current">
                         <field name="VAR" id="fib_current">fib_current</field>
                         <value name="VALUE">
@@ -407,7 +401,6 @@
                       </block>
                     </statement>
                   </block>
-                  <!-- Fibonacci Loss Recovery End -->
                 </next>
               </block>
             </next>
