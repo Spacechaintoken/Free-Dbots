@@ -1,25 +1,28 @@
 <xml xmlns="https://developers.google.com/blockly/xml" is_dbot="true" collection="false">
   <variables>
     <variable id="]oGV^TW+pyAyI~)S*^8n">Max Loss Amount</variable>
-    <variable id="pI}UQ(kb./.`7x5^@eq`">ema</variable>
     <variable id="IuS7w^IfF%%reKqf6Qcq">Expected Profit</variable>
     <variable id="LmU[8ZH:2aZ)m-5^SQ#w">Initial Amount</variable>
     <variable id="T*)=1MO+ZIcn[BCz-0K)">text2</variable>
     <variable id="3}pg`5[#x([dYQ65*F66">text3</variable>
     <variable id="OqkY*.00B2j]PDsQDMDo">text4</variable>
-    <variable id=",`Y]gHZe/MA.H+HvjCT0">EMA-34</variable>
     <variable id=".}isBXha4T:t(WP]tqFt">Win Amount</variable>
-    <variable id="X;sfC8!Jb{*(Z7PgkMjx">ema1</variable>
     <variable id="next_fib">next_fib</variable>
-    <variable id="DNib.B0%.tV1gRYu6!cy">EMA-13</variable>
     <variable id="fib_prev">fib_prev</variable>
     <variable id="},tgHl*09-0]zt5j^)xJ">text5</variable>
     <variable id="~1cGM;duQ;iCnqHn~Z%d">text</variable>
     <variable id="fib_curr">fib_curr</variable>
     <variable id="next_stake">next_stake</variable>
     <variable id="1#-k9aznVA607^7go@:W">text1</variable>
-    <variable id="rsi">rsi</variable>
-    <variable id="text6">text6</variable>
+    <variable id="stoch_k">stoch_k</variable>
+    <variable id="stoch_d">stoch_d</variable>
+    <variable id="wma5">wma5</variable>
+    <variable id="wma10">wma10</variable>
+    <variable id="macd_line">macd_line</variable>
+    <variable id="macd_signal">macd_signal</variable>
+    <variable id="text_wma">text_wma</variable>
+    <variable id="text_stoch">text_stoch</variable>
+    <variable id="text_macd">text_macd</variable>
   </variables>
   <block type="after_purchase" id="KQivR_7:)d]i=B{9`Fla" x="801" y="-54">
     <statement name="AFTERPURCHASE_STACK">
@@ -481,218 +484,436 @@
   </block>
   <block type="before_purchase" id="zejUj,s9[[qBFFN10v$j" deletable="false" x="0" y="856">
     <statement name="BEFOREPURCHASE_STACK">
-      <block type="ema_statement" id="#JBqQofbr`_%sL_!Yh?-">
-        <field name="VARIABLE" id="pI}UQ(kb./.`7x5^@eq`">ema</field>
+      <block type="stochastic_statement" id="stoch_block">
+        <field name="VARIABLE">stoch_k</field>
+        <field name="VARIABLE2">stoch_d</field>
         <statement name="STATEMENT">
-          <block type="input_list" id="jY5(A%tP=T:3tA7[9}r+" deletable="false" movable="false">
+          <block type="input_list" id="stoch_input" deletable="false" movable="false">
             <value name="INPUT_LIST">
-              <block type="ticks" id="6fGJ_D!$=_5rFe]E(OFi"></block>
+              <block type="ticks" id="stoch_ticks"></block>
             </value>
             <next>
-              <block type="period" id="TX5N3(R,!UF_518,_12p" deletable="false" movable="false">
+              <block type="period" id="stoch_period" deletable="false" movable="false">
                 <value name="PERIOD">
-                  <shadow type="math_number" id="9,:AF7gQ.1,rXe+L3drd">
-                    <field name="NUM">34</field>
+                  <shadow type="math_number" id="stoch_period_shadow">
+                    <field name="NUM">5</field>
                   </shadow>
+                  <block type="math_number" id="stoch_period_value">
+                    <field name="NUM">5</field>
+                  </block>
                 </value>
+                <next>
+                  <block type="smooth_period" id="stoch_smooth" deletable="false" movable="false">
+                    <value name="SMOOTH_PERIOD">
+                      <shadow type="math_number" id="stoch_smooth_shadow">
+                        <field name="NUM">3</field>
+                      </shadow>
+                      <block type="math_number" id="stoch_smooth_value">
+                        <field name="NUM">3</field>
+                      </block>
+                    </value>
+                    <next>
+                      <block type="slow_period" id="stoch_slow" deletable="false" movable="false">
+                        <value name="SLOW_PERIOD">
+                          <shadow type="math_number" id="stoch_slow_shadow">
+                            <field name="NUM">3</field>
+                          </shadow>
+                          <block type="math_number" id="stoch_slow_value">
+                            <field name="NUM">3</field>
+                          </block>
+                        </value>
+                      </block>
+                    </next>
+                  </block>
+                </next>
               </block>
             </next>
           </block>
         </statement>
         <next>
-          <block type="variables_set" id="Vin]=vrzUy.cMu|JO1Dz">
-            <field name="VAR" id=",`Y]gHZe/MA.H+HvjCT0">EMA-34</field>
-            <value name="VALUE">
-              <block type="variables_get" id="$rn6Q8P{SpDnj/}^YM{O">
-                <field name="VAR" id="pI}UQ(kb./.`7x5^@eq`">ema</field>
+          <block type="wma_statement" id="wma5_block">
+            <field name="VARIABLE">wma5</field>
+            <statement name="STATEMENT">
+              <block type="input_list" id="wma5_input" deletable="false" movable="false">
+                <value name="INPUT_LIST">
+                  <block type="ticks" id="wma5_ticks"></block>
+                </value>
+                <next>
+                  <block type="period" id="wma5_period" deletable="false" movable="false">
+                    <value name="PERIOD">
+                      <shadow type="math_number" id="wma5_period_shadow">
+                        <field name="NUM">5</field>
+                      </shadow>
+                      <block type="math_number" id="wma5_period_value">
+                        <field name="NUM">5</field>
+                      </block>
+                    </value>
+                  </block>
+                </next>
               </block>
-            </value>
+            </statement>
             <next>
-              <block type="ema_statement" id="A7ywFD%w6-(U@{!MB:3w">
-                <field name="VARIABLE" id="X;sfC8!Jb{*(Z7PgkMjx">ema1</field>
+              <block type="wma_statement" id="wma10_block">
+                <field name="VARIABLE">wma10</field>
                 <statement name="STATEMENT">
-                  <block type="input_list" id="%ETP_/^~:]X/*6:i9QtC" deletable="false" movable="false">
+                  <block type="input_list" id="wma10_input" deletable="false" movable="false">
                     <value name="INPUT_LIST">
-                      <block type="ticks" id="VjZ^NteU.0fzhEa3LHT("></block>
+                      <block type="ticks" id="wma10_ticks"></block>
                     </value>
                     <next>
-                      <block type="period" id=",0Cb^uwBGlp_@.T{Z:F}" deletable="false" movable="false">
+                      <block type="period" id="wma10_period" deletable="false" movable="false">
                         <value name="PERIOD">
-                          <shadow type="math_number" id="*r=HNoodjR}U:U4^(a{~">
-                            <field name="NUM">13</field>
+                          <shadow type="math_number" id="wma10_period_shadow">
+                            <field name="NUM">10</field>
                           </shadow>
+                          <block type="math_number" id="wma10_period_value">
+                            <field name="NUM">10</field>
+                          </block>
                         </value>
                       </block>
                     </next>
                   </block>
                 </statement>
                 <next>
-                  <block type="rsi_statement" id="rsi_calculation">
-                    <field name="VARIABLE" id="rsi">rsi</field>
+                  <block type="macd_statement" id="macd_block">
+                    <field name="VARIABLE">macd_line</field>
+                    <field name="VARIABLE2">macd_signal</field>
                     <statement name="STATEMENT">
-                      <block type="input_list" id="rsi_input">
+                      <block type="input_list" id="macd_input" deletable="false" movable="false">
                         <value name="INPUT_LIST">
-                          <block type="ticks" id="rsi_ticks"></block>
+                          <block type="ticks" id="macd_ticks"></block>
                         </value>
                         <next>
-                          <block type="period" id="rsi_period">
-                            <value name="PERIOD">
-                              <shadow type="math_number" id="rsi_period_shadow">
-                                <field name="NUM">14</field>
+                          <block type="fast_ema_period" id="macd_fast" deletable="false" movable="false">
+                            <value name="FAST_EMA_PERIOD">
+                              <shadow type="math_number" id="macd_fast_shadow">
+                                <field name="NUM">3</field>
                               </shadow>
-                              <block type="math_number" id="rsi_period_value">
-                                <field name="NUM">14</field>
+                              <block type="math_number" id="macd_fast_value">
+                                <field name="NUM">3</field>
                               </block>
                             </value>
+                            <next>
+                              <block type="slow_ema_period" id="macd_slow" deletable="false" movable="false">
+                                <value name="SLOW_EMA_PERIOD">
+                                  <shadow type="math_number" id="macd_slow_shadow">
+                                    <field name="NUM">10</field>
+                                  </shadow>
+                                  <block type="math_number" id="macd_slow_value">
+                                    <field name="NUM">10</field>
+                                  </block>
+                                </value>
+                                <next>
+                                  <block type="signal_period" id="macd_signal_period" deletable="false" movable="false">
+                                    <value name="SIGNAL_PERIOD">
+                                      <shadow type="math_number" id="macd_signal_shadow">
+                                        <field name="NUM">16</field>
+                                      </shadow>
+                                      <block type="math_number" id="macd_signal_value">
+                                        <field name="NUM">16</field>
+                                      </block>
+                                    </value>
+                                  </block>
+                                </next>
+                              </block>
+                            </next>
                           </block>
                         </next>
                       </block>
                     </statement>
                     <next>
-                      <block type="text_join" id="rsi_text_join">
-                        <field name="VARIABLE" id="text6">text6</field>
+                      <block type="text_join" id="wma_text">
+                        <field name="VARIABLE" id="text_wma">text_wma</field>
                         <statement name="STACK">
-                          <block type="text_statement" id="rsi_text1">
+                          <block type="text_statement" id="wma_text1">
                             <value name="TEXT">
-                              <shadow type="text" id="rsi_shadow1">
+                              <shadow type="text" id="wma_shadow1">
                                 <field name="TEXT"></field>
                               </shadow>
-                              <block type="text" id="rsi_text_value1">
-                                <field name="TEXT">RSI: </field>
+                              <block type="text" id="wma_text_val1">
+                                <field name="TEXT">WMA5: </field>
                               </block>
                             </value>
                             <next>
-                              <block type="text_statement" id="rsi_text2">
+                              <block type="text_statement" id="wma_text2">
                                 <value name="TEXT">
-                                  <shadow type="text" id="rsi_shadow2">
+                                  <shadow type="text" id="wma_shadow2">
                                     <field name="TEXT"></field>
                                   </shadow>
-                                  <block type="variables_get" id="rsi_value">
-                                    <field name="VAR" id="rsi">rsi</field>
+                                  <block type="variables_get" id="wma5_val">
+                                    <field name="VAR" id="wma5">wma5</field>
                                   </block>
                                 </value>
+                                <next>
+                                  <block type="text_statement" id="wma_text3">
+                                    <value name="TEXT">
+                                      <shadow type="text" id="wma_shadow3">
+                                        <field name="TEXT"></field>
+                                      </shadow>
+                                      <block type="text" id="wma_text_val2">
+                                        <field name="TEXT">, WMA10: </field>
+                                      </block>
+                                    </value>
+                                    <next>
+                                      <block type="text_statement" id="wma_text4">
+                                        <value name="TEXT">
+                                          <shadow type="text" id="wma_shadow4">
+                                            <field name="TEXT"></field>
+                                          </shadow>
+                                          <block type="variables_get" id="wma10_val">
+                                            <field name="VAR" id="wma10">wma10</field>
+                                          </block>
+                                        </value>
+                                      </block>
+                                    </next>
+                                  </block>
+                                </next>
                               </block>
                             </next>
                           </block>
                         </statement>
                         <next>
-                          <block type="notify" id="rsi_notify">
-                            <field name="NOTIFICATION_TYPE">info</field>
+                          <block type="notify" id="wma_notify">
+                            <field name="NOTIFICATION_TYPE">success</field>
                             <field name="NOTIFICATION_SOUND">silent</field>
                             <value name="MESSAGE">
-                              <block type="variables_get" id="rsi_message">
-                                <field name="VAR" id="text6">text6</field>
+                              <block type="variables_get" id="wma_text_var">
+                                <field name="VAR" id="text_wma">text_wma</field>
                               </block>
                             </value>
                             <next>
-                              <block type="variables_set" id="R|se$aMP$swEY%JOKzhx">
-                                <field name="VAR" id="DNib.B0%.tV1gRYu6!cy">EMA-13</field>
-                                <value name="VALUE">
-                                  <block type="variables_get" id="c0BuP,scPo,)rQtx*Kw)">
-                                    <field name="VAR" id="X;sfC8!Jb{*(Z7PgkMjx">ema1</field>
-                                  </block>
-                                </value>
-                                <next>
-                                  <block type="text_join" id="(Way%=S*vtXMcwU3YSY!">
-                                    <field name="VARIABLE" id="~1cGM;duQ;iCnqHn~Z%d">text</field>
-                                    <statement name="STACK">
-                                      <block type="text_statement" id="1=O=6GV{^;_3?2Ii8qOn">
+                              <block type="text_join" id="stoch_text">
+                                <field name="VARIABLE" id="text_stoch">text_stoch</field>
+                                <statement name="STACK">
+                                  <block type="text_statement" id="stoch_text1">
+                                    <value name="TEXT">
+                                      <shadow type="text" id="stoch_shadow1">
+                                        <field name="TEXT"></field>
+                                      </shadow>
+                                      <block type="text" id="stoch_text_val1">
+                                        <field name="TEXT">Stoch K: </field>
+                                      </block>
+                                    </value>
+                                    <next>
+                                      <block type="text_statement" id="stoch_text2">
                                         <value name="TEXT">
-                                          <shadow type="text" id="vBkmP,a@.LStlx-HZxPS">
+                                          <shadow type="text" id="stoch_shadow2">
                                             <field name="TEXT"></field>
                                           </shadow>
-                                          <block type="text" id="F~m;O0]I;fae%R;XkEdK">
-                                            <field name="TEXT">EMA-13</field>
+                                          <block type="variables_get" id="stoch_k_val">
+                                            <field name="VAR" id="stoch_k">stoch_k</field>
                                           </block>
                                         </value>
                                         <next>
-                                          <block type="text_statement" id="63Tye#7?eB2z1r!_d5jV">
+                                          <block type="text_statement" id="stoch_text3">
                                             <value name="TEXT">
-                                              <shadow type="text" id="Q/6WN;XfL?E-_1MiN~yb">
+                                              <shadow type="text" id="stoch_shadow3">
                                                 <field name="TEXT"></field>
                                               </shadow>
-                                              <block type="variables_get" id="QV3C/KaU**MonUmR(e7e">
-                                                <field name="VAR" id="DNib.B0%.tV1gRYu6!cy">EMA-13</field>
+                                              <block type="text" id="stoch_text_val2">
+                                                <field name="TEXT">, D: </field>
                                               </block>
                                             </value>
+                                            <next>
+                                              <block type="text_statement" id="stoch_text4">
+                                                <value name="TEXT">
+                                                  <shadow type="text" id="stoch_shadow4">
+                                                    <field name="TEXT"></field>
+                                                  </shadow>
+                                                  <block type="variables_get" id="stoch_d_val">
+                                                    <field name="VAR" id="stoch_d">stoch_d</field>
+                                                  </block>
+                                                </value>
+                                              </block>
+                                            </next>
                                           </block>
                                         </next>
                                       </block>
-                                    </statement>
+                                    </next>
+                                  </block>
+                                </statement>
+                                <next>
+                                  <block type="notify" id="stoch_notify">
+                                    <field name="NOTIFICATION_TYPE">success</field>
+                                    <field name="NOTIFICATION_SOUND">silent</field>
+                                    <value name="MESSAGE">
+                                      <block type="variables_get" id="stoch_text_var">
+                                        <field name="VAR" id="text_stoch">text_stoch</field>
+                                      </block>
+                                    </value>
                                     <next>
-                                      <block type="notify" id="fJs{);XEzapUI1;qgrIV">
-                                        <field name="NOTIFICATION_TYPE">success</field>
-                                        <field name="NOTIFICATION_SOUND">silent</field>
-                                        <value name="MESSAGE">
-                                          <block type="variables_get" id="p]7+|p;OHU5_]BV#/}z7">
-                                            <field name="VAR" id="~1cGM;duQ;iCnqHn~Z%d">text</field>
-                                          </block>
-                                        </value>
-                                        <next>
-                                          <block type="text_join" id="V]=A5BUa*,3CZd]rR@4z">
-                                            <field name="VARIABLE" id="1#-k9aznVA607^7go@:W">text1</field>
-                                            <statement name="STACK">
-                                              <block type="text_statement" id="eni=[Ls!#Tp;^jY`s(Bw">
+                                      <block type="text_join" id="macd_text">
+                                        <field name="VARIABLE" id="text_macd">text_macd</field>
+                                        <statement name="STACK">
+                                          <block type="text_statement" id="macd_text1">
+                                            <value name="TEXT">
+                                              <shadow type="text" id="macd_shadow1">
+                                                <field name="TEXT"></field>
+                                              </shadow>
+                                              <block type="text" id="macd_text_val1">
+                                                <field name="TEXT">MACD Line: </field>
+                                              </block>
+                                            </value>
+                                            <next>
+                                              <block type="text_statement" id="macd_text2">
                                                 <value name="TEXT">
-                                                  <shadow type="text" id="1cQu@mX#HOjU_UVRQEJK">
+                                                  <shadow type="text" id="macd_shadow2">
                                                     <field name="TEXT"></field>
                                                   </shadow>
-                                                  <block type="text" id="?E(i?7]`tF6lrrj($#g3">
-                                                    <field name="TEXT">EMA-34</field>
+                                                  <block type="variables_get" id="macd_line_val">
+                                                    <field name="VAR" id="macd_line">macd_line</field>
                                                   </block>
                                                 </value>
                                                 <next>
-                                                  <block type="text_statement" id="*+xOyeev;6CnJ]6+kq0#">
+                                                  <block type="text_statement" id="macd_text3">
                                                     <value name="TEXT">
-                                                      <shadow type="text" id="8%mj6A-4*t`{fe7REyZ{">
+                                                      <shadow type="text" id="macd_shadow3">
                                                         <field name="TEXT"></field>
                                                       </shadow>
-                                                      <block type="variables_get" id="{.l.fXZwzGO}^dL*xPdK">
-                                                        <field name="VAR" id=",`Y]gHZe/MA.H+HvjCT0">EMA-34</field>
+                                                      <block type="text" id="macd_text_val2">
+                                                        <field name="TEXT">, Signal: </field>
                                                       </block>
                                                     </value>
+                                                    <next>
+                                                      <block type="text_statement" id="macd_text4">
+                                                        <value name="TEXT">
+                                                          <shadow type="text" id="macd_shadow4">
+                                                            <field name="TEXT"></field>
+                                                          </shadow>
+                                                          <block type="variables_get" id="macd_signal_val">
+                                                            <field name="VAR" id="macd_signal">macd_signal</field>
+                                                          </block>
+                                                        </value>
+                                                      </block>
+                                                    </next>
                                                   </block>
                                                 </next>
                                               </block>
-                                            </statement>
+                                            </next>
+                                          </block>
+                                        </statement>
+                                        <next>
+                                          <block type="notify" id="macd_notify">
+                                            <field name="NOTIFICATION_TYPE">success</field>
+                                            <field name="NOTIFICATION_SOUND">silent</field>
+                                            <value name="MESSAGE">
+                                              <block type="variables_get" id="macd_text_var">
+                                                <field name="VAR" id="text_macd">text_macd</field>
+                                              </block>
+                                            </value>
                                             <next>
-                                              <block type="notify" id="|1VFk!n9zGP27.+Vj]0w">
-                                                <field name="NOTIFICATION_TYPE">success</field>
-                                                <field name="NOTIFICATION_SOUND">silent</field>
-                                                <value name="MESSAGE">
-                                                  <block type="variables_get" id="!vXWzBG{n_CDX^[Y,fUw">
-                                                    <field name="VAR" id="1#-k9aznVA607^7go@:W">text1</field>
-                                                  </block>
-                                                </value>
-                                                <next>
-                                                  <block type="controls_if" id="PZ-)eqscRe}`X8|HB$N:">
-                                                    <value name="IF0">
-                                                      <block type="logic_operation" id="call_condition">
+                                              <block type="controls_if" id="call_condition">
+                                                <value name="IF0">
+                                                  <block type="logic_operation" id="call_and">
+                                                    <field name="OP">AND</field>
+                                                    <value name="A">
+                                                      <block type="logic_operation" id="call_and_inner">
                                                         <field name="OP">AND</field>
                                                         <value name="A">
-                                                          <block type="logic_compare" id="t)UON0l_aP!X)lBzjOzo">
-                                                            <field name="OP">GTE</field>
+                                                          <block type="logic_compare" id="wma5_gt_wma10">
+                                                            <field name="OP">GT</field>
                                                             <value name="A">
-                                                              <block type="tick" id="Dj(D06bxqv4bp7(hL*d1"></block>
+                                                              <block type="variables_get" id="wma5_compare">
+                                                                <field name="VAR" id="wma5">wma5</field>
+                                                              </block>
                                                             </value>
                                                             <value name="B">
-                                                              <block type="variables_get" id="T*^]Xqmh~u)*Y%NTn+h%">
-                                                                <field name="VAR" id=",`Y]gHZe/MA.H+HvjCT0">EMA-34</field>
+                                                              <block type="variables_get" id="wma10_compare">
+                                                                <field name="VAR" id="wma10">wma10</field>
                                                               </block>
                                                             </value>
                                                           </block>
                                                         </value>
                                                         <value name="B">
-                                                          <block type="logic_compare" id="rsi_call_condition">
-                                                            <field name="OP">LT</field>
+                                                          <block type="logic_compare" id="macd_line_gt_signal">
+                                                            <field name="OP">GT</field>
                                                             <value name="A">
-                                                              <block type="variables_get" id="get_rsi_call">
-                                                                <field name="VAR" id="rsi">rsi</field>
+                                                              <block type="variables_get" id="macd_line_compare">
+                                                                <field name="VAR" id="macd_line">macd_line</field>
                                                               </block>
                                                             </value>
                                                             <value name="B">
-                                                              <block type="math_number" id="rsi_upper">
-                                                                <field name="NUM">70</field>
+                                                              <block type="variables_get" id="macd_signal_compare">
+                                                                <field name="VAR" id="macd_signal">macd_signal</field>
+                                                              </block>
+                                                            </value>
+                                                          </block>
+                                                        </value>
+                                                      </block>
+                                                    </value>
+                                                    <value name="B">
+                                                      <block type="logic_compare" id="stoch_k_gt_d">
+                                                        <field name="OP">GT</field>
+                                                        <value name="A">
+                                                          <block type="variables_get" id="stoch_k_compare">
+                                                            <field name="VAR" id="stoch_k">stoch_k</field>
+                                                          </block>
+                                                        </value>
+                                                        <value name="B">
+                                                          <block type="variables_get" id="stoch_d_compare">
+                                                            <field name="VAR" id="stoch_d">stoch_d</field>
+                                                          </block>
+                                                        </value>
+                                                      </block>
+                                                    </value>
+                                                  </block>
+                                                </value>
+                                                <statement name="DO0">
+                                                  <block type="purchase" id="call_purchase">
+                                                    <field name="PURCHASE_LIST">CALL</field>
+                                                  </block>
+                                                </statement>
+                                                <next>
+                                                  <block type="controls_if" id="put_condition">
+                                                    <value name="IF0">
+                                                      <block type="logic_operation" id="put_and">
+                                                        <field name="OP">AND</field>
+                                                        <value name="A">
+                                                          <block type="logic_operation" id="put_and_inner">
+                                                            <field name="OP">AND</field>
+                                                            <value name="A">
+                                                              <block type="logic_compare" id="wma5_lt_wma10">
+                                                                <field name="OP">LT</field>
+                                                                <value name="A">
+                                                                  <block type="variables_get" id="wma5_compare_put">
+                                                                    <field name="VAR" id="wma5">wma5</field>
+                                                                  </block>
+                                                                </value>
+                                                                <value name="B">
+                                                                  <block type="variables_get" id="wma10_compare_put">
+                                                                    <field name="VAR" id="wma10">wma10</field>
+                                                                  </block>
+                                                                </value>
+                                                              </block>
+                                                            </value>
+                                                            <value name="B">
+                                                              <block type="logic_compare" id="macd_line_lt_signal">
+                                                                <field name="OP">LT</field>
+                                                                <value name="A">
+                                                                  <block type="variables_get" id="macd_line_compare_put">
+                                                                    <field name="VAR" id="macd_line">macd_line</field>
+                                                                  </block>
+                                                                </value>
+                                                                <value name="B">
+                                                                  <block type="variables_get" id="macd_signal_compare_put">
+                                                                    <field name="VAR" id="macd_signal">macd_signal</field>
+                                                                  </block>
+                                                                </value>
+                                                              </block>
+                                                            </value>
+                                                          </block>
+                                                        </value>
+                                                        <value name="B">
+                                                          <block type="logic_compare" id="stoch_k_lt_d">
+                                                            <field name="OP">LT</field>
+                                                            <value name="A">
+                                                              <block type="variables_get" id="stoch_k_compare_put">
+                                                                <field name="VAR" id="stoch_k">stoch_k</field>
+                                                              </block>
+                                                            </value>
+                                                            <value name="B">
+                                                              <block type="variables_get" id="stoch_d_compare_put">
+                                                                <field name="VAR" id="stoch_d">stoch_d</field>
                                                               </block>
                                                             </value>
                                                           </block>
@@ -700,52 +921,10 @@
                                                       </block>
                                                     </value>
                                                     <statement name="DO0">
-                                                      <block type="purchase" id="#jr;_g=gW+`_i[JnWOj9">
-                                                        <field name="PURCHASE_LIST">CALL</field>
+                                                      <block type="purchase" id="put_purchase">
+                                                        <field name="PURCHASE_LIST">PUT</field>
                                                       </block>
                                                     </statement>
-                                                    <next>
-                                                      <block type="controls_if" id="![N(XE/U)2b29A$()HU*">
-                                                        <value name="IF0">
-                                                          <block type="logic_operation" id="put_condition">
-                                                            <field name="OP">AND</field>
-                                                            <value name="A">
-                                                              <block type="logic_compare" id="(S?~ItlBzH~ySbTO7r5@">
-                                                                <field name="OP">LTE</field>
-                                                                <value name="A">
-                                                                  <block type="tick" id="6S4H!3~Pdr%YSe^~JO)@"></block>
-                                                                </value>
-                                                                <value name="B">
-                                                                  <block type="variables_get" id="s^a{vnfWC:jQJ$y$Bn-t">
-                                                                    <field name="VAR" id="DNib.B0%.tV1gRYu6!cy">EMA-13</field>
-                                                                  </block>
-                                                                </value>
-                                                              </block>
-                                                            </value>
-                                                            <value name="B">
-                                                              <block type="logic_compare" id="rsi_put_condition">
-                                                                <field name="OP">GT</field>
-                                                                <value name="A">
-                                                                  <block type="variables_get" id="get_rsi_put">
-                                                                    <field name="VAR" id="rsi">rsi</field>
-                                                                  </block>
-                                                                </value>
-                                                                <value name="B">
-                                                                  <block type="math_number" id="rsi_lower">
-                                                                    <field name="NUM">30</field>
-                                                                  </block>
-                                                                </value>
-                                                              </block>
-                                                            </value>
-                                                          </block>
-                                                        </value>
-                                                        <statement name="DO0">
-                                                          <block type="purchase" id="*y`P@q5p-n,?1#bU9%fo">
-                                                            <field name="PURCHASE_LIST">PUT</field>
-                                                          </block>
-                                                        </statement>
-                                                      </block>
-                                                    </next>
                                                   </block>
                                                 </next>
                                               </block>
