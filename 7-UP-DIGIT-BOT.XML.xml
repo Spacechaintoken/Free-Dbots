@@ -14,6 +14,9 @@
     <variable id="},tgHl*09-0]zt5j^)xJ">text5</variable>
     <variable id="~1cGM;duQ;iCnqHn~Z%d">text</variable>
     <variable id="1#-k9aznVA607^7go@:W">text1</variable>
+    <variable id="bb_middle">BB Middle</variable>
+    <variable id="bb_upper">BB Upper</variable>
+    <variable id="bb_lower">BB Lower</variable>
   </variables>
   <block type="trade_definition" id="W(N}(0Q[6h1i!Y3j|Iwa" deletable="false" x="0" y="0">
     <statement name="TRADE_OPTIONS">
@@ -30,13 +33,13 @@
                 <field name="TYPE_LIST">both</field>
                 <next>
                   <block type="trade_definition_candleinterval" id="K=SNwV5JYw0u$lVyOn%?" deletable="false" movable="false">
-                    <field name="CANDLEINTERVAL_LIST">60</field>
+                    <field name="CANDLEINTERVAL_LIST">1</field>
                     <next>
                       <block type="trade_definition_restartbuysell" id="t1-@9zUC[9SHEK(fW=](" deletable="false" movable="false">
                         <field name="TIME_MACHINE_ENABLED">FALSE</field>
                         <next>
                           <block type="trade_definition_restartonerror" id="`dzI$L@itk;[|0|@Q7-V" deletable="false" movable="false">
-                            <field name="RESTARTONERROR">FALSE</field>
+                            <field name="RESTARTONERROR">TRUE</field>
                           </block>
                         </next>
                       </block>
@@ -390,6 +393,7 @@
   </block>
   <block type="before_purchase" id="zejUj,s9[[qBFFN10v$j" deletable="false" x="0" y="760">
     <statement name="BEFOREPURCHASE_STACK">
+      <!-- EMA-50 Calculation -->
       <block type="ema_statement" id="#JBqQofbr`_%sL_!Yh?-">
         <field name="VARIABLE" id="pI}UQ(kb./.`7x5^@eq`">ema</field>
         <statement name="STATEMENT">
@@ -417,6 +421,7 @@
               </block>
             </value>
             <next>
+              <!-- EMA-100 Calculation -->
               <block type="ema_statement" id="A7ywFD%w6-(U@{!MB:3w">
                 <field name="VARIABLE" id="X;sfC8!Jb{*(Z7PgkMjx">ema1</field>
                 <statement name="STATEMENT">
@@ -444,115 +449,201 @@
                       </block>
                     </value>
                     <next>
-                      <block type="text_join" id="(Way%=S*vtXMcwU3YSY!">
-                        <field name="VARIABLE" id="~1cGM;duQ;iCnqHn~Z%d">text</field>
-                        <statement name="STACK">
-                          <block type="text_statement" id="1=O=6GV{^;_3?2Ii8qOn">
-                            <value name="TEXT">
-                              <shadow type="text" id="vBkmP,a@.LStlx-HZxPS">
-                                <field name="TEXT"></field>
-                              </shadow>
-                              <block type="text" id="F~m;O0]I;fae%R;XkEdK">
-                                <field name="TEXT">EMA-50</field>
-                              </block>
+                      <!-- Bollinger Bands Calculation -->
+                      <block type="bb_statement" id="bollinger_bands">
+                        <field name="VARIABLE">bb_array</field>
+                        <statement name="STATEMENT">
+                          <block type="input_list" id="bb_input_list">
+                            <value name="INPUT_LIST">
+                              <block type="tick" id="bb_ticks"></block>
                             </value>
                             <next>
-                              <block type="text_statement" id="63Tye#7?eB2z1r!_d5jV">
-                                <value name="TEXT">
-                                  <shadow type="text" id="Q/6WN;XfL?E-_1MiN~yb">
-                                    <field name="TEXT"></field>
+                              <block type="period" id="bb_period">
+                                <value name="PERIOD">
+                                  <shadow type="math_number">
+                                    <field name="NUM">20</field>
                                   </shadow>
-                                  <block type="variables_get" id="QV3C/KaU**MonUmR(e7e">
-                                    <field name="VAR" id="DNib.B0%.tV1gRYu6!cy">EMA-100</field>
-                                  </block>
                                 </value>
+                                <next>
+                                  <block type="std_dev" id="bb_std_dev">
+                                    <value name="STD_DEV">
+                                      <shadow type="math_number">
+                                        <field name="NUM">2</field>
+                                      </shadow>
+                                    </value>
+                                  </block>
+                                </next>
                               </block>
                             </next>
                           </block>
                         </statement>
                         <next>
-                          <block type="notify" id="fJs{);XEzapUI1;qgrIV">
-                            <field name="NOTIFICATION_TYPE">success</field>
-                            <field name="NOTIFICATION_SOUND">silent</field>
-                            <value name="MESSAGE">
-                              <block type="variables_get" id="p]7+|p;OHU5_]BV#/}z7">
-                                <field name="VAR" id="~1cGM;duQ;iCnqHn~Z%d">text</field>
+                          <!-- Extract BB Middle -->
+                          <block type="variables_set" id="set_bb_middle">
+                            <field name="VAR" id="bb_middle">BB Middle</field>
+                            <value name="VALUE">
+                              <block type="list_index" id="bb_middle_index">
+                                <value name="LIST">
+                                  <block type="variables_get" id="get_bb_array">
+                                    <field name="VAR">bb_array</field>
+                                  </block>
+                                </value>
+                                <value name="INDEX">
+                                  <block type="math_number">
+                                    <field name="NUM">0</field>
+                                  </block>
+                                </value>
                               </block>
                             </value>
                             <next>
-                              <block type="text_join" id="V]=A5BUa*,3CZd]rR@4z">
-                                <field name="VARIABLE" id="1#-k9aznVA607^7go@:W">text1</field>
-                                <statement name="STACK">
-                                  <block type="text_statement" id="eni=[Ls!#Tp;^jY`s(Bw">
-                                    <value name="TEXT">
-                                      <shadow type="text" id="1cQu@mX#HOjU_UVRQEJK">
-                                        <field name="TEXT"></field>
-                                      </shadow>
-                                      <block type="text" id="?E(i?7]`tF6lrrj($#g3">
-                                        <field name="TEXT">EMA-100</field>
+                              <!-- Extract BB Upper -->
+                              <block type="variables_set" id="set_bb_upper">
+                                <field name="VAR" id="bb_upper">BB Upper</field>
+                                <value name="VALUE">
+                                  <block type="list_index" id="bb_upper_index">
+                                    <value name="LIST">
+                                      <block type="variables_get" id="get_bb_array2">
+                                        <field name="VAR">bb_array</field>
                                       </block>
                                     </value>
-                                    <next>
-                                      <block type="text_statement" id="*+xOyeev;6CnJ]6+kq0#">
-                                        <value name="TEXT">
-                                          <shadow type="text" id="8%mj6A-4*t`{fe7REyZ{">
-                                            <field name="TEXT"></field>
-                                          </shadow>
-                                          <block type="variables_get" id="{.l.fXZwzGO}^dL*xPdK">
-                                            <field name="VAR" id=",`Y]gHZe/MA.H+HvjCT0">EMA-50</field>
+                                    <value name="INDEX">
+                                      <block type="math_number">
+                                        <field name="NUM">1</field>
+                                      </block>
+                                    </value>
+                                  </block>
+                                </value>
+                                <next>
+                                  <!-- Extract BB Lower -->
+                                  <block type="variables_set" id="set_bb_lower">
+                                    <field name="VAR" id="bb_lower">BB Lower</field>
+                                    <value name="VALUE">
+                                      <block type="list_index" id="bb_lower_index">
+                                        <value name="LIST">
+                                          <block type="variables_get" id="get_bb_array3">
+                                            <field name="VAR">bb_array</field>
+                                          </block>
+                                        </value>
+                                        <value name="INDEX">
+                                          <block type="math_number">
+                                            <field name="NUM">2</field>
                                           </block>
                                         </value>
                                       </block>
-                                    </next>
-                                  </block>
-                                </statement>
-                                <next>
-                                  <block type="notify" id="|1VFk!n9zGP27.+Vj]0w">
-                                    <field name="NOTIFICATION_TYPE">success</field>
-                                    <field name="NOTIFICATION_SOUND">silent</field>
-                                    <value name="MESSAGE">
-                                      <block type="variables_get" id="!vXWzBG{n_CDX^[Y,fUw">
-                                        <field name="VAR" id="1#-k9aznVA607^7go@:W">text1</field>
-                                      </block>
                                     </value>
                                     <next>
+                                      <!-- Trading Logic with EMAs and Bollinger Bands -->
                                       <block type="controls_if" id="PZ-)eqscRe}`X8|HB$N:">
                                         <value name="IF0">
-                                          <block type="logic_compare" id="t)UON0l_aP!X)lBzjOzo">
-                                            <field name="OP">GTE</field>
+                                          <block type="logic_operation" id="ema_trend_up">
+                                            <field name="OP">AND</field>
                                             <value name="A">
-                                              <block type="tick" id="Dj(D06bxqv4bp7(hL*d1"></block>
-                                            </value>
-                                            <value name="B">
-                                              <block type="variables_get" id="T*^]Xqmh~u)*Y%NTn+h%">
-                                                <field name="VAR" id=",`Y]gHZe/MA.H+HvjCT0">EMA-50</field>
-                                              </block>
-                                            </value>
-                                          </block>
-                                        </value>
-                                        <statement name="DO0">
-                                          <block type="purchase" id="#jr;_g=gW+`_i[JnWOj9">
-                                            <field name="PURCHASE_LIST">CALL</field>
-                                          </block>
-                                        </statement>
-                                        <next>
-                                          <block type="controls_if" id="![N(XE/U)2b29A$()HU*">
-                                            <value name="IF0">
-                                              <block type="logic_compare" id="(S?~ItlBzH~ySbTO7r5@">
-                                                <field name="OP">LTE</field>
+                                              <block type="logic_compare" id="price_above_ema50">
+                                                <field name="OP">GTE</field>
                                                 <value name="A">
-                                                  <block type="tick" id="6S4H!3~Pdr%YSe^~JO)@"></block>
+                                                  <block type="tick" id="current_tick1"></block>
                                                 </value>
                                                 <value name="B">
-                                                  <block type="variables_get" id="s^a{vnfWC:jQJ$y$Bn-t">
+                                                  <block type="variables_get" id="get_ema50">
+                                                    <field name="VAR" id=",`Y]gHZe/MA.H+HvjCT0">EMA-50</field>
+                                                  </block>
+                                                </value>
+                                              </block>
+                                            </value>
+                                            <value name="B">
+                                              <block type="logic_compare" id="ema50_above_ema100">
+                                                <field name="OP">GTE</field>
+                                                <value name="A">
+                                                  <block type="variables_get" id="get_ema50_2">
+                                                    <field name="VAR" id=",`Y]gHZe/MA.H+HvjCT0">EMA-50</field>
+                                                  </block>
+                                                </value>
+                                                <value name="B">
+                                                  <block type="variables_get" id="get_ema100">
                                                     <field name="VAR" id="DNib.B0%.tV1gRYu6!cy">EMA-100</field>
                                                   </block>
                                                 </value>
                                               </block>
                                             </value>
+                                          </block>
+                                        </value>
+                                        <statement name="DO0">
+                                          <block type="controls_if" id="bollinger_call">
+                                            <value name="IF0">
+                                              <block type="logic_compare" id="price_near_lower_band">
+                                                <field name="OP">LTE</field>
+                                                <value name="A">
+                                                  <block type="tick" id="current_tick2"></block>
+                                                </value>
+                                                <value name="B">
+                                                  <block type="variables_get" id="get_bb_lower">
+                                                    <field name="VAR" id="bb_lower">BB Lower</field>
+                                                  </block>
+                                                </value>
+                                              </block>
+                                            </value>
                                             <statement name="DO0">
-                                              <block type="purchase" id="*y`P@q5p-n,?1#bU9%fo">
-                                                <field name="PURCHASE_LIST">PUT</field>
+                                              <block type="purchase" id="call_entry">
+                                                <field name="PURCHASE_LIST">CALL</field>
+                                              </block>
+                                            </statement>
+                                          </block>
+                                        </statement>
+                                        <next>
+                                          <block type="controls_if" id="put_condition">
+                                            <value name="IF0">
+                                              <block type="logic_operation" id="ema_trend_down">
+                                                <field name="OP">AND</field>
+                                                <value name="A">
+                                                  <block type="logic_compare" id="price_below_ema50">
+                                                    <field name="OP">LTE</field>
+                                                    <value name="A">
+                                                      <block type="tick" id="current_tick3"></block>
+                                                    </value>
+                                                    <value name="B">
+                                                      <block type="variables_get" id="get_ema50_3">
+                                                        <field name="VAR" id=",`Y]gHZe/MA.H+HvjCT0">EMA-50</field>
+                                                      </block>
+                                                    </value>
+                                                  </block>
+                                                </value>
+                                                <value name="B">
+                                                  <block type="logic_compare" id="ema50_below_ema100">
+                                                    <field name="OP">LTE</field>
+                                                    <value name="A">
+                                                      <block type="variables_get" id="get_ema50_4">
+                                                        <field name="VAR" id=",`Y]gHZe/MA.H+HvjCT0">EMA-50</field>
+                                                      </block>
+                                                    </value>
+                                                    <value name="B">
+                                                      <block type="variables_get" id="get_ema100_2">
+                                                        <field name="VAR" id="DNib.B0%.tV1gRYu6!cy">EMA-100</field>
+                                                      </block>
+                                                    </value>
+                                                  </block>
+                                                </value>
+                                              </block>
+                                            </value>
+                                            <statement name="DO0">
+                                              <block type="controls_if" id="bollinger_put">
+                                                <value name="IF0">
+                                                  <block type="logic_compare" id="price_near_upper_band">
+                                                    <field name="OP">GTE</field>
+                                                    <value name="A">
+                                                      <block type="tick" id="current_tick4"></block>
+                                                    </value>
+                                                    <value name="B">
+                                                      <block type="variables_get" id="get_bb_upper">
+                                                        <field name="VAR" id="bb_upper">BB Upper</field>
+                                                      </block>
+                                                    </value>
+                                                  </block>
+                                                </value>
+                                                <statement name="DO0">
+                                                  <block type="purchase" id="put_entry">
+                                                    <field name="PURCHASE_LIST">PUT</field>
+                                                  </block>
+                                                </statement>
                                               </block>
                                             </statement>
                                           </block>
