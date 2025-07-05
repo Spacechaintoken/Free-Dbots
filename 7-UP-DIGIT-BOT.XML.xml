@@ -14,11 +14,6 @@
     <variable id="},tgHl*09-0]zt5j^)xJ">text5</variable>
     <variable id="~1cGM;duQ;iCnqHn~Z%d">text</variable>
     <variable id="1#-k9aznVA607^7go@:W">text1</variable>
-    <!-- Fibonacci strategy variables -->
-    <variable id="fib_prev">fib_prev</variable>
-    <variable id="fib_curr">fib_curr</variable>
-    <variable id="next_fib">next_fib</variable>
-    <variable id="next_stake">next_stake</variable>
   </variables>
   <block type="trade_definition" id="W(N}(0Q[6h1i!Y3j|Iwa" deletable="false" x="0" y="0">
     <statement name="TRADE_OPTIONS">
@@ -86,27 +81,6 @@
                         <field name="NUM">0.35</field>
                       </block>
                     </value>
-                    <next>
-                      <!-- Initialize Fibonacci sequence -->
-                      <block type="variables_set" id="fib_init_prev">
-                        <field name="VAR" id="fib_prev">fib_prev</field>
-                        <value name="VALUE">
-                          <block type="math_number" id="fib_num0">
-                            <field name="NUM">0</field>
-                          </block>
-                        </value>
-                        <next>
-                          <block type="variables_set" id="fib_init_curr">
-                            <field name="VAR" id="fib_curr">fib_curr</field>
-                            <value name="VALUE">
-                              <block type="math_number" id="fib_num1">
-                                <field name="NUM">1</field>
-                              </block>
-                            </value>
-                          </block>
-                        </next>
-                      </block>
-                    </next>
                   </block>
                 </next>
               </block>
@@ -125,8 +99,27 @@
           </block>
         </value>
         <value name="AMOUNT">
-          <block type="variables_get" id="~DTT_$pO;[.+N?II[*h#">
-            <field name="VAR" id="LmU[8ZH:2aZ)m-5^SQ#w">Initial Amount</field>
+          <block type="math_arithmetic" id="multiply_random_stake">
+            <field name="OP">MULTIPLY</field>
+            <value name="A">
+              <block type="math_random_float" id="random_float">
+                <value name="FROM">
+                  <block type="math_number" id="from_num">
+                    <field name="NUM">0.35</field>
+                  </block>
+                </value>
+                <value name="TO">
+                  <block type="math_number" id="to_num">
+                    <field name="NUM">3</field>
+                  </block>
+                </value>
+              </block>
+            </value>
+            <value name="B">
+              <block type="math_number" id="multiplier">
+                <field name="NUM">2</field>
+              </block>
+            </value>
           </block>
         </value>
       </block>
@@ -185,27 +178,6 @@
                         <field name="VAR" id=".}isBXha4T:t(WP]tqFt">Win Amount</field>
                       </block>
                     </value>
-                    <next>
-                      <!-- Reset Fibonacci on win -->
-                      <block type="variables_set" id="fib_reset_prev">
-                        <field name="VAR" id="fib_prev">fib_prev</field>
-                        <value name="VALUE">
-                          <block type="math_number" id="fib_win0">
-                            <field name="NUM">0</field>
-                          </block>
-                        </value>
-                        <next>
-                          <block type="variables_set" id="fib_reset_curr">
-                            <field name="VAR" id="fib_curr">fib_curr</field>
-                            <value name="VALUE">
-                              <block type="math_number" id="fib_win1">
-                                <field name="NUM">1</field>
-                              </block>
-                            </value>
-                          </block>
-                        </next>
-                      </block>
-                    </next>
                   </block>
                 </next>
               </block>
@@ -257,125 +229,78 @@
                   </block>
                 </value>
                 <next>
-                  <!-- FIBONACCI SEQUENCE UPDATE START -->
-                  <block type="variables_set" id="fib_next_calc">
-                    <field name="VAR" id="next_fib">next_fib</field>
-                    <value name="VALUE">
-                      <block type="math_arithmetic" id="fib_add">
-                        <field name="OP">ADD</field>
+                  <block type="math_change" id="!Cc2C|tW%QCXkA)hzuH4">
+                    <field name="VAR" id="LmU[8ZH:2aZ)m-5^SQ#w">Initial Amount</field>
+                    <value name="DELTA">
+                      <shadow type="math_number" id="THqwKW*|#LXENqvAky%y">
+                        <field name="NUM">1</field>
+                      </shadow>
+                      <block type="math_arithmetic" id="D)jE1qhD{O=;BuFOvP-T">
+                        <field name="OP">MULTIPLY</field>
                         <value name="A">
-                          <block type="variables_get" id="get_fib_prev">
-                            <field name="VAR" id="fib_prev">fib_prev</field>
+                          <shadow type="math_number" id="v1NBJ1Os^-+E8je}MOe4">
+                            <field name="NUM">1</field>
+                          </shadow>
+                          <block type="math_single" id="Kgj?/JQAsxr?-|}i{a[S">
+                            <field name="OP">ABS</field>
+                            <value name="NUM">
+                              <shadow type="math_number" id="pJCqrXqpHP5}i)#,7=F4">
+                                <field name="NUM">9</field>
+                              </shadow>
+                              <block type="read_details" id="l/[vqE!?EQsQ?1gv%A%,">
+                                <field name="DETAIL_INDEX">4</field>
+                              </block>
+                            </value>
                           </block>
                         </value>
                         <value name="B">
-                          <block type="variables_get" id="get_fib_curr">
-                            <field name="VAR" id="fib_curr">fib_curr</field>
+                          <shadow type="math_number" id="`]OF]+,a7dcTi9HcX2Bg">
+                            <field name="NUM">1</field>
+                          </shadow>
+                          <block type="math_number" id="V!r20dweq:TsX*I)^Kr3">
+                            <field name="NUM">1.25</field>
                           </block>
                         </value>
                       </block>
                     </value>
                     <next>
-                      <block type="variables_set" id="update_fib_prev">
-                        <field name="VAR" id="fib_prev">fib_prev</field>
-                        <value name="VALUE">
-                          <block type="variables_get" id="get_curr_for_prev">
-                            <field name="VAR" id="fib_curr">fib_curr</field>
-                          </block>
-                        </value>
-                        <next>
-                          <block type="variables_set" id="update_fib_curr">
-                            <field name="VAR" id="fib_curr">fib_curr</field>
-                            <value name="VALUE">
-                              <block type="variables_get" id="get_next_fib">
-                                <field name="VAR" id="next_fib">next_fib</field>
-                              </block>
-                            </value>
-                            <next>
-                              <block type="variables_set" id="calc_next_stake">
-                                <field name="VAR" id="next_stake">next_stake</field>
-                                <value name="VALUE">
-                                  <block type="math_arithmetic" id="mult_fib_stake">
-                                    <field name="OP">MULTIPLY</field>
-                                    <value name="A">
-                                      <block type="variables_get" id="get_win_amount">
-                                        <field name="VAR" id=".}isBXha4T:t(WP]tqFt">Win Amount</field>
-                                      </block>
-                                    </value>
-                                    <value name="B">
-                                      <block type="variables_get" id="get_curr_fib">
-                                        <field name="VAR" id="fib_curr">fib_curr</field>
-                                      </block>
-                                    </value>
+                      <block type="controls_if" id="Qo65x[@bpuPTXe3icfGe">
+                        <value name="IF0">
+                          <block type="logic_compare" id="~aQnKV1=^%`=mq%~~J@~">
+                            <field name="OP">GTE</field>
+                            <value name="A">
+                              <block type="math_single" id="LYfSlEV!%CzoXlxSU8HJ">
+                                <field name="OP">ABS</field>
+                                <value name="NUM">
+                                  <shadow type="math_number" id="}?j,)0XVl_94c::UP/T|">
+                                    <field name="NUM">9</field>
+                                  </shadow>
+                                  <block type="read_details" id="@S+a6s4@U,0z8^dMC0ac">
+                                    <field name="DETAIL_INDEX">4</field>
                                   </block>
                                 </value>
-                                <next>
-                                  <block type="controls_if" id="check_max_loss">
-                                    <value name="IF0">
-                                      <block type="logic_compare" id="compare_stake_max">
-                                        <field name="OP">GTE</field>
-                                        <value name="A">
-                                          <block type="variables_get" id="get_next_stake">
-                                            <field name="VAR" id="next_stake">next_stake</field>
-                                          </block>
-                                        </value>
-                                        <value name="B">
-                                          <block type="variables_get" id="get_max_loss">
-                                            <field name="VAR" id="]oGV^TW+pyAyI~)S*^8n">Max Loss Amount</field>
-                                          </block>
-                                        </value>
-                                      </block>
-                                    </value>
-                                    <statement name="DO0">
-                                      <block type="variables_set" id="reset_fib_prev">
-                                        <field name="VAR" id="fib_prev">fib_prev</field>
-                                        <value name="VALUE">
-                                          <block type="math_number" id="fib_reset0">
-                                            <field name="NUM">0</field>
-                                          </block>
-                                        </value>
-                                        <next>
-                                          <block type="variables_set" id="reset_fib_curr">
-                                            <field name="VAR" id="fib_curr">fib_curr</field>
-                                            <value name="VALUE">
-                                              <block type="math_number" id="fib_reset1">
-                                                <field name="NUM">1</field>
-                                              </block>
-                                            </value>
-                                            <next>
-                                              <block type="variables_set" id="reset_stake">
-                                                <field name="VAR" id="next_stake">next_stake</field>
-                                                <value name="VALUE">
-                                                  <block type="variables_get" id="get_win_reset">
-                                                    <field name="VAR" id=".}isBXha4T:t(WP]tqFt">Win Amount</field>
-                                                  </block>
-                                                </value>
-                                              </block>
-                                            </next>
-                                          </block>
-                                        </next>
-                                      </block>
-                                    </statement>
-                                    <next>
-                                      <block type="variables_set" id="set_initial_amt">
-                                        <field name="VAR" id="LmU[8ZH:2aZ)m-5^SQ#w">Initial Amount</field>
-                                        <value name="VALUE">
-                                          <block type="variables_get" id="get_next_stake_val">
-                                            <field name="VAR" id="next_stake">next_stake</field>
-                                          </block>
-                                        </value>
-                                      </block>
-                                    </next>
-                                  </block>
-                                </next>
                               </block>
-                            </next>
+                            </value>
+                            <value name="B">
+                              <block type="variables_get" id="s2v4WWUB;05h=^-`y.P}">
+                                <field name="VAR" id="]oGV^TW+pyAyI~)S*^8n">Max Loss Amount</field>
+                              </block>
+                            </value>
                           </block>
-                        </next>
+                        </value>
+                        <statement name="DO0">
+                          <block type="variables_set" id="iM75do^/FrW]TslwYpiq">
+                            <field name="VAR" id="LmU[8ZH:2aZ)m-5^SQ#w">Initial Amount</field>
+                            <value name="VALUE">
+                              <block type="variables_get" id="Lb3w;Ic_H#gFT(c^.xx+">
+                                <field name="VAR" id=".}isBXha4T:t(WP]tqFt">Win Amount</field>
+                              </block>
+                            </value>
+                          </block>
+                        </statement>
                       </block>
                     </next>
                   </block>
-                  <!-- FIBONACCI SEQUENCE UPDATE END -->
                 </next>
               </block>
             </next>
