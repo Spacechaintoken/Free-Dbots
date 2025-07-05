@@ -14,6 +14,8 @@
     <variable id="},tgHl*09-0]zt5j^)xJ">text5</variable>
     <variable id="~1cGM;duQ;iCnqHn~Z%d">text</variable>
     <variable id="1#-k9aznVA607^7go@:W">text1</variable>
+    <variable id="rsi_var">RSI</variable>
+    <variable id="text_rsi">text_rsi</variable>
   </variables>
   <block type="trade_definition" id="W(N}(0Q[6h1i!Y3j|Iwa" deletable="false" x="0" y="0">
     <statement name="TRADE_OPTIONS">
@@ -463,128 +465,226 @@
                       </block>
                     </value>
                     <next>
-                      <block type="text_join" id="(Way%=S*vtXMcwU3YSY!">
-                        <field name="VARIABLE" id="~1cGM;duQ;iCnqHn~Z%d">text</field>
-                        <statement name="STACK">
-                          <block type="text_statement" id="1=O=6GV{^;_3?2Ii8qOn">
-                            <value name="TEXT">
-                              <shadow type="text" id="vBkmP,a@.LStlx-HZxPS">
-                                <field name="TEXT"></field>
-                              </shadow>
-                              <block type="text" id="F~m;O0]I;fae%R;XkEdK">
-                                <field name="TEXT">EMA-13</field>
-                              </block>
+                      <!-- START RSI CALCULATION -->
+                      <block type="rsi_statement" id="rsi_calc_block">
+                        <field name="VARIABLE" id="rsi_var">RSI</field>
+                        <statement name="STATEMENT">
+                          <block type="input_list" id="rsi_input">
+                            <value name="INPUT_LIST">
+                              <block type="ticks" id="rsi_ticks"></block>
                             </value>
                             <next>
-                              <block type="text_statement" id="63Tye#7?eB2z1r!_d5jV">
-                                <value name="TEXT">
-                                  <shadow type="text" id="Q/6WN;XfL?E-_1MiN~yb">
-                                    <field name="TEXT"></field>
+                              <block type="period" id="rsi_period">
+                                <value name="PERIOD">
+                                  <shadow type="math_number" id="rsi_period_shadow">
+                                    <field name="NUM">14</field>
                                   </shadow>
-                                  <block type="variables_get" id="QV3C/KaU**MonUmR(e7e">
-                                    <field name="VAR" id="DNib.B0%.tV1gRYu6!cy">EMA-13</field>
-                                  </block>
                                 </value>
                               </block>
                             </next>
                           </block>
                         </statement>
                         <next>
-                          <block type="notify" id="fJs{);XEzapUI1;qgrIV">
-                            <field name="NOTIFICATION_TYPE">success</field>
-                            <field name="NOTIFICATION_SOUND">silent</field>
-                            <value name="MESSAGE">
-                              <block type="variables_get" id="p]7+|p;OHU5_]BV#/}z7">
-                                <field name="VAR" id="~1cGM;duQ;iCnqHn~Z%d">text</field>
-                              </block>
-                            </value>
-                            <next>
-                              <block type="text_join" id="V]=A5BUa*,3CZd]rR@4z">
-                                <field name="VARIABLE" id="1#-k9aznVA607^7go@:W">text1</field>
-                                <statement name="STACK">
-                                  <block type="text_statement" id="eni=[Ls!#Tp;^jY`s(Bw">
-                                    <value name="TEXT">
-                                      <shadow type="text" id="1cQu@mX#HOjU_UVRQEJK">
-                                        <field name="TEXT"></field>
-                                      </shadow>
-                                      <block type="text" id="?E(i?7]`tF6lrrj($#g3">
-                                        <field name="TEXT">EMA-34</field>
-                                      </block>
-                                    </value>
-                                    <next>
-                                      <block type="text_statement" id="*+xOyeev;6CnJ]6+kq0#">
-                                        <value name="TEXT">
-                                          <shadow type="text" id="8%mj6A-4*t`{fe7REyZ{">
-                                            <field name="TEXT"></field>
-                                          </shadow>
-                                          <block type="variables_get" id="{.l.fXZwzGO}^dL*xPdK">
-                                            <field name="VAR" id=",`Y]gHZe/MA.H+HvjCT0">EMA-34</field>
-                                          </block>
-                                        </value>
-                                      </block>
-                                    </next>
+                          <block type="text_join" id="rsi_text_join">
+                            <field name="VARIABLE" id="text_rsi">text_rsi</field>
+                            <statement name="STACK">
+                              <block type="text_statement" id="rsi_text1">
+                                <value name="TEXT">
+                                  <block type="text" id="rsi_prefix">
+                                    <field name="TEXT">RSI: </field>
                                   </block>
-                                </statement>
+                                </value>
                                 <next>
-                                  <block type="notify" id="|1VFk!n9zGP27.+Vj]0w">
-                                    <field name="NOTIFICATION_TYPE">success</field>
-                                    <field name="NOTIFICATION_SOUND">silent</field>
-                                    <value name="MESSAGE">
-                                      <block type="variables_get" id="!vXWzBG{n_CDX^[Y,fUw">
-                                        <field name="VAR" id="1#-k9aznVA607^7go@:W">text1</field>
+                                  <block type="text_statement" id="rsi_value">
+                                    <value name="TEXT">
+                                      <block type="variables_get" id="rsi_var_get">
+                                        <field name="VAR" id="rsi_var">RSI</field>
                                       </block>
                                     </value>
-                                    <next>
-                                      <block type="controls_if" id="PZ-)eqscRe}`X8|HB$N:">
-                                        <value name="IF0">
-                                          <block type="logic_compare" id="t)UON0l_aP!X)lBzjOzo">
-                                            <field name="OP">GTE</field>
-                                            <value name="A">
-                                              <block type="tick" id="Dj(D06bxqv4bp7(hL*d1"></block>
-                                            </value>
-                                            <value name="B">
-                                              <block type="variables_get" id="T*^]Xqmh~u)*Y%NTn+h%">
-                                                <field name="VAR" id=",`Y]gHZe/MA.H+HvjCT0">EMA-34</field>
-                                              </block>
-                                            </value>
-                                          </block>
-                                        </value>
-                                        <statement name="DO0">
-                                          <block type="purchase" id="#jr;_g=gW+`_i[JnWOj9">
-                                            <field name="PURCHASE_LIST">CALL</field>
-                                          </block>
-                                        </statement>
-                                        <next>
-                                          <block type="controls_if" id="![N(XE/U)2b29A$()HU*">
-                                            <value name="IF0">
-                                              <block type="logic_compare" id="(S?~ItlBzH~ySbTO7r5@">
-                                                <field name="OP">LTE</field>
-                                                <value name="A">
-                                                  <block type="tick" id="6S4H!3~Pdr%YSe^~JO)@"></block>
-                                                </value>
-                                                <value name="B">
-                                                  <block type="variables_get" id="s^a{vnfWC:jQJ$y$Bn-t">
-                                                    <field name="VAR" id="DNib.B0%.tV1gRYu6!cy">EMA-13</field>
-                                                  </block>
-                                                </value>
-                                              </block>
-                                            </value>
-                                            <statement name="DO0">
-                                              <block type="purchase" id="*y`P@q5p-n,?1#bU9%fo">
-                                                <field name="PURCHASE_LIST">PUT</field>
-                                              </block>
-                                            </statement>
-                                          </block>
-                                        </next>
-                                      </block>
-                                    </next>
                                   </block>
                                 </next>
+                              </block>
+                            </statement>
+                            <next>
+                              <block type="notify" id="rsi_notify">
+                                <field name="NOTIFICATION_TYPE">info</field>
+                                <field name="NOTIFICATION_SOUND">silent</field>
+                                <value name="MESSAGE">
+                                  <block type="variables_get" id="text_rsi_get">
+                                    <field name="VAR" id="text_rsi">text_rsi</field>
+                                  </block>
+                                </value>
                               </block>
                             </next>
                           </block>
                         </next>
                       </block>
+                      <!-- END RSI CALCULATION -->
+                      <next>
+                        <block type="text_join" id="(Way%=S*vtXMcwU3YSY!">
+                          <field name="VARIABLE" id="~1cGM;duQ;iCnqHn~Z%d">text</field>
+                          <statement name="STACK">
+                            <block type="text_statement" id="1=O=6GV{^;_3?2Ii8qOn">
+                              <value name="TEXT">
+                                <shadow type="text" id="vBkmP,a@.LStlx-HZxPS">
+                                  <field name="TEXT"></field>
+                                </shadow>
+                                <block type="text" id="F~m;O0]I;fae%R;XkEdK">
+                                  <field name="TEXT">EMA-13</field>
+                                </block>
+                              </value>
+                              <next>
+                                <block type="text_statement" id="63Tye#7?eB2z1r!_d5jV">
+                                  <value name="TEXT">
+                                    <shadow type="text" id="Q/6WN;XfL?E-_1MiN~yb">
+                                      <field name="TEXT"></field>
+                                    </shadow>
+                                    <block type="variables_get" id="QV3C/KaU**MonUmR(e7e">
+                                      <field name="VAR" id="DNib.B0%.tV1gRYu6!cy">EMA-13</field>
+                                    </block>
+                                  </value>
+                                </block>
+                              </next>
+                            </block>
+                          </statement>
+                          <next>
+                            <block type="notify" id="fJs{);XEzapUI1;qgrIV">
+                              <field name="NOTIFICATION_TYPE">success</field>
+                              <field name="NOTIFICATION_SOUND">silent</field>
+                              <value name="MESSAGE">
+                                <block type="variables_get" id="p]7+|p;OHU5_]BV#/}z7">
+                                  <field name="VAR" id="~1cGM;duQ;iCnqHn~Z%d">text</field>
+                                </block>
+                              </value>
+                              <next>
+                                <block type="text_join" id="V]=A5BUa*,3CZd]rR@4z">
+                                  <field name="VARIABLE" id="1#-k9aznVA607^7go@:W">text1</field>
+                                  <statement name="STACK">
+                                    <block type="text_statement" id="eni=[Ls!#Tp;^jY`s(Bw">
+                                      <value name="TEXT">
+                                        <shadow type="text" id="1cQu@mX#HOjU_UVRQEJK">
+                                          <field name="TEXT"></field>
+                                        </shadow>
+                                        <block type="text" id="?E(i?7]`tF6lrrj($#g3">
+                                          <field name="TEXT">EMA-34</field>
+                                        </block>
+                                      </value>
+                                      <next>
+                                        <block type="text_statement" id="*+xOyeev;6CnJ]6+kq0#">
+                                          <value name="TEXT">
+                                            <shadow type="text" id="8%mj6A-4*t`{fe7REyZ{">
+                                              <field name="TEXT"></field>
+                                            </shadow>
+                                            <block type="variables_get" id="{.l.fXZwzGO}^dL*xPdK">
+                                              <field name="VAR" id=",`Y]gHZe/MA.H+HvjCT0">EMA-34</field>
+                                            </block>
+                                          </value>
+                                        </block>
+                                      </next>
+                                    </block>
+                                  </statement>
+                                  <next>
+                                    <block type="notify" id="|1VFk!n9zGP27.+Vj]0w">
+                                      <field name="NOTIFICATION_TYPE">success</field>
+                                      <field name="NOTIFICATION_SOUND">silent</field>
+                                      <value name="MESSAGE">
+                                        <block type="variables_get" id="!vXWzBG{n_CDX^[Y,fUw">
+                                          <field name="VAR" id="1#-k9aznVA607^7go@:W">text1</field>
+                                        </block>
+                                      </value>
+                                      <next>
+                                        <!-- MODIFIED TRADE CONDITIONS WITH RSI -->
+                                        <block type="controls_if" id="PZ-)eqscRe}`X8|HB$N:">
+                                          <value name="IF0">
+                                            <block type="logic_operation" id="call_condition">
+                                              <field name="OP">AND</field>
+                                              <value name="A">
+                                                <block type="logic_compare" id="ema34_condition">
+                                                  <field name="OP">GTE</field>
+                                                  <value name="A">
+                                                    <block type="tick" id="current_tick1"></block>
+                                                  </value>
+                                                  <value name="B">
+                                                    <block type="variables_get" id="ema34_var">
+                                                      <field name="VAR" id=",`Y]gHZe/MA.H+HvjCT0">EMA-34</field>
+                                                    </block>
+                                                  </value>
+                                                </block>
+                                              </value>
+                                              <value name="B">
+                                                <block type="logic_compare" id="rsi_call_condition">
+                                                  <field name="OP">LTE</field>
+                                                  <value name="A">
+                                                    <block type="variables_get" id="rsi_var_call">
+                                                      <field name="VAR" id="rsi_var">RSI</field>
+                                                    </block>
+                                                  </value>
+                                                  <value name="B">
+                                                    <block type="math_number" id="rsi_upper">
+                                                      <field name="NUM">70</field>
+                                                    </block>
+                                                  </value>
+                                                </block>
+                                              </value>
+                                            </block>
+                                          </value>
+                                          <statement name="DO0">
+                                            <block type="purchase" id="#jr;_g=gW+`_i[JnWOj9">
+                                              <field name="PURCHASE_LIST">CALL</field>
+                                            </block>
+                                          </statement>
+                                          <next>
+                                            <block type="controls_if" id="![N(XE/U)2b29A$()HU*">
+                                              <value name="IF0">
+                                                <block type="logic_operation" id="put_condition">
+                                                  <field name="OP">AND</field>
+                                                  <value name="A">
+                                                    <block type="logic_compare" id="ema13_condition">
+                                                      <field name="OP">LTE</field>
+                                                      <value name="A">
+                                                        <block type="tick" id="current_tick2"></block>
+                                                      </value>
+                                                      <value name="B">
+                                                        <block type="variables_get" id="ema13_var">
+                                                          <field name="VAR" id="DNib.B0%.tV1gRYu6!cy">EMA-13</field>
+                                                        </block>
+                                                      </value>
+                                                    </block>
+                                                  </value>
+                                                  <value name="B">
+                                                    <block type="logic_compare" id="rsi_put_condition">
+                                                      <field name="OP">GTE</field>
+                                                      <value name="A">
+                                                        <block type="variables_get" id="rsi_var_put">
+                                                          <field name="VAR" id="rsi_var">RSI</field>
+                                                        </block>
+                                                      </value>
+                                                      <value name="B">
+                                                        <block type="math_number" id="rsi_lower">
+                                                          <field name="NUM">30</field>
+                                                        </block>
+                                                      </value>
+                                                    </block>
+                                                  </value>
+                                                </block>
+                                              </value>
+                                              <statement name="DO0">
+                                                <block type="purchase" id="*y`P@q5p-n,?1#bU9%fo">
+                                                  <field name="PURCHASE_LIST">PUT</field>
+                                                </block>
+                                              </statement>
+                                            </block>
+                                          </next>
+                                        </block>
+                                      </next>
+                                    </block>
+                                  </next>
+                                </block>
+                              </next>
+                            </block>
+                          </next>
+                        </block>
+                      </next>
                     </next>
                   </block>
                 </next>
