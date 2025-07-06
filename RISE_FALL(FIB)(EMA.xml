@@ -18,6 +18,9 @@
     <variable id="fib_curr">fib_curr</variable>
     <variable id="next_stake">next_stake</variable>
     <variable id="1#-k9aznVA607^7go@:W">text1</variable>
+    <!-- Added variables for 2-tick confirmation -->
+    <variable id="prev_tick">prev_tick</variable>
+    <variable id="confirmation_count">confirmation_count</variable>
   </variables>
   <block type="after_purchase" id="KQivR_7:)d]i=B{9`Fla" x="801" y="-54">
     <statement name="AFTERPURCHASE_STACK">
@@ -448,6 +451,27 @@
                                 <field name="NUM">1</field>
                               </block>
                             </value>
+                            <next>
+                              <!-- Added initialization for confirmation system -->
+                              <block type="variables_set" id="init_prev_tick">
+                                <field name="VAR" id="prev_tick">prev_tick</field>
+                                <value name="VALUE">
+                                  <block type="math_number" id="init_prev_tick_val">
+                                    <field name="NUM">0</field>
+                                  </block>
+                                </value>
+                                <next>
+                                  <block type="variables_set" id="init_conf_count">
+                                    <field name="VAR" id="confirmation_count">confirmation_count</field>
+                                    <value name="VALUE">
+                                      <block type="math_number" id="init_conf_count_val">
+                                        <field name="NUM">0</field>
+                                      </block>
+                                    </value>
+                                  </block>
+                                </next>
+                              </block>
+                            </next>
                           </block>
                         </next>
                       </block>
@@ -605,45 +629,225 @@
                                       </block>
                                     </value>
                                     <next>
-                                      <block type="controls_if" id="PZ-)eqscRe}`X8|HB$N:">
-                                        <value name="IF0">
-                                          <block type="logic_compare" id="t)UON0l_aP!X)lBzjOzo">
-                                            <field name="OP">GTE</field>
-                                            <value name="A">
-                                              <block type="tick" id="Dj(D06bxqv4bp7(hL*d1"></block>
-                                            </value>
-                                            <value name="B">
-                                              <block type="variables_get" id="T*^]Xqmh~u)*Y%NTn+h%">
-                                                <field name="VAR" id=",`Y]gHZe/MA.H+HvjCT0">EMA-34</field>
-                                              </block>
-                                            </value>
-                                          </block>
+                                      <!-- Start of 2-tick confirmation system -->
+                                      <block type="variables_set" id="set_current_tick">
+                                        <field name="VAR" id="prev_tick">current_tick</field>
+                                        <value name="VALUE">
+                                          <block type="tick" id="get_current_tick"></block>
                                         </value>
-                                        <statement name="DO0">
-                                          <block type="purchase" id="#jr;_g=gW+`_i[JnWOj9">
-                                            <field name="PURCHASE_LIST">CALL</field>
-                                          </block>
-                                        </statement>
                                         <next>
-                                          <block type="controls_if" id="![N(XE/U)2b29A$()HU*">
+                                          <block type="controls_if" id="check_first_tick">
                                             <value name="IF0">
-                                              <block type="logic_compare" id="(S?~ItlBzH~ySbTO7r5@">
-                                                <field name="OP">LTE</field>
+                                              <block type="logic_compare" id="is_first_tick">
+                                                <field name="OP">EQ</field>
                                                 <value name="A">
-                                                  <block type="tick" id="6S4H!3~Pdr%YSe^~JO)@"></block>
+                                                  <block type="variables_get" id="get_prev_tick_val">
+                                                    <field name="VAR" id="prev_tick">prev_tick</field>
+                                                  </block>
                                                 </value>
                                                 <value name="B">
-                                                  <block type="variables_get" id="s^a{vnfWC:jQJ$y$Bn-t">
-                                                    <field name="VAR" id="DNib.B0%.tV1gRYu6!cy">EMA-13</field>
+                                                  <block type="math_number" id="zero_val">
+                                                    <field name="NUM">0</field>
                                                   </block>
                                                 </value>
                                               </block>
                                             </value>
                                             <statement name="DO0">
-                                              <block type="purchase" id="*y`P@q5p-n,?1#bU9%fo">
-                                                <field name="PURCHASE_LIST">PUT</field>
+                                              <block type="variables_set" id="init_prev_tick_val">
+                                                <field name="VAR" id="prev_tick">prev_tick</field>
+                                                <value name="VALUE">
+                                                  <block type="variables_get" id="get_current_tick_val">
+                                                    <field name="VAR" id="prev_tick">current_tick</field>
+                                                  </block>
+                                                </value>
                                               </block>
                                             </statement>
+                                            <next>
+                                              <block type="controls_if" id="check_rise_confirmation">
+                                                <value name="IF0">
+                                                  <block type="logic_operation" id="rise_condition">
+                                                    <field name="OP">AND</field>
+                                                    <value name="A">
+                                                      <block type="logic_compare" id="tick_above_ema34">
+                                                        <field name="OP">GTE</field>
+                                                        <value name="A">
+                                                          <block type="variables_get" id="get_current_tick_rise">
+                                                            <field name="VAR" id="prev_tick">current_tick</field>
+                                                          </block>
+                                                        </value>
+                                                        <value name="B">
+                                                          <block type="variables_get" id="get_ema34_rise">
+                                                            <field name="VAR" id=",`Y]gHZe/MA.H+HvjCT0">EMA-34</field>
+                                                          </block>
+                                                        </value>
+                                                      </block>
+                                                    </value>
+                                                    <value name="B">
+                                                      <block type="logic_compare" id="prev_tick_above_ema34">
+                                                        <field name="OP">GTE</field>
+                                                        <value name="A">
+                                                          <block type="variables_get" id="get_prev_tick_rise">
+                                                            <field name="VAR" id="prev_tick">prev_tick</field>
+                                                          </block>
+                                                        </value>
+                                                        <value name="B">
+                                                          <block type="variables_get" id="get_ema34_again_rise">
+                                                            <field name="VAR" id=",`Y]gHZe/MA.H+HvjCT0">EMA-34</field>
+                                                          </block>
+                                                        </value>
+                                                      </block>
+                                                    </value>
+                                                  </block>
+                                                </value>
+                                                <statement name="DO0">
+                                                  <block type="variables_set" id="inc_rise_conf">
+                                                    <field name="VAR" id="confirmation_count">confirmation_count</field>
+                                                    <value name="VALUE">
+                                                      <block type="math_arithmetic" id="add_conf_rise">
+                                                        <field name="OP">ADD</field>
+                                                        <value name="A">
+                                                          <block type="variables_get" id="get_conf_count_rise">
+                                                            <field name="VAR" id="confirmation_count">confirmation_count</field>
+                                                          </block>
+                                                        </value>
+                                                        <value name="B">
+                                                          <block type="math_number" id="add_one_rise">
+                                                            <field name="NUM">1</field>
+                                                          </block>
+                                                        </value>
+                                                      </block>
+                                                    </value>
+                                                  </block>
+                                                </statement>
+                                                <next>
+                                                  <block type="controls_if" id="check_fall_confirmation">
+                                                    <value name="IF0">
+                                                      <block type="logic_operation" id="fall_condition">
+                                                        <field name="OP">AND</field>
+                                                        <value name="A">
+                                                          <block type="logic_compare" id="tick_below_ema13">
+                                                            <field name="OP">LTE</field>
+                                                            <value name="A">
+                                                              <block type="variables_get" id="get_current_tick_fall">
+                                                                <field name="VAR" id="prev_tick">current_tick</field>
+                                                              </block>
+                                                            </value>
+                                                            <value name="B">
+                                                              <block type="variables_get" id="get_ema13_fall">
+                                                                <field name="VAR" id="DNib.B0%.tV1gRYu6!cy">EMA-13</field>
+                                                              </block>
+                                                            </value>
+                                                          </block>
+                                                        </value>
+                                                        <value name="B">
+                                                          <block type="logic_compare" id="prev_tick_below_ema13">
+                                                            <field name="OP">LTE</field>
+                                                            <value name="A">
+                                                              <block type="variables_get" id="get_prev_tick_fall">
+                                                                <field name="VAR" id="prev_tick">prev_tick</field>
+                                                              </block>
+                                                            </value>
+                                                            <value name="B">
+                                                              <block type="variables_get" id="get_ema13_again_fall">
+                                                                <field name="VAR" id="DNib.B0%.tV1gRYu6!cy">EMA-13</field>
+                                                              </block>
+                                                            </value>
+                                                          </block>
+                                                        </value>
+                                                      </block>
+                                                    </value>
+                                                    <statement name="DO0">
+                                                      <block type="variables_set" id="inc_fall_conf">
+                                                        <field name="VAR" id="confirmation_count">confirmation_count</field>
+                                                        <value name="VALUE">
+                                                          <block type="math_arithmetic" id="add_conf_fall">
+                                                            <field name="OP">ADD</field>
+                                                            <value name="A">
+                                                              <block type="variables_get" id="get_conf_count_fall">
+                                                                <field name="VAR" id="confirmation_count">confirmation_count</field>
+                                                              </block>
+                                                            </value>
+                                                            <value name="B">
+                                                              <block type="math_number" id="add_one_fall">
+                                                                <field name="NUM">1</field>
+                                                              </block>
+                                                            </value>
+                                                          </block>
+                                                        </value>
+                                                      </block>
+                                                    </statement>
+                                                    <next>
+                                                      <block type="controls_if" id="check_rise_trade">
+                                                        <value name="IF0">
+                                                          <block type="logic_compare" id="rise_confirmed">
+                                                            <field name="OP">GTE</field>
+                                                            <value name="A">
+                                                              <block type="variables_get" id="get_conf_count_rise_trade">
+                                                                <field name="VAR" id="confirmation_count">confirmation_count</field>
+                                                              </block>
+                                                            </value>
+                                                            <value name="B">
+                                                              <block type="math_number" id="min_conf">
+                                                                <field name="NUM">2</field>
+                                                              </block>
+                                                            </value>
+                                                          </block>
+                                                        </value>
+                                                        <statement name="DO0">
+                                                          <block type="purchase" id="purchase_call">
+                                                            <field name="PURCHASE_LIST">CALL</field>
+                                                            <next>
+                                                              <block type="variables_set" id="reset_conf_rise">
+                                                                <field name="VAR" id="confirmation_count">confirmation_count</field>
+                                                                <value name="VALUE">
+                                                                  <block type="math_number" id="zero_reset">
+                                                                    <field name="NUM">0</field>
+                                                                  </block>
+                                                                </value>
+                                                              </block>
+                                                            </next>
+                                                          </block>
+                                                        </statement>
+                                                        <next>
+                                                          <block type="controls_if" id="check_fall_trade">
+                                                            <value name="IF0">
+                                                              <block type="logic_compare" id="fall_confirmed">
+                                                                <field name="OP">GTE</field>
+                                                                <value name="A">
+                                                                  <block type="variables_get" id="get_conf_count_fall_trade">
+                                                                    <field name="VAR" id="confirmation_count">confirmation_count</field>
+                                                                  </block>
+                                                                </value>
+                                                                <value name="B">
+                                                                  <block type="math_number" id="min_conf_fall">
+                                                                    <field name="NUM">2</field>
+                                                                  </block>
+                                                                </value>
+                                                              </block>
+                                                            </value>
+                                                            <statement name="DO0">
+                                                              <block type="purchase" id="purchase_put">
+                                                                <field name="PURCHASE_LIST">PUT</field>
+                                                                <next>
+                                                                  <block type="variables_set" id="reset_conf_fall">
+                                                                    <field name="VAR" id="confirmation_count">confirmation_count</field>
+                                                                    <value name="VALUE">
+                                                                      <block type="math_number" id="zero_reset_fall">
+                                                                        <field name="NUM">0</field>
+                                                                      </block>
+                                                                    </value>
+                                                                  </block>
+                                                                </next>
+                                                              </block>
+                                                            </statement>
+                                                          </block>
+                                                        </next>
+                                                      </block>
+                                                    </next>
+                                                  </block>
+                                                </next>
+                                              </block>
+                                            </next>
                                           </block>
                                         </next>
                                       </block>
