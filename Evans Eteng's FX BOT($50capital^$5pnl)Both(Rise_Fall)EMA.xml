@@ -61,8 +61,18 @@
           <block type="variables_set" id="|_FMbv[=+q~2+#IGJ+l-">
             <field name="VAR" id="IuS7w^IfF%%reKqf6Qcq">Expected Profit</field>
             <value name="VALUE">
-              <block type="math_number" id="Z.Zl(h_l4vBZCSRQ?flV">
-                <field name="NUM">5</field>
+              <block type="math_random_int">
+               <value name="FROM">
+                <block type="math_number">
+                 <field name="NUM">4</field>
+                </block>
+                </value>
+               <value name="TO">
+                <block type="math_number">
+                 <field name="NUM">7</field>
+                </block>
+                 </value>
+                </block>
               </block>
             </value>
             <next>
