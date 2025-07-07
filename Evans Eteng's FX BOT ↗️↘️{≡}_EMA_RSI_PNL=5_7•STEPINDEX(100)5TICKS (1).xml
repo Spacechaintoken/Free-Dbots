@@ -20,6 +20,7 @@
     <variable id="DNib.B0%.tV1gRYu6!cy">EMA-13</variable>
     <variable id="~1cGM;duQ;iCnqHn~Z%d">text</variable>
     <variable id="1#-k9aznVA607^7go@:W">text1</variable>
+    <!-- New variables for recovery system -->
     <variable id="win_count">win_count</variable>
     <variable id="loss_since_last_reset">loss_since_last_reset</variable>
     <variable id="current_loss">current_loss</variable>
@@ -103,10 +104,11 @@
                             <field name="VAR" id="fib_curr">fib_curr</field>
                             <value name="VALUE">
                               <block type="math_number" id="fib_num1">
-                                <field name="NUM">0.9</field>
+                                <field name="NUM">1</field>
                               </block>
                             </value>
                             <next>
+                              <!-- Initialize recovery system variables -->
                               <block type="variables_set" id="init_win_count">
                                 <field name="VAR" id="win_count">win_count</field>
                                 <value name="VALUE">
@@ -225,6 +227,7 @@
                               </block>
                             </value>
                             <next>
+                              <!-- Increment win count and check for recovery activation -->
                               <block type="variables_set" id="increment_win_count">
                                 <field name="VAR" id="win_count">win_count</field>
                                 <value name="VALUE">
@@ -299,6 +302,7 @@
                   </block>
                 </value>
                 <next>
+                  <!-- Store current loss amount -->
                   <block type="variables_set" id="set_current_loss">
                     <field name="VAR" id="current_loss">current_loss</field>
                     <value name="VALUE">
@@ -312,6 +316,7 @@
                       </block>
                     </value>
                     <next>
+                      <!-- Accumulate loss if win_count < 5 -->
                       <block type="controls_if" id="accumulate_loss_condition">
                         <value name="IF0">
                           <block type="logic_compare" id="win_count_lt_5">
@@ -349,6 +354,7 @@
                           </block>
                         </statement>
                         <next>
+                          <!-- Check for recovery activation -->
                           <block type="controls_if" id="recovery_condition">
                             <value name="IF0">
                               <block type="logic_compare" id="win_count_eq_5">
@@ -366,6 +372,7 @@
                               </block>
                             </value>
                             <statement name="DO0">
+                              <!-- Recovery Mode: Stake 2x accumulated losses -->
                               <block type="variables_set" id="set_recovery_stake">
                                 <field name="VAR" id="next_stake">next_stake</field>
                                 <value name="VALUE">
@@ -383,7 +390,8 @@
                                     </value>
                                   </block>
                                 </value>
-                                <next>      
+                                <next>
+                                  <!-- Reset counters after recovery -->
                                   <block type="variables_set" id="reset_win_count">
                                     <field name="VAR" id="win_count">win_count</field>
                                     <value name="VALUE">
@@ -406,6 +414,7 @@
                               </block>
                             </statement>
                             <statement name="ELSE">
+                              <!-- Normal Fibonacci progression -->
                               <block type="variables_set" id="fib_next_calc">
                                 <field name="VAR" id="next_fib">next_fib</field>
                                 <value name="VALUE">
@@ -466,62 +475,94 @@
                               </block>
                             </statement>
                             <next>
-                              <block type="controls_if" id="check_max_loss">
+                              <!-- Ensure stake meets minimum requirement -->
+                              <block type="controls_if" id="check_min_stake">
                                 <value name="IF0">
-                                  <block type="logic_compare" id="compare_stake_max">
-                                    <field name="OP">GTE</field>
+                                  <block type="logic_compare" id="min_stake_condition">
+                                    <field name="OP">LT</field>
                                     <value name="A">
-                                      <block type="variables_get" id="get_next_stake">
+                                      <block type="variables_get" id="get_next_stake_val">
                                         <field name="VAR" id="next_stake">next_stake</field>
                                       </block>
                                     </value>
                                     <value name="B">
-                                      <block type="variables_get" id="get_max_loss">
-                                        <field name="VAR" id="]oGV^TW+pyAyI~)S*^8n">Max Loss Amount</field>
+                                      <block type="math_number" id="min_stake_value">
+                                        <field name="NUM">0.35</field>
                                       </block>
                                     </value>
                                   </block>
                                 </value>
                                 <statement name="DO0">
-                                  <block type="variables_set" id="reset_fib_prev">
-                                    <field name="VAR" id="fib_prev">fib_prev</field>
+                                  <block type="variables_set" id="set_min_stake">
+                                    <field name="VAR" id="next_stake">next_stake</field>
                                     <value name="VALUE">
-                                      <block type="math_number" id="fib_reset0">
-                                        <field name="NUM">0</field>
+                                      <block type="math_number" id="min_stake">
+                                        <field name="NUM">0.35</field>
                                       </block>
                                     </value>
-                                    <next>
-                                      <block type="variables_set" id="reset_fib_curr">
-                                        <field name="VAR" id="fib_curr">fib_curr</field>
+                                  </block>
+                                </statement>
+                                <next>
+                                  <!-- Max loss check -->
+                                  <block type="controls_if" id="check_max_loss">
+                                    <value name="IF0">
+                                      <block type="logic_compare" id="compare_stake_max">
+                                        <field name="OP">GTE</field>
+                                        <value name="A">
+                                          <block type="variables_get" id="get_next_stake">
+                                            <field name="VAR" id="next_stake">next_stake</field>
+                                          </block>
+                                        </value>
+                                        <value name="B">
+                                          <block type="variables_get" id="get_max_loss">
+                                            <field name="VAR" id="]oGV^TW+pyAyI~)S*^8n">Max Loss Amount</field>
+                                          </block>
+                                        </value>
+                                      </block>
+                                    </value>
+                                    <statement name="DO0">
+                                      <block type="variables_set" id="reset_fib_prev">
+                                        <field name="VAR" id="fib_prev">fib_prev</field>
                                         <value name="VALUE">
-                                          <block type="math_number" id="fib_reset1">
-                                            <field name="NUM">1</field>
+                                          <block type="math_number" id="fib_reset0">
+                                            <field name="NUM">0</field>
                                           </block>
                                         </value>
                                         <next>
-                                          <block type="variables_set" id="reset_stake">
-                                            <field name="VAR" id="next_stake">next_stake</field>
+                                          <block type="variables_set" id="reset_fib_curr">
+                                            <field name="VAR" id="fib_curr">fib_curr</field>
                                             <value name="VALUE">
-                                              <block type="variables_get" id="get_win_reset">
-                                                <field name="VAR" id=".}isBXha4T:t(WP]tqFt">Win Amount</field>
+                                              <block type="math_number" id="fib_reset1">
+                                                <field name="NUM">1</field>
                                               </block>
                                             </value>
                                             <next>
-                                              <block type="variables_set" id="reset_win_count_max">
-                                                <field name="VAR" id="win_count">win_count</field>
+                                              <block type="variables_set" id="reset_stake">
+                                                <field name="VAR" id="next_stake">next_stake</field>
                                                 <value name="VALUE">
-                                                  <block type="math_number" id="zero_win_max">
-                                                    <field name="NUM">0</field>
+                                                  <block type="variables_get" id="get_win_reset">
+                                                    <field name="VAR" id=".}isBXha4T:t(WP]tqFt">Win Amount</field>
                                                   </block>
                                                 </value>
                                                 <next>
-                                                  <block type="variables_set" id="reset_loss_reset_max">
-                                                    <field name="VAR" id="loss_since_last_reset">loss_since_last_reset</field>
+                                                  <!-- Reset recovery counters on max loss -->
+                                                  <block type="variables_set" id="reset_win_count_max">
+                                                    <field name="VAR" id="win_count">win_count</field>
                                                     <value name="VALUE">
-                                                      <block type="math_number" id="zero_loss_reset_max">
+                                                      <block type="math_number" id="zero_win_max">
                                                         <field name="NUM">0</field>
                                                       </block>
                                                     </value>
+                                                    <next>
+                                                      <block type="variables_set" id="reset_loss_reset_max">
+                                                        <field name="VAR" id="loss_since_last_reset">loss_since_last_reset</field>
+                                                        <value name="VALUE">
+                                                          <block type="math_number" id="zero_loss_reset_max">
+                                                            <field name="NUM">0</field>
+                                                          </block>
+                                                        </value>
+                                                      </block>
+                                                    </next>
                                                   </block>
                                                 </next>
                                               </block>
@@ -529,17 +570,17 @@
                                           </block>
                                         </next>
                                       </block>
-                                    </next>
-                                  </block>
-                                </statement>
-                                <next>
-                                  <block type="variables_set" id="set_initial_amt">
-                                    <field name="VAR" id="LmU[8ZH:2aZ)m-5^SQ#w">Initial Amount</field>
-                                    <value name="VALUE">
-                                      <block type="variables_get" id="get_next_stake_val">
-                                        <field name="VAR" id="next_stake">next_stake</field>
+                                    </statement>
+                                    <next>
+                                      <block type="variables_set" id="set_initial_amt">
+                                        <field name="VAR" id="LmU[8ZH:2aZ)m-5^SQ#w">Initial Amount</field>
+                                        <value name="VALUE">
+                                          <block type="variables_get" id="get_next_stake_val">
+                                            <field name="VAR" id="next_stake">next_stake</field>
+                                          </block>
+                                        </value>
                                       </block>
-                                    </value>
+                                    </next>
                                   </block>
                                 </next>
                               </block>
