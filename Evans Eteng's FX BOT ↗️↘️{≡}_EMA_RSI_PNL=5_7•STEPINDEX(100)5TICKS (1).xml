@@ -250,7 +250,7 @@
                                 <field name="VAR" id="recovery_stake">recovery_stake</field>
                                 <value name="VALUE">
                                   <block type="math_arithmetic" id="calc_recovery">
-                                    <field name="OP">ADD</field>
+                                    <field name="OP">MULTIPLY</field>
                                     <value name="A">
                                       <block type="variables_get" id="get_total_loss">
                                         <field name="VAR" id="total_loss">total_loss</field>
@@ -391,6 +391,7 @@
                           </block>
                         </value>
                         <next>
+                          <!-- FIXED DIRECTION TOGGLE BLOCK STARTS HERE -->
                           <block type="variables_set" id="toggle_direction">
                             <field name="VAR" id="current_direction">current_direction</field>
                             <value name="VALUE">
@@ -433,6 +434,7 @@
                               </block>
                             </next>
                           </block>
+                          <!-- FIXED DIRECTION TOGGLE BLOCK ENDS HERE -->
                         </next>
                       </block>
                     </next>
