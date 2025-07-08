@@ -152,6 +152,7 @@
           </block>
         </value>
         <statement name="DO0">
+          <!-- LOSS BRANCH -->
           <block type="text_join" id=",DM`wD~TCGr{E1#/gx?l">
             <field name="VARIABLE" id=";Nub0jD_QQ{e@__UYhXE">text</field>
             <statement name="STACK">
@@ -257,6 +258,7 @@
           </block>
         </statement>
         <statement name="ELSE">
+          <!-- WIN BRANCH -->
           <block type="controls_if" id="/eb8z,hcE_6u5ETdHFNE">
             <mutation xmlns="http://www.w3.org/1999/xhtml" else="1"></mutation>
             <value name="IF0">
@@ -442,6 +444,7 @@
             </statement>
           </block>
         </statement>
+        <!-- COMMON CODE AFTER LOSS/WIN -->
         <next>
           <block type="text_join" id="J@s#~1mb@f94zE/z%?O8">
             <field name="VARIABLE" id="W?uLGIENx1)FY:8]jm:e">text2</field>
