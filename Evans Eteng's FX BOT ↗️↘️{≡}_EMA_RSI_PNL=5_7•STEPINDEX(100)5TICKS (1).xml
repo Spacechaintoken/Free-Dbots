@@ -99,21 +99,31 @@
                               </block>
                             </value>
                             <next>
-                              <block type="variables_set" id="init_win_count">
-                                <field name="VAR" id="win_count">win_count</field>
+                              <block type="variables_set" id="init_prev_direction">
+                                <field name="VAR" id="previous_direction">previous_direction</field>
                                 <value name="VALUE">
-                                  <block type="math_number" id="win_count_init">
-                                    <field name="NUM">0</field>
+                                  <block type="text">
+                                    <field name="TEXT">rise</field>
                                   </block>
                                 </value>
                                 <next>
-                                  <block type="variables_set" id="init_total_loss">
-                                    <field name="VAR" id="total_loss">total_loss</field>
+                                  <block type="variables_set" id="init_win_count">
+                                    <field name="VAR" id="win_count">win_count</field>
                                     <value name="VALUE">
-                                      <block type="math_number" id="total_loss_init">
+                                      <block type="math_number" id="win_count_init">
                                         <field name="NUM">0</field>
                                       </block>
                                     </value>
+                                    <next>
+                                      <block type="variables_set" id="init_total_loss">
+                                        <field name="VAR" id="total_loss">total_loss</field>
+                                        <value name="VALUE">
+                                          <block type="math_number" id="total_loss_init">
+                                            <field name="NUM">0</field>
+                                          </block>
+                                        </value>
+                                      </block>
+                                    </next>
                                   </block>
                                 </next>
                               </block>
@@ -372,42 +382,52 @@
                           </block>
                         </value>
                         <next>
-                          <block type="controls_ifelse" id="toggle_direction">
-                            <value name="IF">
-                              <block type="logic_compare">
-                                <field name="OP">EQ</field>
-                                <value name="A">
-                                  <block type="variables_get">
-                                    <field name="VAR" id="current_direction">current_direction</field>
-                                  </block>
-                                </value>
-                                <value name="B">
-                                  <block type="text">
-                                    <field name="TEXT">rise</field>
-                                  </block>
-                                </value>
+                          <block type="variables_set" id="set_prev_dir_loss">
+                            <field name="VAR" id="previous_direction">previous_direction</field>
+                            <value name="VALUE">
+                              <block type="variables_get" id="get_current_dir">
+                                <field name="VAR" id="current_direction">current_direction</field>
                               </block>
                             </value>
-                            <statement name="DO0">
-                              <block type="variables_set">
-                                <field name="VAR" id="current_direction">current_direction</field>
-                                <value name="VALUE">
-                                  <block type="text">
-                                    <field name="TEXT">fall</field>
+                            <next>
+                              <block type="controls_ifelse" id="set_next_dir_loss">
+                                <value name="IF">
+                                  <block type="logic_compare">
+                                    <field name="OP">EQ</field>
+                                    <value name="A">
+                                      <block type="variables_get">
+                                        <field name="VAR" id="previous_direction">previous_direction</field>
+                                      </block>
+                                    </value>
+                                    <value name="B">
+                                      <block type="text">
+                                        <field name="TEXT">rise</field>
+                                      </block>
+                                    </value>
                                   </block>
                                 </value>
-                              </block>
-                            </statement>
-                            <statement name="DO1">
-                              <block type="variables_set">
-                                <field name="VAR" id="current_direction">current_direction</field>
-                                <value name="VALUE">
-                                  <block type="text">
-                                    <field name="TEXT">rise</field>
+                                <statement name="DO0">
+                                  <block type="variables_set">
+                                    <field name="VAR" id="current_direction">current_direction</field>
+                                    <value name="VALUE">
+                                      <block type="text">
+                                        <field name="TEXT">fall</field>
+                                      </block>
+                                    </value>
                                   </block>
-                                </value>
+                                </statement>
+                                <statement name="DO1">
+                                  <block type="variables_set">
+                                    <field name="VAR" id="current_direction">current_direction</field>
+                                    <value name="VALUE">
+                                      <block type="text">
+                                        <field name="TEXT">rise</field>
+                                      </block>
+                                    </value>
+                                  </block>
+                                </statement>
                               </block>
-                            </statement>
+                            </next>
                           </block>
                         </next>
                       </block>
