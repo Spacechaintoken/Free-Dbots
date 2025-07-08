@@ -8,20 +8,22 @@
     <variable id="$~6pi|Dpu{7rY$yF7N~E">Profit Expectation</variable>
     <variable id="Y9;b0=lG;-Wn2FG1(zg%">text1</variable>
     <variable id="if]A;[/e%;B@?m[UFZ02">Stake on Win</variable>
-    <variable id="t/e5rb;Rxg/z9vqQ%X^Z">text3</variable>
-    <variable id="win_counter">Win Counter</variable>
     <variable id="accumulated_loss">Accumulated Loss</variable>
+    <variable id="win_counter">Win Counter</variable>
+    <variable id="t/e5rb;Rxg/z9vqQ%X^Z">text3</variable>
+    <variable id="macd_value">MACD Value</variable>
+    <variable id="rsi_value">RSI Value</variable>
   </variables>
   <block type="trade_definition" id="W}rOqk6y`|Xdgx%).0KH" deletable="false" x="0" y="60">
     <statement name="TRADE_OPTIONS">
       <block type="trade_definition_market" id="/f!]?6$.Y`,#1fUB;wu/" deletable="false" movable="false">
         <field name="MARKET_LIST">synthetic_index</field>
         <field name="SUBMARKET_LIST">random_index</field>
-        <field name="SYMBOL_LIST">R_50</field>
+        <field name="SYMBOL_LIST">R_100</field>
         <next>
           <block type="trade_definition_tradetype" id="j,Dz$8Bygnbppep.o`Tm" deletable="false" movable="false">
-            <field name="TRADETYPECAT_LIST">callput</field>
-            <field name="TRADETYPE_LIST">callputequal</field>
+            <field name="TRADETYPECAT_LIST">digits</field>
+            <field name="TRADETYPE_LIST">overunder</field>
             <next>
               <block type="trade_definition_contracttype" id="8B`~Pppg%_cz5?*vm%,f" deletable="false" movable="false">
                 <field name="TYPE_LIST">both</field>
@@ -90,7 +92,7 @@
                           <block type="variables_set" id="win_counter_init">
                             <field name="VAR" id="win_counter">Win Counter</field>
                             <value name="VALUE">
-                              <block type="math_number">
+                              <block type="math_number" id="?:AN5}N2EoycZT3Fx+J7">
                                 <field name="NUM">0</field>
                               </block>
                             </value>
@@ -98,7 +100,7 @@
                               <block type="variables_set" id="accumulated_loss_init">
                                 <field name="VAR" id="accumulated_loss">Accumulated Loss</field>
                                 <value name="VALUE">
-                                  <block type="math_number">
+                                  <block type="math_number" id="i`#^Yuh}~p~PsJYO@yZc">
                                     <field name="NUM">0</field>
                                   </block>
                                 </value>
@@ -118,7 +120,7 @@
     </statement>
     <statement name="SUBMARKET">
       <block type="trade_definition_tradeoptions" id="+BL6zN(q*Bs60x9Ec]0K">
-        <mutation xmlns="http://www.w3.org/1999/xhtml" has_first_barrier="false" has_second_barrier="false" has_prediction="false"></mutation>
+        <mutation xmlns="http://www.w3.org/1999/xhtml" has_first_barrier="false" has_second_barrier="false" has_prediction="true"></mutation>
         <field name="DURATIONTYPE_LIST">t</field>
         <value name="DURATION">
           <block type="math_random_int" id="+RefrYN4Wck=}S*Yvq[E">
@@ -129,7 +131,7 @@
             </value>
             <value name="TO">
               <shadow type="math_number" id="O{*EjD,]RTm*g!$`;g.p">
-                <field name="NUM">1</field>
+                <field name="NUM">4</field>
               </shadow>
             </value>
           </block>
@@ -139,10 +141,27 @@
             <field name="VAR" id="`WOI5{w~~8:IGQ0a6Y:)">Initial Stake</field>
           </block>
         </value>
+        <value name="PREDICTION">
+          <shadow type="math_number_positive" id="I1LPkx]1EB*e3SdNVX5u" inline="true">
+            <field name="NUM">4</field>
+          </shadow>
+          <block type="math_random_int" id="xKo9NV+*|*q7P3B@bw96">
+            <value name="FROM">
+              <shadow type="math_number" id="B-i67y)Q:v%2u:xkxma+">
+                <field name="NUM">4</field>
+              </shadow>
+            </value>
+            <value name="TO">
+              <shadow type="math_number" id="MZ|BI;n13Bkx=}WI0v!o">
+                <field name="NUM">6</field>
+              </shadow>
+            </value>
+          </block>
+        </value>
       </block>
     </statement>
   </block>
-  <block type="after_purchase" id="C$~Ej^:uYpp1z[kUUEj7" x="963" y="60">
+  <block type="after_purchase" id="C$~Ej^:uYpp1z[kUUEj7" x="1085" y="60">
     <statement name="AFTERPURCHASE_STACK">
       <block type="controls_if" id="M1p1SEukvv`l:uyHa|0f">
         <mutation xmlns="http://www.w3.org/1999/xhtml" else="1"></mutation>
@@ -188,7 +207,6 @@
                   </block>
                 </value>
                 <next>
-                  <!-- Accumulate loss amount -->
                   <block type="math_change" id="accumulate_loss">
                     <field name="VAR" id="accumulated_loss">Accumulated Loss</field>
                     <value name="DELTA">
@@ -208,7 +226,6 @@
                       </block>
                     </value>
                     <next>
-                      <!-- Reset stake to initial value -->
                       <block type="variables_set" id="reset_stake_loss">
                         <field name="VAR" id="`WOI5{w~~8:IGQ0a6Y:)">Initial Stake</field>
                         <value name="VALUE">
@@ -216,46 +233,6 @@
                             <field name="VAR" id="if]A;[/e%;B@?m[UFZ02">Stake on Win</field>
                           </block>
                         </value>
-                        <next>
-                          <block type="controls_if" id="/xG.3/4:2^`YXsS*9X:n">
-                            <mutation xmlns="http://www.w3.org/1999/xhtml" else="1"></mutation>
-                            <value name="IF0">
-                              <block type="logic_compare" id="6GSFh{_A3Ie7DLCihtF0">
-                                <field name="OP">NEQ</field>
-                                <value name="A">
-                                  <block type="variables_get" id="~r5AKk,f$f)Sp#YDdPTu">
-                                    <field name="VAR" id="!{n^g?p1ze,q0]%vUuW3">Next Trade Condition</field>
-                                  </block>
-                                </value>
-                                <value name="B">
-                                  <block type="text" id="IqE+ov{P|rbkj]Ih-zO[">
-                                    <field name="TEXT">Rise</field>
-                                  </block>
-                                </value>
-                              </block>
-                            </value>
-                            <statement name="DO0">
-                              <block type="variables_set" id="TSB7wbv9;I0t6,o$SfZz">
-                                <field name="VAR" id="!{n^g?p1ze,q0]%vUuW3">Next Trade Condition</field>
-                                <value name="VALUE">
-                                  <block type="text" id="}MkBXE;g7kpAF.UMTThu">
-                                    <field name="TEXT">Rise</field>
-                                  </block>
-                                </value>
-                              </block>
-                            </statement>
-                            <statement name="ELSE">
-                              <block type="variables_set" id="^F7.%ZfQ(]/,L}sbH3*R">
-                                <field name="VAR" id="!{n^g?p1ze,q0]%vUuW3">Next Trade Condition</field>
-                                <value name="VALUE">
-                                  <block type="text" id="5B(Vk21}BAs._~Ej8cZ[">
-                                    <field name="TEXT">Fall</field>
-                                  </block>
-                                </value>
-                              </block>
-                            </statement>
-                          </block>
-                        </next>
                       </block>
                     </next>
                   </block>
@@ -316,17 +293,16 @@
                       </block>
                     </value>
                     <next>
-                      <!-- Increment win counter -->
                       <block type="math_change" id="increment_win_count">
                         <field name="VAR" id="win_counter">Win Counter</field>
                         <value name="DELTA">
-                          <shadow type="math_number">
+                          <shadow type="math_number" id="+fm[^(,|!T|d1sN08M4`">
                             <field name="NUM">1</field>
                           </shadow>
                         </value>
                         <next>
                           <block type="controls_if" id="check_win_count">
-                            <mutation else="1"></mutation>
+                            <mutation xmlns="http://www.w3.org/1999/xhtml" else="1"></mutation>
                             <value name="IF0">
                               <block type="logic_compare" id="is_fifth_win">
                                 <field name="OP">EQ</field>
@@ -337,18 +313,17 @@
                                 </value>
                                 <value name="B">
                                   <block type="math_number" id="number_5">
-                                    <field name="NUM">5</field>
+                                    <field name="NUM">3</field>
                                   </block>
                                 </value>
                               </block>
                             </value>
                             <statement name="DO0">
-                              <!-- Recovery system: 2x accumulated loss -->
                               <block type="variables_set" id="recovery_stake">
                                 <field name="VAR" id="`WOI5{w~~8:IGQ0a6Y:)">Initial Stake</field>
                                 <value name="VALUE">
                                   <block type="math_arithmetic" id="calculate_recovery">
-                                    <field name="OP">MULTIPLY</field>
+                                    <field name="OP">ADD</field>
                                     <value name="A">
                                       <block type="variables_get" id="get_accum_loss">
                                         <field name="VAR" id="accumulated_loss">Accumulated Loss</field>
@@ -356,13 +331,12 @@
                                     </value>
                                     <value name="B">
                                       <block type="math_number" id="multiplier_2">
-                                        <field name="NUM">2</field>
+                                        <field name="NUM">4</field>
                                       </block>
                                     </value>
                                   </block>
                                 </value>
                                 <next>
-                                  <!-- Reset counters -->
                                   <block type="variables_set" id="reset_win_count">
                                     <field name="VAR" id="win_counter">Win Counter</field>
                                     <value name="VALUE">
@@ -385,7 +359,6 @@
                               </block>
                             </statement>
                             <statement name="ELSE">
-                              <!-- Normal win: reset to initial stake -->
                               <block type="variables_set" id="set_normal_stake">
                                 <field name="VAR" id="`WOI5{w~~8:IGQ0a6Y:)">Initial Stake</field>
                                 <value name="VALUE">
@@ -561,35 +534,242 @@
       </block>
     </statement>
   </block>
-  <block type="before_purchase" id="k)y7;8p/L$C:69~S.l,Z" deletable="false" x="0" y="868">
+  <block type="before_purchase" id="k)y7;8p/L$C:69~S.l,Z" deletable="false" x="0" y="964">
     <statement name="BEFOREPURCHASE_STACK">
-      <block type="controls_if" id="4A5*ONE8EXY5yO:xZ8W,">
-        <mutation xmlns="http://www.w3.org/1999/xhtml" else="1"></mutation>
-        <value name="IF0">
-          <block type="logic_compare" id="_A{,L7M=s_*k2gX)g9(p">
-            <field name="OP">EQ</field>
-            <value name="A">
-              <block type="variables_get" id="m;qG`|(6)wD*};cIM7VX">
-                <field name="VAR" id="!{n^g?p1ze,q0]%vUuW3">Next Trade Condition</field>
+      <!-- MACD Calculation -->
+      <block type="variables_set" id="macd_calculation">
+        <field name="VAR" id="macd_value">MACD Value</field>
+        <value name="VALUE">
+          <block type="indicators_macd">
+            <value name="INPUT">
+              <block type="candles">
+                <field name="CANDLEINTERVAL_LIST">86400</field>
               </block>
             </value>
-            <value name="B">
-              <block type="text" id="c,VbYPU~;[B0*Y7C8:rE">
-                <field name="TEXT">Rise</field>
+            <value name="FASTPERIOD">
+              <block type="math_number">
+                <field name="NUM">12</field>
+              </block>
+            </value>
+            <value name="SLOWPERIOD">
+              <block type="math_number">
+                <field name="NUM">26</field>
+              </block>
+            </value>
+            <value name="SIGNALPERIOD">
+              <block type="math_number">
+                <field name="NUM">9</field>
               </block>
             </value>
           </block>
         </value>
-        <statement name="DO0">
-          <block type="purchase" id="Kp:QsPIAc%d*FJwD8m?.">
-            <field name="PURCHASE_LIST">CALLE</field>
+        <next>
+          <!-- RSI Calculation -->
+          <block type="variables_set" id="rsi_calculation">
+            <field name="VAR" id="rsi_value">RSI Value</field>
+            <value name="VALUE">
+              <block type="indicators_rsi">
+                <value name="INPUT">
+                  <block type="candles">
+                    <field name="CANDLEINTERVAL_LIST">86400</field>
+                  </block>
+                </value>
+                <value name="PERIOD">
+                  <block type="math_number">
+                    <field name="NUM">14</field>
+                  </block>
+                </value>
+              </block>
+            </value>
+            <next>
+              <!-- Strategy Decision -->
+              <block type="controls_if" id="strategy_decision">
+                <mutation elseif="1" else="1"></mutation>
+                <value name="IF0">
+                  <block type="logic_operation">
+                    <field name="OP">AND</field>
+                    <value name="A">
+                      <block type="logic_compare">
+                        <field name="OP">GT</field>
+                        <value name="A">
+                          <block type="list_index">
+                            <field name="INDEX">last</field>
+                            <value name="LIST">
+                              <block type="macd_series">
+                                <field name="MACDSERIES_LIST">macd</field>
+                                <value name="MACD">
+                                  <block type="variables_get">
+                                    <field name="VAR" id="macd_value">MACD Value</field>
+                                  </block>
+                                </value>
+                              </block>
+                            </value>
+                          </block>
+                        </value>
+                        <value name="B">
+                          <block type="list_index">
+                            <field name="INDEX">last</field>
+                            <value name="LIST">
+                              <block type="macd_series">
+                                <field name="MACDSERIES_LIST">signal</field>
+                                <value name="MACD">
+                                  <block type="variables_get">
+                                    <field name="VAR" id="macd_value">MACD Value</field>
+                                  </block>
+                                </value>
+                              </block>
+                            </value>
+                          </block>
+                        </value>
+                      </block>
+                    </value>
+                    <value name="B">
+                      <block type="logic_compare">
+                        <field name="OP">GT</field>
+                        <value name="A">
+                          <block type="list_index">
+                            <field name="INDEX">last</field>
+                            <value name="LIST">
+                              <block type="variables_get">
+                                <field name="VAR" id="rsi_value">RSI Value</field>
+                              </block>
+                            </value>
+                          </block>
+                        </value>
+                        <value name="B">
+                          <block type="math_number">
+                            <field name="NUM">50</field>
+                          </block>
+                        </value>
+                      </block>
+                    </value>
+                  </block>
+                </value>
+                <statement name="DO0">
+                  <block type="variables_set" id="set_rise_condition">
+                    <field name="VAR" id="!{n^g?p1ze,q0]%vUuW3">Next Trade Condition</field>
+                    <value name="VALUE">
+                      <block type="text">
+                        <field name="TEXT">Rise</field>
+                      </block>
+                    </value>
+                  </block>
+                </statement>
+                <value name="IF1">
+                  <block type="logic_operation">
+                    <field name="OP">AND</field>
+                    <value name="A">
+                      <block type="logic_compare">
+                        <field name="OP">LT</field>
+                        <value name="A">
+                          <block type="list_index">
+                            <field name="INDEX">last</field>
+                            <value name="LIST">
+                              <block type="macd_series">
+                                <field name="MACDSERIES_LIST">macd</field>
+                                <value name="MACD">
+                                  <block type="variables_get">
+                                    <field name="VAR" id="macd_value">MACD Value</field>
+                                  </block>
+                                </value>
+                              </block>
+                            </value>
+                          </block>
+                        </value>
+                        <value name="B">
+                          <block type="list_index">
+                            <field name="INDEX">last</field>
+                            <value name="LIST">
+                              <block type="macd_series">
+                                <field name="MACDSERIES_LIST">signal</field>
+                                <value name="MACD">
+                                  <block type="variables_get">
+                                    <field name="VAR" id="macd_value">MACD Value</field>
+                                  </block>
+                                </value>
+                              </block>
+                            </value>
+                          </block>
+                        </value>
+                      </block>
+                    </value>
+                    <value name="B">
+                      <block type="logic_compare">
+                        <field name="OP">LT</field>
+                        <value name="A">
+                          <block type="list_index">
+                            <field name="INDEX">last</field>
+                            <value name="LIST">
+                              <block type="variables_get">
+                                <field name="VAR" id="rsi_value">RSI Value</field>
+                              </block>
+                            </value>
+                          </block>
+                        </value>
+                        <value name="B">
+                          <block type="math_number">
+                            <field name="NUM">50</field>
+                          </block>
+                        </value>
+                      </block>
+                    </value>
+                  </block>
+                </value>
+                <statement name="DO1">
+                  <block type="variables_set" id="set_fall_condition">
+                    <field name="VAR" id="!{n^g?p1ze,q0]%vUuW3">Next Trade Condition</field>
+                    <value name="VALUE">
+                      <block type="text">
+                        <field name="TEXT">Fall</field>
+                      </block>
+                    </value>
+                  </block>
+                </statement>
+                <statement name="ELSE">
+                  <block type="variables_set" id="set_default_condition">
+                    <field name="VAR" id="!{n^g?p1ze,q0]%vUuW3">Next Trade Condition</field>
+                    <value name="VALUE">
+                      <block type="text">
+                        <field name="TEXT">Rise</field>
+                      </block>
+                    </value>
+                  </block>
+                </statement>
+                <next>
+                  <!-- Original Purchase Logic -->
+                  <block type="controls_if" id="4A5*ONE8EXY5yO:xZ8W,">
+                    <mutation xmlns="http://www.w3.org/1999/xhtml" else="1"></mutation>
+                    <value name="IF0">
+                      <block type="logic_compare" id="_A{,L7M=s_*k2gX)g9(p">
+                        <field name="OP">EQ</field>
+                        <value name="A">
+                          <block type="variables_get" id="m;qG`|(6)wD*};cIM7VX">
+                            <field name="VAR" id="!{n^g?p1ze,q0]%vUuW3">Next Trade Condition</field>
+                          </block>
+                        </value>
+                        <value name="B">
+                          <block type="text" id="c,VbYPU~;[B0*Y7C8:rE">
+                            <field name="TEXT">Rise</field>
+                          </block>
+                        </value>
+                      </block>
+                    </value>
+                    <statement name="DO0">
+                      <block type="purchase" id="Kp:QsPIAc%d*FJwD8m?.">
+                        <field name="PURCHASE_LIST">DIGITOVER</field>
+                      </block>
+                    </statement>
+                    <statement name="ELSE">
+                      <block type="purchase" id=";Dfhm@FzhR{s|@-:lRt+">
+                        <field name="PURCHASE_LIST">DIGITUNDER</field>
+                      </block>
+                    </statement>
+                  </block>
+                </next>
+              </block>
+            </next>
           </block>
-        </statement>
-        <statement name="ELSE">
-          <block type="purchase" id=";Dfhm@FzhR{s|@-:lRt+">
-            <field name="PURCHASE_LIST">PUTE</field>
-          </block>
-        </statement>
+        </next>
       </block>
     </statement>
   </block>
