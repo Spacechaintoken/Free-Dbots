@@ -472,11 +472,12 @@
                                       </block>
                                     </value>
                                     <statement name="DO0">
+                                      <!-- FIXED PROFIT TARGET +30% UPDATE START -->
                                       <block type="variables_set" id="recovery_stake">
                                         <field name="VAR" id="`WOI5{w~~8:IGQ0a6Y:)">Initial Stake</field>
                                         <value name="VALUE">
                                           <block type="math_arithmetic" id="calculate_recovery">
-                                            <field name="OP">DIVIDE</field>
+                                            <field name="OP">MULTIPLY</field>
                                             <value name="A">
                                               <block type="variables_get" id="get_accum_loss">
                                                 <field name="VAR" id="accumulated_loss">Accumulated Loss</field>
@@ -484,7 +485,7 @@
                                             </value>
                                             <value name="B">
                                               <block type="math_number" id="multiplier_2">
-                                                <field name="NUM">0.7</field>
+                                                <field name="NUM">1.3</field> <!-- 30% profit target -->
                                               </block>
                                             </value>
                                           </block>
@@ -510,6 +511,7 @@
                                           </block>
                                         </next>
                                       </block>
+                                      <!-- FIXED PROFIT TARGET +30% UPDATE END -->
                                     </statement>
                                     <statement name="ELSE">
                                       <block type="variables_set" id="set_normal_stake">
@@ -536,7 +538,7 @@
           </block>
         </statement>
         <next>
-          <!-- NEW: Hybrid Recovery System -->
+          <!-- Hybrid Recovery System -->
           <block type="controls_if" id="hybrid_recovery">
             <mutation else="1"></mutation>
             <value name="IF0">
