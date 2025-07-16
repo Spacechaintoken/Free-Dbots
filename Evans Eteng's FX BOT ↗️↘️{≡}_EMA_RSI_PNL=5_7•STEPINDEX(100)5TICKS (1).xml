@@ -10,9 +10,9 @@
     <variable id="Y9;b0=lG;-Wn2FG1(zg%">text1</variable>
     <variable id="if]A;[/e%;B@?m[UFZ02">Stake on Win</variable>
     <variable id="accumulated_loss">Accumulated Loss</variable>
+    <variable id="new_losses">New Losses</variable>
     <variable id="consecutive_losses">Consecutive Losses</variable>
     <variable id="t/e5rb;Rxg/z9vqQ%X^Z">text3</variable>
-    <variable id="new_losses">New Losses</variable>
   </variables>
   <block type="trade_definition" id="W}rOqk6y`|Xdgx%).0KH" deletable="false" x="0" y="60">
     <statement name="TRADE_OPTIONS">
@@ -238,7 +238,7 @@
                           <block type="math_single" id="get_abs_new_loss">
                             <field name="OP">ABS</field>
                             <value name="NUM">
-                              <shadow type="math_number">
+                              <shadow type="math_number" id=":I8!4sKwQN$@]Mv1#B0b">
                                 <field name="NUM">0</field>
                               </shadow>
                               <block type="read_details" id="read_new_loss_amount">
@@ -314,7 +314,7 @@
                                             </value>
                                             <value name="B">
                                               <block type="math_number" id="nine_losses">
-                                                <field name="NUM">3</field>
+                                                <field name="NUM">6</field>
                                               </block>
                                             </value>
                                           </block>
@@ -324,7 +324,7 @@
                                             <field name="VAR" id="`WOI5{w~~8:IGQ0a6Y:)">Initial Stake</field>
                                             <value name="VALUE">
                                               <block type="math_arithmetic" id="calculate_emergency_stake">
-                                                <field name="OP">DIVIDE</field>
+                                                <field name="OP">MULTIPLY</field>
                                                 <value name="A">
                                                   <block type="variables_get" id="get_accum_loss_emergency">
                                                     <field name="VAR" id="new_losses">New Losses</field>
@@ -332,7 +332,7 @@
                                                 </value>
                                                 <value name="B">
                                                   <block type="math_number" id="emergency_buffer">
-                                                    <field name="NUM">0.9</field>
+                                                    <field name="NUM">1.2</field>
                                                   </block>
                                                 </value>
                                               </block>
@@ -678,7 +678,7 @@
       </block>
     </statement>
   </block>
-  <block type="before_purchase" id="k)y7;8p/L$C:69~S.l,Z" deletable="false" x="0" y="1012">
+  <block type="before_purchase" id="k)y7;8p/L$C:69~S.l,Z" deletable="false" x="0" y="1060">
     <statement name="BEFOREPURCHASE_STACK">
       <block type="controls_if" id="4A5*ONE8EXY5yO:xZ8W,">
         <mutation xmlns="http://www.w3.org/1999/xhtml" else="1"></mutation>
@@ -710,7 +710,7 @@
       </block>
     </statement>
   </block>
-  <block type="variables_set" id="QQVt`*+DcN@$11z.ZmsZ" disabled="true" x="0" y="2740">
+  <block type="variables_set" id="QQVt`*+DcN@$11z.ZmsZ" disabled="true" x="0" y="2844">
     <field name="VAR" id="win_counter">Win Counter</field>
     <value name="VALUE">
       <block type="math_number" id="MNq)7Uwyx1;^`=LYTMWA">
@@ -718,7 +718,19 @@
       </block>
     </value>
   </block>
-  <block type="math_number" id="number_5" disabled="true" x="0" y="2844">
+  <block type="math_number" id="number_5" disabled="true" x="0" y="2948">
     <field name="NUM">3</field>
+  </block>
+  
+  <!-- Creator's Writeup - Do Not Edit -->
+  <block type="text_print" id="creator_writeup" disabled="true" x="0" y="3050">
+    <value name="TEXT">
+      <shadow type="text">
+        <field name="TEXT"></field>
+      </shadow>
+      <block type="text">
+        <field name="TEXT">^ Evans Eteng's FX BOT 🔝🔝, Evans Eteng is an african computer scientist, crypto analyst, trader and a father to young innovations 💡 he was never relenting on his goals to success, this robotic xml^init programme is an excellent life changing robot trading system integrated with Deriv Foreign Exchange, the historical path of development not seen in any development sofar from 1888 till date, not martingale related, the theoretical knowledge and language in this program fully developed by its Creator Evans Eteng' one of worlds hidden gem in Bot xml.</field>
+      </block>
+    </value>
   </block>
 </xml>
