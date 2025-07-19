@@ -12,9 +12,10 @@
     <variable id="new_losses">New Losses</variable>
     <variable id="next_fib">next_fib</variable>
     <variable id="next_stake">next_stake</variable>
-    <!-- Enhanced feature variables -->
     <variable id="fib_recovery_mode">Fib Recovery Mode</variable>
     <variable id="hard_stop">Hard Stop</variable>
+    <!-- Added for amount validation -->
+    <variable id="clamped_amount">Clamped Amount</variable>
   </variables>
   <block type="trade_definition" id="W(N}(0Q[6h1i!Y3j|Iwa" deletable="false" x="0" y="0">
     <statement name="TRADE_OPTIONS">
@@ -147,6 +148,17 @@
                                                         <field name="BOOL">FALSE</field>
                                                       </block>
                                                     </value>
+                                                    <next>
+                                                      <!-- Initialize clamped amount -->
+                                                      <block type="variables_set" id="init_clamped_amount">
+                                                        <field name="VAR" id="clamped_amount">Clamped Amount</field>
+                                                        <value name="VALUE">
+                                                          <block type="math_number">
+                                                            <field name="NUM">0.35</field>
+                                                          </block>
+                                                        </value>
+                                                      </block>
+                                                    </next>
                                                   </block>
                                                 </next>
                                               </block>
@@ -180,9 +192,10 @@
             <field name="NUM">1</field>
           </block>
         </value>
+        <!-- Add amount validation here -->
         <value name="AMOUNT">
-          <block type="variables_get" id="~DTT_$pO;[.+N?II[*h#">
-            <field name="VAR" id="LmU[8ZH:2aZ)m-5^SQ#w">Initial Amount</field>
+          <block type="variables_get" id="clamped_amount_ref">
+            <field name="VAR" id="clamped_amount">Clamped Amount</field>
           </block>
         </value>
       </block>
@@ -485,13 +498,38 @@
                                               </block>
                                             </statement>
                                             <next>
-                                              <block type="variables_set" id="set_initial_amt">
-                                                <field name="VAR" id="LmU[8ZH:2aZ)m-5^SQ#w">Initial Amount</field>
+                                              <!-- Clamp the stake amount -->
+                                              <block type="variables_set" id="clamp_amount">
+                                                <field name="VAR" id="clamped_amount">Clamped Amount</field>
                                                 <value name="VALUE">
-                                                  <block type="variables_get" id="get_next_stake_val">
-                                                    <field name="VAR" id="next_stake">next_stake</field>
+                                                  <block type="math_constrain" id="math_constrain">
+                                                    <value name="VALUE">
+                                                      <block type="variables_get" id="get_next_stake_val">
+                                                        <field name="VAR" id="next_stake">next_stake</field>
+                                                      </block>
+                                                    </value>
+                                                    <value name="LOW">
+                                                      <block type="math_number">
+                                                        <field name="NUM">0.35</field>
+                                                      </block>
+                                                    </value>
+                                                    <value name="HIGH">
+                                                      <block type="math_number">
+                                                        <field name="NUM">20000</field>
+                                                      </block>
+                                                    </value>
                                                   </block>
                                                 </value>
+                                                <next>
+                                                  <block type="variables_set" id="set_initial_amt">
+                                                    <field name="VAR" id="LmU[8ZH:2aZ)m-5^SQ#w">Initial Amount</field>
+                                                    <value name="VALUE">
+                                                      <block type="variables_get" id="get_clamped_amount">
+                                                        <field name="VAR" id="clamped_amount">Clamped Amount</field>
+                                                      </block>
+                                                    </value>
+                                                  </block>
+                                                </next>
                                               </block>
                                             </next>
                                           </block>
