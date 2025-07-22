@@ -31,10 +31,7 @@
     <variable id="loss_14">Loss 14</variable>
     <variable id="loss_15">Loss 15</variable>
     <variable id="next_stake">Next Stake</variable>
-    <!-- New EMAs -->
-    <variable id="ema5_period">EMA-5</variable>
-    <variable id="ema9_period">EMA-9</variable>
-    <variable id="ema12_period">EMA-12</variable>
+    <variable id="EMA-34">EMA-34</variable>
   </variables>
   <block type="trade_definition" id="W(N}(0Q[6h1i!Y3j|Iwa" deletable="false" x="0" y="60">
     <statement name="TRADE_OPTIONS">
@@ -1058,19 +1055,18 @@
   </block>
   <block type="before_purchase" id="zejUj,s9[[qBFFN10v$j" deletable="false" x="0" y="1732">
     <statement name="BEFOREPURCHASE_STACK">
-      <!-- EMA-5 Calculation -->
-      <block type="ema_statement" id="ema5_block">
+      <block type="ema_statement" id="#JBqQofbr`_%sL_!Yh?-">
         <field name="VARIABLE" id="pI}UQ(kb./.`7x5^@eq`">ema</field>
         <statement name="STATEMENT">
-          <block type="input_list" id="ema5_input_list">
+          <block type="input_list" id="jY5(A%tP=T:3tA7[9}r+" deletable="false" movable="false">
             <value name="INPUT_LIST">
-              <block type="ticks" id="ema5_ticks"></block>
+              <block type="ticks" id="6fGJ_D!$=_5rFe]E(OFi"></block>
             </value>
             <next>
-              <block type="period" id="ema5_period_block">
+              <block type="period" id="TX5N3(R,!UF_518,_12p" deletable="false" movable="false">
                 <value name="PERIOD">
-                  <shadow type="math_number" id="ema5_period_value">
-                    <field name="NUM">5</field>
+                  <shadow type="math_number" id="9,:AF7gQ.1,rXe+L3drd">
+                    <field name="NUM">8</field>
                   </shadow>
                 </value>
               </block>
@@ -1078,27 +1074,26 @@
           </block>
         </statement>
         <next>
-          <block type="variables_set" id="set_ema5">
-            <field name="VAR" id="ema5_period">EMA-5</field>
+          <block type="variables_set" id="Vin]=vrzUy.cMu|JO1Dz">
+            <field name="VAR" id=",`Y]gHZe/MA.H+HvjCT0">EMA-8</field>
             <value name="VALUE">
-              <block type="variables_get" id="get_ema5_value">
+              <block type="variables_get" id="$rn6Q8P{SpDnj/}^YM{O">
                 <field name="VAR" id="pI}UQ(kb./.`7x5^@eq`">ema</field>
               </block>
             </value>
             <next>
-              <!-- EMA-8 Calculation (Original) -->
-              <block type="ema_statement" id="#JBqQofbr`_%sL_!Yh?-">
+              <block type="ema_statement" id="ema34_calculation">
                 <field name="VARIABLE" id="pI}UQ(kb./.`7x5^@eq`">ema</field>
                 <statement name="STATEMENT">
-                  <block type="input_list" id="jY5(A%tP=T:3tA7[9}r+" deletable="false" movable="false">
+                  <block type="input_list" id="ema34_input_list">
                     <value name="INPUT_LIST">
-                      <block type="ticks" id="6fGJ_D!$=_5rFe]E(OFi"></block>
+                      <block type="ticks" id="ema34_ticks"></block>
                     </value>
                     <next>
-                      <block type="period" id="TX5N3(R,!UF_518,_12p" deletable="false" movable="false">
+                      <block type="period" id="ema34_period">
                         <value name="PERIOD">
-                          <shadow type="math_number" id="9,:AF7gQ.1,rXe+L3drd">
-                            <field name="NUM">8</field>
+                          <shadow type="math_number" id="ema34_period_num">
+                            <field name="NUM">34</field>
                           </shadow>
                         </value>
                       </block>
@@ -1106,250 +1101,93 @@
                   </block>
                 </statement>
                 <next>
-                  <block type="variables_set" id="Vin]=vrzUy.cMu|JO1Dz">
-                    <field name="VAR" id=",`Y]gHZe/MA.H+HvjCT0">EMA-8</field>
+                  <block type="variables_set" id="set_ema34">
+                    <field name="VAR" id="EMA-34">EMA-34</field>
                     <value name="VALUE">
-                      <block type="variables_get" id="$rn6Q8P{SpDnj/}^YM{O">
+                      <block type="variables_get" id="get_ema34">
                         <field name="VAR" id="pI}UQ(kb./.`7x5^@eq`">ema</field>
                       </block>
                     </value>
                     <next>
-                      <!-- EMA-9 Calculation -->
-                      <block type="ema_statement" id="ema9_block">
-                        <field name="VARIABLE" id="pI}UQ(kb./.`7x5^@eq`">ema</field>
-                        <statement name="STATEMENT">
-                          <block type="input_list" id="ema9_input_list">
-                            <value name="INPUT_LIST">
-                              <block type="ticks" id="ema9_ticks"></block>
+                      <block type="text_join" id="V]=A5BUa*,3CZd]rR@4z">
+                        <field name="VARIABLE" id="1#-k9aznVA607^7go@:W">text1</field>
+                        <statement name="STACK">
+                          <block type="text_statement" id="eni=[Ls!#Tp;^jY`s(Bw">
+                            <value name="TEXT">
+                              <shadow type="text" id="1cQu@mX#HOjU_UVRQEJK">
+                                <field name="TEXT"></field>
+                              </shadow>
+                              <block type="text" id="?E(i?7]`tF6lrrj($#g3">
+                                <field name="TEXT">EMA-8: </field>
+                              </block>
                             </value>
                             <next>
-                              <block type="period" id="ema9_period_block">
-                                <value name="PERIOD">
-                                  <shadow type="math_number" id="ema9_period_value">
-                                    <field name="NUM">9</field>
+                              <block type="text_statement" id="*+xOyeev;6CnJ]6+kq0#">
+                                <value name="TEXT">
+                                  <shadow type="text" id="8%mj6A-4*t`{fe7REyZ{">
+                                    <field name="TEXT"></field>
                                   </shadow>
+                                  <block type="variables_get" id="{.l.fXZwzGO}^dL*xPdK">
+                                    <field name="VAR" id=",`Y]gHZe/MA.H+HvjCT0">EMA-8</field>
+                                  </block>
                                 </value>
+                                <next>
+                                  <block type="text_statement" id="ema34_text">
+                                    <value name="TEXT">
+                                      <shadow type="text" id="ema34_shadow_text">
+                                        <field name="TEXT"></field>
+                                      </shadow>
+                                      <block type="text" id="ema34_text_value">
+                                        <field name="TEXT">EMA-34: </field>
+                                      </block>
+                                    </value>
+                                    <next>
+                                      <block type="text_statement" id="ema34_value">
+                                        <value name="TEXT">
+                                          <shadow type="text" id="ema34_value_shadow">
+                                            <field name="TEXT"></field>
+                                          </shadow>
+                                          <block type="variables_get" id="get_ema34_value">
+                                            <field name="VAR" id="EMA-34">EMA-34</field>
+                                          </block>
+                                        </value>
+                                      </block>
+                                    </next>
+                                  </block>
+                                </next>
                               </block>
                             </next>
                           </block>
                         </statement>
                         <next>
-                          <block type="variables_set" id="set_ema9">
-                            <field name="VAR" id="ema9_period">EMA-9</field>
-                            <value name="VALUE">
-                              <block type="variables_get" id="get_ema9_value">
-                                <field name="VAR" id="pI}UQ(kb./.`7x5^@eq`">ema</field>
+                          <block type="notify" id="|1VFk!n9zGP27.+Vj]0w">
+                            <field name="NOTIFICATION_TYPE">success</field>
+                            <field name="NOTIFICATION_SOUND">silent</field>
+                            <value name="MESSAGE">
+                              <block type="variables_get" id="!vXWzBG{n_CDX^[Y,fUw">
+                                <field name="VAR" id="1#-k9aznVA607^7go@:W">text1</field>
                               </block>
                             </value>
                             <next>
-                              <!-- EMA-12 Calculation -->
-                              <block type="ema_statement" id="ema12_block">
-                                <field name="VARIABLE" id="pI}UQ(kb./.`7x5^@eq`">ema</field>
-                                <statement name="STATEMENT">
-                                  <block type="input_list" id="ema12_input_list">
-                                    <value name="INPUT_LIST">
-                                      <block type="ticks" id="ema12_ticks"></block>
+                              <block type="controls_if" id="PZ-)eqscRe}`X8|HB$N:">
+                                <value name="IF0">
+                                  <block type="logic_compare" id="call_condition">
+                                    <field name="OP">GTE</field>
+                                    <value name="A">
+                                      <block type="tick" id="Dj(D06bxqv4bp7(hL*d1"></block>
                                     </value>
-                                    <next>
-                                      <block type="period" id="ema12_period_block">
-                                        <value name="PERIOD">
-                                          <shadow type="math_number" id="ema12_period_value">
-                                            <field name="NUM">12</field>
-                                          </shadow>
-                                        </value>
+                                    <value name="B">
+                                      <block type="variables_get" id="T*^]Xqmh~u)*Y%NTn+h%">
+                                        <field name="VAR" id=",`Y]gHZe/MA.H+HvjCT0">EMA-8</field>
                                       </block>
-                                    </next>
+                                    </value>
+                                  </block>
+                                </value>
+                                <statement name="DO0">
+                                  <block type="purchase" id="#jr;_g=gW+`_i[JnWOj9">
+                                    <field name="PURCHASE_LIST">CALL</field>
                                   </block>
                                 </statement>
-                                <next>
-                                  <block type="variables_set" id="set_ema12">
-                                    <field name="VAR" id="ema12_period">EMA-12</field>
-                                    <value name="VALUE">
-                                      <block type="variables_get" id="get_ema12_value">
-                                        <field name="VAR" id="pI}UQ(kb./.`7x5^@eq`">ema</field>
-                                      </block>
-                                    </value>
-                                    <next>
-                                      <!-- Notification Block for All EMAs -->
-                                      <block type="text_join" id="V]=A5BUa*,3CZd]rR@4z">
-                                        <field name="VARIABLE" id="1#-k9aznVA607^7go@:W">text1</field>
-                                        <statement name="STACK">
-                                          <block type="text_statement" id="ema5_text">
-                                            <value name="TEXT">
-                                              <block type="text" id="ema5_label">
-                                                <field name="TEXT">EMA-5: </field>
-                                              </block>
-                                            </value>
-                                            <next>
-                                              <block type="text_statement" id="ema5_value">
-                                                <value name="TEXT">
-                                                  <block type="variables_get" id="ema5_val">
-                                                    <field name="VAR" id="ema5_period">EMA-5</field>
-                                                  </block>
-                                                </value>
-                                                <next>
-                                                  <block type="text_statement" id="newline1">
-                                                    <value name="TEXT">
-                                                      <block type="text">
-                                                        <field name="TEXT">&#10;</field>
-                                                      </block>
-                                                    </value>
-                                                    <next>
-                                                      <block type="text_statement" id="ema8_text">
-                                                        <value name="TEXT">
-                                                          <block type="text" id="ema8_label">
-                                                            <field name="TEXT">EMA-8: </field>
-                                                          </block>
-                                                        </value>
-                                                        <next>
-                                                          <block type="text_statement" id="ema8_value">
-                                                            <value name="TEXT">
-                                                              <block type="variables_get" id="ema8_val">
-                                                                <field name="VAR" id=",`Y]gHZe/MA.H+HvjCT0">EMA-8</field>
-                                                              </block>
-                                                            </value>
-                                                            <next>
-                                                              <block type="text_statement" id="newline2">
-                                                                <value name="TEXT">
-                                                                  <block type="text">
-                                                                    <field name="TEXT">&#10;</field>
-                                                                  </block>
-                                                                </value>
-                                                                <next>
-                                                                  <block type="text_statement" id="ema9_text">
-                                                                    <value name="TEXT">
-                                                                      <block type="text" id="ema9_label">
-                                                                        <field name="TEXT">EMA-9: </field>
-                                                                      </block>
-                                                                    </value>
-                                                                    <next>
-                                                                      <block type="text_statement" id="ema9_value">
-                                                                        <value name="TEXT">
-                                                                          <block type="variables_get" id="ema9_val">
-                                                                            <field name="VAR" id="ema9_period">EMA-9</field>
-                                                                          </block>
-                                                                        </value>
-                                                                        <next>
-                                                                          <block type="text_statement" id="newline3">
-                                                                            <value name="TEXT">
-                                                                              <block type="text">
-                                                                                <field name="TEXT">&#10;</field>
-                                                                              </block>
-                                                                            </value>
-                                                                            <next>
-                                                                              <block type="text_statement" id="ema12_text">
-                                                                                <value name="TEXT">
-                                                                                  <block type="text" id="ema12_label">
-                                                                                    <field name="TEXT">EMA-12: </field>
-                                                                                  </block>
-                                                                                </value>
-                                                                                <next>
-                                                                                  <block type="text_statement" id="ema12_value">
-                                                                                    <value name="TEXT">
-                                                                                      <block type="variables_get" id="ema12_val">
-                                                                                        <field name="VAR" id="ema12_period">EMA-12</field>
-                                                                                      </block>
-                                                                                    </value>
-                                                                                  </block>
-                                                                                </next>
-                                                                              </block>
-                                                                            </next>
-                                                                          </block>
-                                                                        </next>
-                                                                      </block>
-                                                                    </next>
-                                                                  </block>
-                                                                </next>
-                                                              </block>
-                                                            </next>
-                                                          </block>
-                                                        </next>
-                                                      </block>
-                                                    </next>
-                                                  </block>
-                                                </next>
-                                              </block>
-                                            </next>
-                                          </block>
-                                        </next>
-                                      </block>
-                                    </statement>
-                                    <next>
-                                      <block type="notify" id="|1VFk!n9zGP27.+Vj]0w">
-                                        <field name="NOTIFICATION_TYPE">success</field>
-                                        <field name="NOTIFICATION_SOUND">silent</field>
-                                        <value name="MESSAGE">
-                                          <block type="variables_get" id="!vXWzBG{n_CDX^[Y,fUw">
-                                            <field name="VAR" id="1#-k9aznVA607^7go@:W">text1</field>
-                                          </block>
-                                        </value>
-                                        <next>
-                                          <!-- Combined EMA Condition (OR Logic) -->
-                                          <block type="controls_if" id="PZ-)eqscRe}`X8|HB$N:">
-                                            <mutation elseif="3"></mutation>
-                                            <value name="IF0">
-                                              <block type="logic_compare" id="call_condition_ema5">
-                                                <field name="OP">GTE</field>
-                                                <value name="A">
-                                                  <block type="tick" id="current_tick"></block>
-                                                </value>
-                                                <value name="B">
-                                                  <block type="variables_get" id="ema5_compare">
-                                                    <field name="VAR" id="ema5_period">EMA-5</field>
-                                                  </block>
-                                                </value>
-                                              </block>
-                                            </value>
-                                            <value name="IF1">
-                                              <block type="logic_compare" id="call_condition_ema8">
-                                                <field name="OP">GTE</field>
-                                                <value name="A">
-                                                  <block type="tick" id="current_tick_ema8"></block>
-                                                </value>
-                                                <value name="B">
-                                                  <block type="variables_get" id="ema8_compare">
-                                                    <field name="VAR" id=",`Y]gHZe/MA.H+HvjCT0">EMA-8</field>
-                                                  </block>
-                                                </value>
-                                              </block>
-                                            </value>
-                                            <value name="IF2">
-                                              <block type="logic_compare" id="call_condition_ema9">
-                                                <field name="OP">GTE</field>
-                                                <value name="A">
-                                                  <block type="tick" id="current_tick_ema9"></block>
-                                                </value>
-                                                <value name="B">
-                                                  <block type="variables_get" id="ema9_compare">
-                                                    <field name="VAR" id="ema9_period">EMA-9</field>
-                                                  </block>
-                                                </value>
-                                              </block>
-                                            </value>
-                                            <value name="IF3">
-                                              <block type="logic_compare" id="call_condition_ema12">
-                                                <field name="OP">GTE</field>
-                                                <value name="A">
-                                                  <block type="tick" id="current_tick_ema12"></block>
-                                                </value>
-                                                <value name="B">
-                                                  <block type="variables_get" id="ema12_compare">
-                                                    <field name="VAR" id="ema12_period">EMA-12</field>
-                                                  </block>
-                                                </value>
-                                              </block>
-                                            </value>
-                                            <statement name="DO0">
-                                              <block type="purchase" id="purchase_call">
-                                                <field name="PURCHASE_LIST">CALL</field>
-                                              </block>
-                                            </statement>
-                                          </block>
-                                        </next>
-                                      </block>
-                                    </next>
-                                  </block>
-                                </next>
                               </block>
                             </next>
                           </block>
