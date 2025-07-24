@@ -20,7 +20,6 @@
     <variable id="loss_5">Loss 5</variable>
     <variable id="loss_6">Loss 6</variable>
     <variable id="rUPB[)tUi3we;byHr`7]">EMA-9</variable>
-    <!-- NEW: Add recovery phase tracking -->
     <variable id="recovery_phase">Recovery Phase</variable>
     <variable id="recovery_stake">Recovery Stake</variable>
   </variables>
@@ -163,7 +162,6 @@
                                                           </block>
                                                         </value>
                                                         <next>
-                                                          <!-- NEW: Initialize recovery variables -->
                                                           <block type="variables_set" id="init_recovery_phase">
                                                             <field name="VAR" id="recovery_phase">Recovery Phase</field>
                                                             <value name="VALUE">
@@ -280,7 +278,6 @@
                       </shadow>
                     </value>
                     <next>
-                      <!-- NEW: Reset recovery phase on win -->
                       <block type="variables_set" id="reset_recovery_phase_win">
                         <field name="VAR" id="recovery_phase">Recovery Phase</field>
                         <value name="VALUE">
@@ -576,7 +573,6 @@
                                                       </block>
                                                     </value>
                                                     <next>
-                                                      <!-- MODIFIED: Enhanced recovery logic -->
                                                       <block type="controls_if" id="check_loss_recovery">
                                                         <mutation xmlns="http://www.w3.org/1999/xhtml" else="1"></mutation>
                                                         <value name="IF0">
@@ -605,7 +601,6 @@
                                                           </block>
                                                         </value>
                                                         <statement name="DO0">
-                                                          <!-- Enter recovery phase -->
                                                           <block type="variables_set" id="set_recovery_phase">
                                                             <field name="VAR" id="recovery_phase">Recovery Phase</field>
                                                             <value name="VALUE">
@@ -614,15 +609,64 @@
                                                               </block>
                                                             </value>
                                                             <next>
-                                                              <!-- Calculate new recovery stake -->
                                                               <block type="variables_set" id="set_recovery_stake">
                                                                 <field name="VAR" id="recovery_stake">Recovery Stake</field>
                                                                 <value name="VALUE">
                                                                   <block type="math_arithmetic" id="calc_recovery_amount">
                                                                     <field name="OP">MULTIPLY</field>
                                                                     <value name="A">
-                                                                      <block type="variables_get" id="get_current_loss_abs">
-                                                                        <field name="VAR" id="loss_6">Loss 6</field>
+                                                                      <block type="math_arithmetic" id="sum_six_losses">
+                                                                        <field name="OP">ADD</field>
+                                                                        <value name="A">
+                                                                          <block type="math_arithmetic" id="sum_loss1_to_loss3">
+                                                                            <field name="OP">ADD</field>
+                                                                            <value name="A">
+                                                                              <block type="variables_get" id="get_loss1_val">
+                                                                                <field name="VAR" id="loss_1">Loss 1</field>
+                                                                              </block>
+                                                                            </value>
+                                                                            <value name="B">
+                                                                              <block type="math_arithmetic" id="sum_loss2_loss3">
+                                                                                <field name="OP">ADD</field>
+                                                                                <value name="A">
+                                                                                  <block type="variables_get" id="get_loss2_val">
+                                                                                    <field name="VAR" id="loss_2">Loss 2</field>
+                                                                                  </block>
+                                                                                </value>
+                                                                                <value name="B">
+                                                                                  <block type="variables_get" id="get_loss3_val">
+                                                                                    <field name="VAR" id="loss_3">Loss 3</field>
+                                                                                  </block>
+                                                                                </value>
+                                                                              </block>
+                                                                            </value>
+                                                                          </block>
+                                                                        </value>
+                                                                        <value name="B">
+                                                                          <block type="math_arithmetic" id="sum_loss4_to_loss6">
+                                                                            <field name="OP">ADD</field>
+                                                                            <value name="A">
+                                                                              <block type="math_arithmetic" id="sum_loss4_loss5">
+                                                                                <field name="OP">ADD</field>
+                                                                                <value name="A">
+                                                                                  <block type="variables_get" id="get_loss4_val">
+                                                                                    <field name="VAR" id="loss_4">Loss 4</field>
+                                                                                  </block>
+                                                                                </value>
+                                                                                <value name="B">
+                                                                                  <block type="variables_get" id="get_loss5_val">
+                                                                                    <field name="VAR" id="loss_5">Loss 5</field>
+                                                                                  </block>
+                                                                                </value>
+                                                                              </block>
+                                                                            </value>
+                                                                            <value name="B">
+                                                                              <block type="variables_get" id="get_loss6_val">
+                                                                                <field name="VAR" id="loss_6">Loss 6</field>
+                                                                              </block>
+                                                                            </value>
+                                                                          </block>
+                                                                        </value>
                                                                       </block>
                                                                     </value>
                                                                     <value name="B">
@@ -633,7 +677,6 @@
                                                                   </block>
                                                                 </value>
                                                                 <next>
-                                                                  <!-- Set next stake to recovery amount -->
                                                                   <block type="variables_set" id="set_recovery_initial_amount">
                                                                     <field name="VAR" id="RHgF*C%#h{|Ha5u;#5j?">Initial Amount</field>
                                                                     <value name="VALUE">
@@ -648,7 +691,6 @@
                                                           </block>
                                                         </statement>
                                                         <statement name="ELSE">
-                                                          <!-- Not in recovery, use base stake -->
                                                           <block type="variables_set" id="set_normal_stake_loss">
                                                             <field name="VAR" id="RHgF*C%#h{|Ha5u;#5j?">Initial Amount</field>
                                                             <value name="VALUE">
