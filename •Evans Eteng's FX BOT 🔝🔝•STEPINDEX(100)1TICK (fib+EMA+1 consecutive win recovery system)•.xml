@@ -31,6 +31,9 @@
     <variable id="loss_14">Loss 14</variable>
     <variable id="loss_15">Loss 15</variable>
     <variable id="next_stake">Next Stake</variable>
+    <!-- NEW VARIABLES ADDED -->
+    <variable id="recovery_count">Recovery Count</variable>
+    <variable id="recovery_multiplier">Recovery Multiplier</variable>
   </variables>
   <block type="trade_definition" id="W(N}(0Q[6h1i!Y3j|Iwa" deletable="false" x="0" y="60">
     <statement name="TRADE_OPTIONS">
@@ -250,6 +253,27 @@
                                                                                                     <field name="NUM">0</field>
                                                                                                   </block>
                                                                                                 </value>
+                                                                                                <next>
+                                                                                                  <!-- NEW INITIALIZATION BLOCKS -->
+                                                                                                  <block type="variables_set" id="init_recovery_count">
+                                                                                                    <field name="VAR" id="recovery_count">Recovery Count</field>
+                                                                                                    <value name="VALUE">
+                                                                                                      <block type="math_number" id="init_recovery_count_val">
+                                                                                                        <field name="NUM">0</field>
+                                                                                                      </block>
+                                                                                                    </value>
+                                                                                                    <next>
+                                                                                                      <block type="variables_set" id="init_recovery_multiplier">
+                                                                                                        <field name="VAR" id="recovery_multiplier">Recovery Multiplier</field>
+                                                                                                        <value name="VALUE">
+                                                                                                          <block type="math_number" id="init_recovery_multiplier_val">
+                                                                                                            <field name="NUM">0</field>
+                                                                                                          </block>
+                                                                                                        </value>
+                                                                                                      </block>
+                                                                                                    </next>
+                                                                                                  </block>
+                                                                                                </next>
                                                                                               </block>
                                                                                             </next>
                                                                                           </block>
@@ -394,44 +418,355 @@
                           </block>
                         </value>
                         <statement name="DO0">
-                          <block type="variables_set" id="recovery_stake">
-                            <field name="VAR" id="LmU[8ZH:2aZ)m-5^SQ#w">Initial Amount</field>
-                            <value name="VALUE">
-                              <block type="math_arithmetic" id="calculate_recovery">
-                                <field name="OP">MULTIPLY</field>
-                                <value name="A">
-                                  <block type="variables_get" id="get_new_losses">
-                                    <field name="VAR" id="new_losses">New Losses</field>
-                                  </block>
-                                </value>
-                                <value name="B">
-                                  <block type="math_number" id="recovery_buffer">
-                                    <field name="NUM">1.2</field>
-                                  </block>
-                                </value>
-                              </block>
+                          <!-- START OF MODIFIED SECTION -->
+                          <block type="math_change" id="increment_recovery_count">
+                            <field name="VAR" id="recovery_count">Recovery Count</field>
+                            <value name="DELTA">
+                              <shadow type="math_number" id="increment_recovery_count_shadow">
+                                <field name="NUM">1</field>
+                              </shadow>
                             </value>
                             <next>
-                              <block type="variables_set" id="reset_consec_wins">
-                                <field name="VAR" id="consecutive_wins">Consecutive Wins</field>
-                                <value name="VALUE">
-                                  <block type="math_number" id="zero_wins">
-                                    <field name="NUM">0</field>
-                                  </block>
-                                </value>
-                                <next>
-                                  <block type="variables_set" id="reset_new_losses">
-                                    <field name="VAR" id="new_losses">New Losses</field>
-                                    <value name="VALUE">
-                                      <block type="math_number" id="zero_new_loss">
-                                        <field name="NUM">0</field>
+                              <block type="controls_if" id="set_recovery_multiplier">
+                                <mutation xmlns="http://www.w3.org/1999/xhtml" elseif="4" else="1"></mutation>
+                                <value name="IF0">
+                                  <block type="logic_compare" id="check_recovery_count_1">
+                                    <field name="OP">EQ</field>
+                                    <value name="A">
+                                      <block type="variables_get" id="get_recovery_count_1">
+                                        <field name="VAR" id="recovery_count">Recovery Count</field>
                                       </block>
                                     </value>
+                                    <value name="B">
+                                      <block type="math_number" id="recovery_count_1">
+                                        <field name="NUM">1</field>
+                                      </block>
+                                    </value>
+                                  </block>
+                                </value>
+                                <statement name="DO0">
+                                  <block type="variables_set" id="set_recovery_multiplier_1">
+                                    <field name="VAR" id="recovery_multiplier">Recovery Multiplier</field>
+                                    <value name="VALUE">
+                                      <block type="math_number" id="multiplier_1">
+                                        <field name="NUM">1</field>
+                                      </block>
+                                    </value>
+                                  </block>
+                                </statement>
+                                <value name="IF1">
+                                  <block type="logic_compare" id="check_recovery_count_2">
+                                    <field name="OP">EQ</field>
+                                    <value name="A">
+                                      <block type="variables_get" id="get_recovery_count_2">
+                                        <field name="VAR" id="recovery_count">Recovery Count</field>
+                                      </block>
+                                    </value>
+                                    <value name="B">
+                                      <block type="math_number" id="recovery_count_2">
+                                        <field name="NUM">2</field>
+                                      </block>
+                                    </value>
+                                  </block>
+                                </value>
+                                <statement name="DO1">
+                                  <block type="variables_set" id="set_recovery_multiplier_2">
+                                    <field name="VAR" id="recovery_multiplier">Recovery Multiplier</field>
+                                    <value name="VALUE">
+                                      <block type="math_number" id="multiplier_2">
+                                        <field name="NUM">1</field>
+                                      </block>
+                                    </value>
+                                  </block>
+                                </statement>
+                                <value name="IF2">
+                                  <block type="logic_compare" id="check_recovery_count_3">
+                                    <field name="OP">EQ</field>
+                                    <value name="A">
+                                      <block type="variables_get" id="get_recovery_count_3">
+                                        <field name="VAR" id="recovery_count">Recovery Count</field>
+                                      </block>
+                                    </value>
+                                    <value name="B">
+                                      <block type="math_number" id="recovery_count_3">
+                                        <field name="NUM">3</field>
+                                      </block>
+                                    </value>
+                                  </block>
+                                </value>
+                                <statement name="DO2">
+                                  <block type="variables_set" id="set_recovery_multiplier_3">
+                                    <field name="VAR" id="recovery_multiplier">Recovery Multiplier</field>
+                                    <value name="VALUE">
+                                      <block type="math_number" id="multiplier_3">
+                                        <field name="NUM">1.1</field>
+                                      </block>
+                                    </value>
+                                  </block>
+                                </statement>
+                                <value name="IF3">
+                                  <block type="logic_compare" id="check_recovery_count_4">
+                                    <field name="OP">EQ</field>
+                                    <value name="A">
+                                      <block type="variables_get" id="get_recovery_count_4">
+                                        <field name="VAR" id="recovery_count">Recovery Count</field>
+                                      </block>
+                                    </value>
+                                    <value name="B">
+                                      <block type="math_number" id="recovery_count_4">
+                                        <field name="NUM">4</field>
+                                      </block>
+                                    </value>
+                                  </block>
+                                </value>
+                                <statement name="DO3">
+                                  <block type="variables_set" id="set_recovery_multiplier_4">
+                                    <field name="VAR" id="recovery_multiplier">Recovery Multiplier</field>
+                                    <value name="VALUE">
+                                      <block type="math_number" id="multiplier_4">
+                                        <field name="NUM">1.15</field>
+                                      </block>
+                                    </value>
+                                  </block>
+                                </statement>
+                                <value name="IF4">
+                                  <block type="logic_compare" id="check_recovery_count_5">
+                                    <field name="OP">EQ</field>
+                                    <value name="A">
+                                      <block type="variables_get" id="get_recovery_count_5">
+                                        <field name="VAR" id="recovery_count">Recovery Count</field>
+                                      </block>
+                                    </value>
+                                    <value name="B">
+                                      <block type="math_number" id="recovery_count_5">
+                                        <field name="NUM">5</field>
+                                      </block>
+                                    </value>
+                                  </block>
+                                </value>
+                                <statement name="DO4">
+                                  <block type="variables_set" id="set_recovery_multiplier_5">
+                                    <field name="VAR" id="recovery_multiplier">Recovery Multiplier</field>
+                                    <value name="VALUE">
+                                      <block type="math_number" id="multiplier_5">
+                                        <field name="NUM">1.2</field>
+                                      </block>
+                                    </value>
+                                    <next>
+                                      <block type="controls_if" id="a~Y^ieD#1oKLd)$k|q2u">
+                                        <value name="IF0">
+                                          <block type="logic_compare" id="^..;O3Tb)!W{7!ecicqg">
+                                            <field name="OP">EQ</field>
+                                            <value name="A">
+                                              <block type="variables_get" id="vKwX87BnOa6OlaQ#3#eM">
+                                                <field name="VAR" id="consecutive_wins">Consecutive Wins</field>
+                                              </block>
+                                            </value>
+                                            <value name="B">
+                                              <block type="math_number" id="nh4x{*x;ks5L@-uQ5(1B">
+                                                <field name="NUM">6</field>
+                                              </block>
+                                            </value>
+                                          </block>
+                                        </value>
+                                        <statement name="DO0">
+                                          <block type="math_change" id="D1EVbdmY~Kr(`{(sPEy*">
+                                            <field name="VAR" id="recovery_count">Recovery Count</field>
+                                            <value name="DELTA">
+                                              <shadow type="math_number" id="dnK=k.Z%49p]HZ9|+v32">
+                                                <field name="NUM">1.21</field>
+                                              </shadow>
+                                            </value>
+                                            <next>
+                                              <block type="controls_if" id="|C@;$SA|QBrto2BS?oN^">
+                                                <mutation xmlns="http://www.w3.org/1999/xhtml" elseif="4"></mutation>
+                                                <value name="IF0">
+                                                  <block type="logic_compare" id="AfF~qgKc1R~(y^@AqN_X">
+                                                    <field name="OP">EQ</field>
+                                                    <value name="A">
+                                                      <block type="variables_get" id="uOc},Gmp9}68U4i/hDu^">
+                                                        <field name="VAR" id="recovery_count">Recovery Count</field>
+                                                      </block>
+                                                    </value>
+                                                    <value name="B">
+                                                      <block type="math_number" id="}~Bm)r;UaK@yYn)RsLg2">
+                                                        <field name="NUM">7</field>
+                                                      </block>
+                                                    </value>
+                                                  </block>
+                                                </value>
+                                                <statement name="DO0">
+                                                  <block type="variables_set" id="~=B9A?Kz`SJ%G1FLhF1M">
+                                                    <field name="VAR" id="recovery_multiplier">Recovery Multiplier</field>
+                                                    <value name="VALUE">
+                                                      <block type="math_number" id="-vfGNjL|zxbsp@+|_,:@">
+                                                        <field name="NUM">1.22</field>
+                                                      </block>
+                                                    </value>
+                                                  </block>
+                                                </statement>
+                                                <value name="IF1">
+                                                  <block type="logic_compare" id="{q,8O5*1BBWqj(t@yPW7">
+                                                    <field name="OP">EQ</field>
+                                                    <value name="A">
+                                                      <block type="variables_get" id="V#+qm1Uw#|IPqAiHSt|R">
+                                                        <field name="VAR" id="recovery_count">Recovery Count</field>
+                                                      </block>
+                                                    </value>
+                                                    <value name="B">
+                                                      <block type="math_number" id="HPz9f+royloA,WVsc0.Y">
+                                                        <field name="NUM">8</field>
+                                                      </block>
+                                                    </value>
+                                                  </block>
+                                                </value>
+                                                <statement name="DO1">
+                                                  <block type="variables_set" id="ZQGk[pYCr*O7d2:-sh@E">
+                                                    <field name="VAR" id="recovery_multiplier">Recovery Multiplier</field>
+                                                    <value name="VALUE">
+                                                      <block type="math_number" id="8,ExF(*!u)Ab=N,ZyAjR">
+                                                        <field name="NUM">1.23</field>
+                                                      </block>
+                                                    </value>
+                                                  </block>
+                                                </statement>
+                                                <value name="IF2">
+                                                  <block type="logic_compare" id="9_gOX6Qv?:JRtoo23l!g">
+                                                    <field name="OP">EQ</field>
+                                                    <value name="A">
+                                                      <block type="variables_get" id="v`|8-eo/3H3LQW8dEAuC">
+                                                        <field name="VAR" id="recovery_count">Recovery Count</field>
+                                                      </block>
+                                                    </value>
+                                                    <value name="B">
+                                                      <block type="math_number" id="OgICo@|Z%Zha$Vu5eC^]">
+                                                        <field name="NUM">9</field>
+                                                      </block>
+                                                    </value>
+                                                  </block>
+                                                </value>
+                                                <statement name="DO2">
+                                                  <block type="variables_set" id="/-33!Zuvq~oU,a9mmTl7">
+                                                    <field name="VAR" id="recovery_multiplier">Recovery Multiplier</field>
+                                                    <value name="VALUE">
+                                                      <block type="math_number" id="*y4[y29L~h0Dg|@0w-}z">
+                                                        <field name="NUM">1.24</field>
+                                                      </block>
+                                                    </value>
+                                                  </block>
+                                                </statement>
+                                                <value name="IF3">
+                                                  <block type="logic_compare" id="n!zMhX0#@G4t0e!%?~m^">
+                                                    <field name="OP">EQ</field>
+                                                    <value name="A">
+                                                      <block type="variables_get" id="@cn+Rx,FR#CLYU7pc-QH">
+                                                        <field name="VAR" id="recovery_count">Recovery Count</field>
+                                                      </block>
+                                                    </value>
+                                                    <value name="B">
+                                                      <block type="math_number" id="/wTN$kj_:n.(`-7?jGf|">
+                                                        <field name="NUM">10</field>
+                                                      </block>
+                                                    </value>
+                                                  </block>
+                                                </value>
+                                                <statement name="DO3">
+                                                  <block type="variables_set" id="6p??v4;FunpM*=^HDtE/">
+                                                    <field name="VAR" id="recovery_multiplier">Recovery Multiplier</field>
+                                                    <value name="VALUE">
+                                                      <block type="math_number" id="*9t|d`GW4J}i|0C]^e3r">
+                                                        <field name="NUM">1.25</field>
+                                                      </block>
+                                                    </value>
+                                                  </block>
+                                                </statement>
+                                                <value name="IF4">
+                                                  <block type="logic_compare" id="+=keDv]PVQ}I:]6zJiy?">
+                                                    <field name="OP">EQ</field>
+                                                    <value name="A">
+                                                      <block type="variables_get" id="|CM=Ohx*2HB!o+dE{KIn">
+                                                        <field name="VAR" id="recovery_count">Recovery Count</field>
+                                                      </block>
+                                                    </value>
+                                                    <value name="B">
+                                                      <block type="math_number" id="bJB2E8IXQdwh~zjJzf3%">
+                                                        <field name="NUM">11</field>
+                                                      </block>
+                                                    </value>
+                                                  </block>
+                                                </value>
+                                                <statement name="DO4">
+                                                  <block type="variables_set" id="D6-W:*cBc9zd%MV@0^N6">
+                                                    <field name="VAR" id="recovery_multiplier">Recovery Multiplier</field>
+                                                    <value name="VALUE">
+                                                      <block type="math_number" id="}_7U#v-540yub]9k|G(d">
+                                                        <field name="NUM">1.26</field>
+                                                      </block>
+                                                    </value>
+                                                  </block>
+                                                </statement>
+                                              </block>
+                                            </next>
+                                          </block>
+                                        </statement>
+                                      </block>
+                                    </next>
+                                  </block>
+                                </statement>
+                                <statement name="ELSE">
+                                  <block type="variables_set" id="set_recovery_multiplier_else">
+                                    <field name="VAR" id="recovery_multiplier">Recovery Multiplier</field>
+                                    <value name="VALUE">
+                                      <block type="math_number" id="multiplier_else">
+                                        <field name="NUM">1.3</field>
+                                      </block>
+                                    </value>
+                                  </block>
+                                </statement>
+                                <next>
+                                  <block type="variables_set" id="recovery_stake">
+                                    <field name="VAR" id="LmU[8ZH:2aZ)m-5^SQ#w">Initial Amount</field>
+                                    <value name="VALUE">
+                                      <block type="math_arithmetic" id="calculate_recovery">
+                                        <field name="OP">MULTIPLY</field>
+                                        <value name="A">
+                                          <block type="variables_get" id="get_new_losses">
+                                            <field name="VAR" id="new_losses">New Losses</field>
+                                          </block>
+                                        </value>
+                                        <value name="B">
+                                          <block type="variables_get" id="get_recovery_multiplier">
+                                            <field name="VAR" id="recovery_multiplier">Recovery Multiplier</field>
+                                          </block>
+                                        </value>
+                                      </block>
+                                    </value>
+                                    <next>
+                                      <block type="variables_set" id="reset_consec_wins">
+                                        <field name="VAR" id="consecutive_wins">Consecutive Wins</field>
+                                        <value name="VALUE">
+                                          <block type="math_number" id="zero_wins">
+                                            <field name="NUM">0</field>
+                                          </block>
+                                        </value>
+                                        <next>
+                                          <block type="variables_set" id="reset_new_losses">
+                                            <field name="VAR" id="new_losses">New Losses</field>
+                                            <value name="VALUE">
+                                              <block type="math_number" id="zero_new_loss">
+                                                <field name="NUM">0</field>
+                                              </block>
+                                            </value>
+                                          </block>
+                                        </next>
+                                      </block>
+                                    </next>
                                   </block>
                                 </next>
                               </block>
                             </next>
                           </block>
+                          <!-- END OF MODIFIED SECTION -->
                         </statement>
                         <statement name="ELSE">
                           <block type="variables_set" id="set_normal_stake_win">
