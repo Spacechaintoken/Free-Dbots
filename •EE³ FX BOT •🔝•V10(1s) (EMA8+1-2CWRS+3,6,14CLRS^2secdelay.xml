@@ -1,6 +1,5 @@
 <xml xmlns="https://developers.google.com/blockly/xml" is_dbot="true" collection="false">
   <variables>
-    <variable id="loss_1">Loss 1</variable>
     <variable id="fib_current">Fib Current</variable>
     <variable id="]oGV^TW+pyAyI~)S*^8n">Max Loss Amount</variable>
     <variable id="pI}UQ(kb./.`7x5^@eq`">ema</variable>
@@ -19,6 +18,7 @@
     <variable id="accumulated_loss">Accumulated Loss</variable>
     <variable id="new_losses">New Losses</variable>
     <variable id="base_recovery_amount">Base Recovery Amount</variable>
+    <variable id="loss_1">Loss 1</variable>
     <variable id="loss_2">Loss 2</variable>
     <variable id="loss_3">Loss 3</variable>
     <variable id="loss_4">Loss 4</variable>
@@ -33,7 +33,6 @@
     <variable id="loss_13">Loss 13</variable>
     <variable id="loss_14">Loss 14</variable>
     <variable id="loss_15">Loss 15</variable>
-    <!-- Added recovery system variables -->
     <variable id="recovery_count">Recovery Count</variable>
     <variable id="recovery_multiplier">Recovery Multiplier</variable>
   </variables>
@@ -2151,63 +2150,5 @@
         </next>
       </block>
     </statement>
-  </block>
-  <block type="logic_compare" id="6Kr#HCNd.}7ePpFlpIhp" disabled="true" x="1386" y="3703">
-    <field name="OP">EQ</field>
-    <value name="A">
-      <block type="variables_get" id="uO~]9+N,-+y*Z77ph,m9">
-        <field name="VAR" id="recovery_mode">Recovery Mode</field>
-      </block>
-    </value>
-    <value name="B">
-      <block type="math_number" id="h{0$?Vr[+CmxXL*T7q$p">
-        <field name="NUM">4</field>
-      </block>
-    </value>
-  </block>
-  <block type="variables_set" id="U]3||.%-}MRu}c^`D6|_" disabled="true" x="1264" y="3745">
-    <field name="VAR" id="fib_current">Fib Current</field>
-    <value name="VALUE">
-      <block type="math_arithmetic" id="zw%?M]J_Vg`w9@c,+qlL">
-        <field name="OP">ADD</field>
-        <value name="A">
-          <block type="variables_get" id="FBrr-q[BwYpE7,(7%dj-">
-            <field name="VAR" id="fib_prev">Fib Previous</field>
-          </block>
-        </value>
-        <value name="B">
-          <block type="variables_get" id="PO/[Ynm,W11;50IZgZka">
-            <field name="VAR" id="fib_prev">Fib Previous</field>
-          </block>
-        </value>
-      </block>
-    </value>
-  </block>
-  <block type="variables_set" id=",R%voJ_QROa%tKl?0s}8" disabled="true" x="0" y="3908">
-    <field name="VAR" id="loss_1">Loss 1</field>
-    <value name="VALUE">
-      <block type="math_number" id="WYdt*rc{s`G(-C}BcS]i">
-        <field name="NUM">0</field>
-      </block>
-    </value>
-  </block>
-  <block type="text_print" id="^Y[?gG:sPKn8gYw[fkX}" disabled="true" x="0" y="4012">
-    <value name="TEXT">
-      <block type="text" id="PX`W_Hs69R_aAud_zA1r">
-        <field name="TEXT">Skipping trade </field>
-      </block>
-    </value>
-  </block>
-  <block type="math_number" id="num_3" disabled="true" x="0" y="4116">
-    <field name="NUM">3</field>
-  </block>
-  <block type="math_number" id="new_6loss_6" disabled="true" x="0" y="4204">
-    <field name="NUM">6</field>
-  </block>
-  <block type="math_number" id="new_14loss_14" disabled="true" x="0" y="4292">
-    <field name="NUM">14</field>
-  </block>
-  <block type="math_number" id="second_win" disabled="true" x="0" y="4380">
-    <field name="NUM">2</field>
   </block>
 </xml>
