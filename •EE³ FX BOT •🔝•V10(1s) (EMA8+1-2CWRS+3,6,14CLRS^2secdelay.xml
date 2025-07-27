@@ -1644,22 +1644,6 @@
             </block>
           </value>
           <next>
-            <!-- Added last digit calculation -->
-            <block type="variables_set" id="set_last_digit">
-              <field name="VAR" id="last_digit">Last Digit</field>
-              <value name="VALUE">
-                <block type="math_modulo" id="calculate_last_digit">
-                  <value name="DIVIDEND">
-                    <block type="tick" id="current_tick_value"></block>
-                  </value>
-                  <value name="DIVISOR">
-                    <block type="math_number">
-                      <field name="NUM">10</field>
-                    </block>
-                  </value>
-                </block>
-              </value>
-              <next>
                 <block type="text_join" id="V]=A5BUa*,3CZd]rR@4z">
                   <field name="VARIABLE" id="1#-k9aznVA607^7go@:W">text1</field>
                   <statement name="STACK">
