@@ -1483,20 +1483,4 @@
       </block>
     </statement>
   </block>
-  <block type="text_print" id="^Y[?gG:sPKn8gYw[fkX}" disabled="true" x="90" y="2760">
-    <value name="TEXT">
-      <block type="text" id="PX`W_Hs69R_aAud_zA1r">
-        <field name="TEXT">Skipping trade </field>
-      </block>
-    </value>
-  </block>
-  <block type="math_number" id="num_3" disabled="true" x="0" y="5380">
-    <field name="NUM">3</field>
-  </block>
-  <block type="math_number" id="new_6loss_6" disabled="true" x="0" y="5468">
-    <field name="NUM">6</field>
-  </block>
-  <block type="math_number" id="new_14loss_14" disabled="true" x="0" y="5556">
-    <field name="NUM">14</field>
-  </block>
 </xml>
