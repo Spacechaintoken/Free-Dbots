@@ -889,43 +889,62 @@
                                                                                                       </block>
                                                                                                     </value>
                                                                                                     <next>
-                                                                                                      <block type="variables_set" id="reset_recovery_mode_win">
-                                                                                                        <field name="VAR" id="recovery_mode">Recovery Mode</field>
-                                                                                                        <value name="VALUE">
-                                                                                                          <block type="math_number" id="reset_recovery_mode_num">
-                                                                                                            <field name="NUM">0</field>
+                                                                                                      <block type="controls_if" id="conditional_reset">
+                                                                                                        <value name="IF0">
+                                                                                                          <block type="logic_compare" id="check_recovery_count_reset">
+                                                                                                            <field name="OP">NEQ</field>
+                                                                                                            <value name="A">
+                                                                                                              <block type="variables_get" id="get_recovery_count_reset">
+                                                                                                                <field name="VAR" id="recovery_count">Recovery Count</field>
+                                                                                                              </block>
+                                                                                                            </value>
+                                                                                                            <value name="B">
+                                                                                                              <block type="math_number" id="recovery_count_3_val">
+                                                                                                                <field name="NUM">3</field>
+                                                                                                              </block>
+                                                                                                            </value>
                                                                                                           </block>
                                                                                                         </value>
-                                                                                                        <next>
-                                                                                                          <block type="variables_set" id="reset_base_recovery_win">
-                                                                                                            <field name="VAR" id="base_recovery_amount">Base Recovery Amount</field>
+                                                                                                        <statement name="DO0">
+                                                                                                          <block type="variables_set" id="reset_recovery_mode_win">
+                                                                                                            <field name="VAR" id="recovery_mode">Recovery Mode</field>
                                                                                                             <value name="VALUE">
-                                                                                                              <block type="math_number" id="reset_base_recovery_num">
+                                                                                                              <block type="math_number" id="reset_recovery_mode_num">
                                                                                                                 <field name="NUM">0</field>
                                                                                                               </block>
                                                                                                             </value>
                                                                                                             <next>
-                                                                                                              <block type="variables_set" id="reset_EE_win">
-                                                                                                                <field name="VAR" id="EE_previous">EE Previous</field>
+                                                                                                              <block type="variables_set" id="reset_base_recovery_win">
+                                                                                                                <field name="VAR" id="base_recovery_amount">Base Recovery Amount</field>
                                                                                                                 <value name="VALUE">
-                                                                                                                  <block type="math_number" id="reset_EE_prev">
+                                                                                                                  <block type="math_number" id="reset_base_recovery_num">
                                                                                                                     <field name="NUM">0</field>
                                                                                                                   </block>
                                                                                                                 </value>
                                                                                                                 <next>
-                                                                                                                  <block type="variables_set" id="reset_EE_current_win">
-                                                                                                                    <field name="VAR" id="EE_current">EE Current</field>
+                                                                                                                  <block type="variables_set" id="reset_EE_win">
+                                                                                                                    <field name="VAR" id="EE_previous">EE Previous</field>
                                                                                                                     <value name="VALUE">
-                                                                                                                      <block type="math_number" id="reset_EE_current">
+                                                                                                                      <block type="math_number" id="reset_EE_prev">
                                                                                                                         <field name="NUM">0</field>
                                                                                                                       </block>
                                                                                                                     </value>
+                                                                                                                    <next>
+                                                                                                                      <block type="variables_set" id="reset_EE_current_win">
+                                                                                                                        <field name="VAR" id="EE_current">EE Current</field>
+                                                                                                                        <value name="VALUE">
+                                                                                                                          <block type="math_number" id="reset_EE_current">
+                                                                                                                            <field name="NUM">0</field>
+                                                                                                                          </block>
+                                                                                                                        </value>
+                                                                                                                      </block>
+                                                                                                                    </next>
                                                                                                                   </block>
                                                                                                                 </next>
                                                                                                               </block>
                                                                                                             </next>
                                                                                                           </block>
-                                                                                                        </next>
+                                                                                                        </statement>
                                                                                                       </block>
                                                                                                     </next>
                                                                                                   </block>
@@ -1214,7 +1233,7 @@
                                                                                                     <field name="VAR" id="recovery_mode">Recovery Mode</field>
                                                                                                     <value name="VALUE">
                                                                                                       <block type="math_number" id="recovery_mode_on">
-                                                                                                        <field name="NUM">1</field>
+                                                                                                        <field name="NUM">7</field>
                                                                                                       </block>
                                                                                                     </value>
                                                                                                     <next>
