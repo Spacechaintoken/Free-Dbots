@@ -1528,7 +1528,6 @@
                                                                                                   </block>
                                                                                                 </value>
                                                                                                 <statement name="DO3">
-                                                                                                  <!-- Evans Eteng Sequence for Recovery Mode 3 -->
                                                                                                   <block type="math_change" id="increment_ee_current">
                                                                                                     <field name="VAR" id="EE_current">EE Current</field>
                                                                                                     <value name="DELTA">
@@ -2570,38 +2569,5 @@
       </block>
     </statement>
   </block>
-  <block type="math_random_int" id="iJLtsW%8bTq5}K}Xp4%^" disabled="true" x="0" y="7708">
-    <value name="FROM">
-      <shadow type="math_number" id="qAu|=CQpmum~k@-B(-XT">
-        <field name="NUM">1</field>
-      </shadow>
-    </value>
-    <value name="TO">
-      <shadow type="math_number" id="RJ(=0{gz.gZx83=rVjXm">
-        <field name="NUM">2</field>
-      </shadow>
-    </value>
-  </block>
-  <block type="math_number" id="base_amount_0.35" x="0" y="7796">
-    <field name="NUM">0.4</field>
-  </block>
-  <block type="text_print" id="^Y[?gG:sPKn8gYw[fkX}" disabled="true" x="0" y="7884">
-    <value name="TEXT">
-      <block type="text" id="PX`W_Hs69R_aAud_zA1r">
-        <field name="TEXT">Skipping trade </field>
-      </block>
-    </value>
-  </block>
-  <block type="math_number" id="num_3" disabled="true" x="0" y="7988">
-    <field name="NUM">3</field>
-  </block>
-  <block type="math_number" id="new_6loss_6" disabled="true" x="0" y="8076">
-    <field name="NUM">6</field>
-  </block>
-  <block type="math_number" id="new_14loss_14" disabled="true" x="0" y="8164">
-    <field name="NUM">14</field>
-  </block>
-  <block type="math_number" id="second_win" disabled="true" x="0" y="8252">
-    <field name="NUM">2</field>
   </block>
 </xml>
