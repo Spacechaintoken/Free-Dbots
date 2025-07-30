@@ -1528,6 +1528,7 @@
                                                                                                   </block>
                                                                                                 </value>
                                                                                                 <statement name="DO3">
+                                                                                                  <!-- Evans Eteng Sequence for Recovery Mode 3 -->
                                                                                                   <block type="math_change" id="increment_ee_current">
                                                                                                     <field name="VAR" id="EE_current">EE Current</field>
                                                                                                     <value name="DELTA">
@@ -2568,6 +2569,5 @@
         </next>
       </block>
     </statement>
-  </block>
   </block>
 </xml>
