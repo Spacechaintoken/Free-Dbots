@@ -36,6 +36,7 @@
     <variable id="loss_14">Loss 14</variable>
     <variable id="loss_15">Loss 15</variable>
     <variable id="fib_temp">Fib Temp</variable>
+    <!-- New variables for Evans Eteng's Formula -->
     <variable id="EE_previous">EE Previous</variable>
     <variable id="EE_current">EE Current</variable>
   </variables>
@@ -314,18 +315,18 @@
                                                                                                                               </block>
                                                                                                                             </value>
                                                                                                                             <next>
-                                                                                                                              <block type="variables_set" id="init_ee_prev">
+                                                                                                                              <block type="variables_set" id="init_EE_prev">
                                                                                                                                 <field name="VAR" id="EE_previous">EE Previous</field>
                                                                                                                                 <value name="VALUE">
-                                                                                                                                  <block type="math_number">
+                                                                                                                                  <block type="math_number" id="init_EE_prev_num">
                                                                                                                                     <field name="NUM">0</field>
                                                                                                                                   </block>
                                                                                                                                 </value>
                                                                                                                                 <next>
-                                                                                                                                  <block type="variables_set" id="init_ee_current">
+                                                                                                                                  <block type="variables_set" id="init_EE_current">
                                                                                                                                     <field name="VAR" id="EE_current">EE Current</field>
                                                                                                                                     <value name="VALUE">
-                                                                                                                                      <block type="math_number">
+                                                                                                                                      <block type="math_number" id="init_EE_current_num">
                                                                                                                                         <field name="NUM">0</field>
                                                                                                                                       </block>
                                                                                                                                     </value>
@@ -613,104 +614,54 @@
                                       <block type="variables_set" id="set_recovery_mode_3">
                                         <field name="VAR" id="recovery_mode">Recovery Mode</field>
                                         <value name="VALUE">
-                                          <block type="math_number" id="recovery_mode_3">
-                                            <field name="NUM">3</field>
+                                          <block type="math_number" id="recovery_mode_2">
+                                            <field name="NUM">2</field>
                                           </block>
                                         </value>
                                         <next>
-                                          <block type="variables_set" id="set_ee_prev">
+                                          <block type="variables_set" id="set_EE_prev">
                                             <field name="VAR" id="EE_previous">EE Previous</field>
                                             <value name="VALUE">
-                                              <block type="math_arithmetic" id="sum_ee_prev">
-                                                <field name="OP">ADD</field>
-                                                <value name="A">
-                                                  <block type="variables_get" id="get_loss9">
-                                                    <field name="VAR" id="loss_9">Loss 9</field>
-                                                  </block>
-                                                </value>
-                                                <value name="B">
-                                                  <block type="math_arithmetic" id="sum_step1">
-                                                    <field name="OP">ADD</field>
-                                                    <value name="A">
-                                                      <block type="variables_get" id="get_loss10">
-                                                        <field name="VAR" id="loss_10">Loss 10</field>
-                                                      </block>
-                                                    </value>
-                                                    <value name="B">
-                                                      <block type="math_arithmetic" id="sum_step2">
-                                                        <field name="OP">ADD</field>
-                                                        <value name="A">
-                                                          <block type="variables_get" id="get_loss11">
-                                                            <field name="VAR" id="loss_11">Loss 11</field>
-                                                          </block>
-                                                        </value>
-                                                        <value name="B">
-                                                          <block type="math_arithmetic" id="sum_step3">
-                                                            <field name="OP">ADD</field>
-                                                            <value name="A">
-                                                              <block type="variables_get" id="get_loss12">
-                                                                <field name="VAR" id="loss_12">Loss 12</field>
-                                                              </block>
-                                                            </value>
-                                                            <value name="B">
-                                                              <block type="math_arithmetic" id="sum_step4">
-                                                                <field name="OP">ADD</field>
-                                                                <value name="A">
-                                                                  <block type="variables_get" id="get_loss13">
-                                                                    <field name="VAR" id="loss_13">Loss 13</field>
-                                                                  </block>
-                                                                </value>
-                                                                <value name="B">
-                                                                  <block type="math_arithmetic" id="sum_step5">
-                                                                    <field name="OP">ADD</field>
-                                                                    <value name="A">
-                                                                      <block type="variables_get" id="get_loss14">
-                                                                        <field name="VAR" id="loss_14">Loss 14</field>
-                                                                      </block>
-                                                                    </value>
-                                                                    <value name="B">
-                                                                      <block type="variables_get" id="get_loss15">
-                                                                        <field name="VAR" id="loss_15">Loss 15</field>
-                                                                      </block>
-                                                                    </value>
-                                                                  </block>
-                                                                </value>
-                                                              </block>
-                                                            </value>
-                                                          </block>
-                                                        </value>
-                                                      </block>
-                                                    </value>
-                                                  </block>
-                                                </value>
+                                              <block type="math_number" id="EE_prev_1">
+                                                <field name="NUM">0.5</field>
                                               </block>
                                             </value>
                                             <next>
-                                              <block type="variables_set" id="reset_ee_current">
+                                              <block type="variables_set" id="set_EE_current">
                                                 <field name="VAR" id="EE_current">EE Current</field>
                                                 <value name="VALUE">
-                                                  <block type="math_number">
-                                                    <field name="NUM">0</field>
+                                                  <block type="math_number" id="EE_current_1">
+                                                    <field name="NUM">0.5</field>
                                                   </block>
                                                 </value>
                                                 <next>
-                                                  <block type="variables_set" id="set_stake_ee_initial">
-                                                    <field name="VAR" id="LmU[8ZH:2aZ)m-5^SQ#w">Initial Amount</field>
+                                                  <block type="variables_set" id="set_base_recovery_after_3">
+                                                    <field name="VAR" id="base_recovery_amount">Base Recovery Amount</field>
                                                     <value name="VALUE">
-                                                      <block type="math_arithmetic" id="calc_ee_stake">
-                                                        <field name="OP">MULTIPLY</field>
-                                                        <value name="A">
-                                                          <block type="variables_get" id="get_ee_prev">
-                                                            <field name="VAR" id="EE_previous">EE Previous</field>
-                                                          </block>
-                                                        </value>
-                                                        <value name="B">
-                                                          <block type="math_number">
-                                                            <field name="NUM">0.5</field>
+                                                      <block type="variables_get" id="H+SVT0|e%#dBqjGq!!O*">
+                                                        <field name="VAR" id="new_losses">New Losses</field>
+                                                      </block>
+                                                    </value>
+                                                    <next>
+                                                      <block type="variables_set" id="set_stake_base_after_3">
+                                                        <field name="VAR" id="LmU[8ZH:2aZ)m-5^SQ#w">Initial Amount</field>
+                                                        <value name="VALUE">
+                                                          <block type="math_arithmetic" id="calc_EE_stake_0">
+                                                            <field name="OP">MULTIPLY</field>
+                                                            <value name="A">
+                                                              <block type="variables_get" id="get_base_recovery_3">
+                                                                <field name="VAR" id="base_recovery_amount">Base Recovery Amount</field>
+                                                              </block>
+                                                            </value>
+                                                            <value name="B">
+                                                              <block type="variables_get" id="get_EE_current">
+                                                                <field name="VAR" id="EE_current">EE Current</field>
+                                                              </block>
+                                                            </value>
                                                           </block>
                                                         </value>
                                                       </block>
-                                                    </value>
+                                                    </next>
                                                   </block>
                                                 </next>
                                               </block>
@@ -954,18 +905,18 @@
                                                                                                               </block>
                                                                                                             </value>
                                                                                                             <next>
-                                                                                                              <block type="variables_set" id="reset_ee_prev_win">
+                                                                                                              <block type="variables_set" id="reset_EE_win">
                                                                                                                 <field name="VAR" id="EE_previous">EE Previous</field>
                                                                                                                 <value name="VALUE">
-                                                                                                                  <block type="math_number">
+                                                                                                                  <block type="math_number" id="reset_EE_prev">
                                                                                                                     <field name="NUM">0</field>
                                                                                                                   </block>
                                                                                                                 </value>
                                                                                                                 <next>
-                                                                                                                  <block type="variables_set" id="reset_ee_current_win">
+                                                                                                                  <block type="variables_set" id="reset_EE_current_win">
                                                                                                                     <field name="VAR" id="EE_current">EE Current</field>
                                                                                                                     <value name="VALUE">
-                                                                                                                      <block type="math_number">
+                                                                                                                      <block type="math_number" id="reset_EE_current">
                                                                                                                         <field name="NUM">0</field>
                                                                                                                       </block>
                                                                                                                     </value>
@@ -1359,16 +1310,36 @@
                                                                                                   </block>
                                                                                                 </statement>
                                                                                                 <value name="IF1">
-                                                                                                  <block type="logic_compare" id="check_in_recovery">
-                                                                                                    <field name="OP">EQ</field>
+                                                                                                  <block type="logic_operation" id="check_fib_recovery_range">
+                                                                                                    <field name="OP">AND</field>
                                                                                                     <value name="A">
-                                                                                                      <block type="variables_get" id="get_recovery_mode">
-                                                                                                        <field name="VAR" id="recovery_mode">Recovery Mode</field>
+                                                                                                      <block type="logic_compare" id="fib_min">
+                                                                                                        <field name="OP">GTE</field>
+                                                                                                        <value name="A">
+                                                                                                          <block type="variables_get" id="get_recovery_mode">
+                                                                                                            <field name="VAR" id="recovery_mode">Recovery Mode</field>
+                                                                                                          </block>
+                                                                                                        </value>
+                                                                                                        <value name="B">
+                                                                                                          <block type="math_number" id="num_4">
+                                                                                                            <field name="NUM">4</field>
+                                                                                                          </block>
+                                                                                                        </value>
                                                                                                       </block>
                                                                                                     </value>
                                                                                                     <value name="B">
-                                                                                                      <block type="math_number" id="num_1">
-                                                                                                        <field name="NUM">1</field>
+                                                                                                      <block type="logic_compare" id="fib_max">
+                                                                                                        <field name="OP">LTE</field>
+                                                                                                        <value name="A">
+                                                                                                          <block type="variables_get" id="get_recovery_mode_2">
+                                                                                                            <field name="VAR" id="recovery_mode">Recovery Mode</field>
+                                                                                                          </block>
+                                                                                                        </value>
+                                                                                                        <value name="B">
+                                                                                                          <block type="math_number" id="num_10">
+                                                                                                            <field name="NUM">10</field>
+                                                                                                          </block>
+                                                                                                        </value>
                                                                                                       </block>
                                                                                                     </value>
                                                                                                   </block>
@@ -1377,7 +1348,7 @@
                                                                                                   <block type="variables_set" id="update_fib_temp">
                                                                                                     <field name="VAR" id="fib_temp">Fib Temp</field>
                                                                                                     <value name="VALUE">
-                                                                                                      <block type="variables_get" id="get_fib_current_temp">
+                                                                                                      <block type="variables_get" id="get_fib_current">
                                                                                                         <field name="VAR" id="fib_current">Fib Current</field>
                                                                                                       </block>
                                                                                                     </value>
@@ -1393,7 +1364,7 @@
                                                                                                               </block>
                                                                                                             </value>
                                                                                                             <value name="B">
-                                                                                                              <block type="variables_get" id="get_fib_current_old">
+                                                                                                              <block type="variables_get" id="get_fib_temp">
                                                                                                                 <field name="VAR" id="fib_temp">Fib Temp</field>
                                                                                                               </block>
                                                                                                             </value>
@@ -1403,7 +1374,7 @@
                                                                                                           <block type="variables_set" id="update_fib_prev">
                                                                                                             <field name="VAR" id="fib_prev">Fib Previous</field>
                                                                                                             <value name="VALUE">
-                                                                                                              <block type="variables_get" id="get_fib_temp">
+                                                                                                              <block type="variables_get" id="get_fib_temp2">
                                                                                                                 <field name="VAR" id="fib_temp">Fib Temp</field>
                                                                                                               </block>
                                                                                                             </value>
@@ -1414,7 +1385,7 @@
                                                                                                                   <block type="math_arithmetic" id="calc_fib_stake">
                                                                                                                     <field name="OP">MULTIPLY</field>
                                                                                                                     <value name="A">
-                                                                                                                      <block type="variables_get" id="get_base_recovery_again">
+                                                                                                                      <block type="variables_get" id="get_base_recovery">
                                                                                                                         <field name="VAR" id="base_recovery_amount">Base Recovery Amount</field>
                                                                                                                       </block>
                                                                                                                     </value>
@@ -1434,105 +1405,105 @@
                                                                                                   </block>
                                                                                                 </statement>
                                                                                                 <value name="IF2">
-                                                                                                  <block type="logic_compare" id="is_recovery_3">
+                                                                                                  <block type="logic_compare" id="check_EE_recovery">
                                                                                                     <field name="OP">EQ</field>
                                                                                                     <value name="A">
-                                                                                                      <block type="variables_get" id="get_recovery_mode_3">
+                                                                                                      <block type="variables_get" id="get_recovery_mode_EE">
                                                                                                         <field name="VAR" id="recovery_mode">Recovery Mode</field>
                                                                                                       </block>
                                                                                                     </value>
                                                                                                     <value name="B">
-                                                                                                      <block type="math_number" id="recovery_count_3">
-                                                                                                        <field name="NUM">3</field>
+                                                                                                      <block type="math_number" id="EE_mode">
+                                                                                                        <field name="NUM">2</field>
                                                                                                       </block>
                                                                                                     </value>
                                                                                                   </block>
                                                                                                 </value>
                                                                                                 <statement name="DO2">
-                                                                                                  <block type="math_change" id="increment_ee_current">
-                                                                                                    <field name="VAR" id="EE_current">EE Current</field>
-                                                                                                    <value name="DELTA">
-                                                                                                      <block type="math_number">
-                                                                                                        <field name="NUM">1</field>
+                                                                                                  <block type="variables_set" id="update_EE">
+                                                                                                    <field name="VAR" id="EE_previous">EE Previous</field>
+                                                                                                    <value name="VALUE">
+                                                                                                      <block type="variables_get" id="get_EE_current">
+                                                                                                        <field name="VAR" id="EE_current">EE Current</field>
                                                                                                       </block>
                                                                                                     </value>
                                                                                                     <next>
-                                                                                                      <block type="variables_set" id="set_stake_ee">
-                                                                                                        <field name="VAR" id="LmU[8ZH:2aZ)m-5^SQ#w">Initial Amount</field>
-                                                                                                        <value name="VALUE">
-                                                                                                          <block type="controls_if" id="ee_sequence_calculation">
-                                                                                                            <mutation elseif="6" else="1"></mutation>
-                                                                                                            <value name="IF0">
-                                                                                                              <block type="logic_compare">
-                                                                                                                <field name="OP">EQ</field>
-                                                                                                                <value name="A">
-                                                                                                                  <block type="variables_get">
-                                                                                                                    <field name="VAR" id="EE_current">EE Current</field>
-                                                                                                                  </block>
-                                                                                                                </value>
-                                                                                                                <value name="B">
-                                                                                                                  <block type="math_number">
-                                                                                                                    <field name="NUM">0</field>
-                                                                                                                  </block>
-                                                                                                                </value>
+                                                                                                      <block type="controls_if" id="EE_sequence">
+                                                                                                        <mutation xmlns="http://www.w3.org/1999/xhtml" elseif="5" else="1"></mutation>
+                                                                                                        <value name="IF0">
+                                                                                                          <block type="logic_compare" id="EE_step1">
+                                                                                                            <field name="OP">EQ</field>
+                                                                                                            <value name="A">
+                                                                                                              <block type="variables_get" id="get_EE_prev">
+                                                                                                                <field name="VAR" id="EE_previous">EE Previous</field>
                                                                                                               </block>
                                                                                                             </value>
-                                                                                                            <statement name="DO0">
-                                                                                                              <block type="math_arithmetic">
-                                                                                                                <field name="OP">MULTIPLY</field>
-                                                                                                                <value name="A">
-                                                                                                                  <block type="math_number">
-                                                                                                                    <field name="NUM">0.5</field>
-                                                                                                                  </block>
-                                                                                                                </value>
-                                                                                                                <value name="B">
-                                                                                                                  <block type="variables_get">
-                                                                                                                    <field name="VAR" id="EE_previous">EE Previous</field>
-                                                                                                                  </block>
-                                                                                                                </value>
+                                                                                                            <value name="B">
+                                                                                                              <block type="math_number" id="EE_val0.5">
+                                                                                                                <field name="NUM">0.5</field>
                                                                                                               </block>
-                                                                                                            </statement>
-                                                                                                            <value name="IF1">
-                                                                                                              <block type="logic_compare">
-                                                                                                                <field name="OP">EQ</field>
+                                                                                                            </value>
+                                                                                                          </block>
+                                                                                                        </value>
+                                                                                                        <statement name="DO0">
+                                                                                                          <block type="variables_set" id="set_EE_current1">
+                                                                                                            <field name="VAR" id="EE_current">EE Current</field>
+                                                                                                            <value name="VALUE">
+                                                                                                              <block type="math_number" id="EE_val1">
+                                                                                                                <field name="NUM">1</field>
+                                                                                                              </block>
+                                                                                                            </value>
+                                                                                                          </block>
+                                                                                                        </statement>
+                                                                                                        <value name="IF1">
+                                                                                                          <block type="logic_compare" id="EE_step2">
+                                                                                                            <field name="OP">EQ</field>
+                                                                                                            <value name="A">
+                                                                                                              <block type="variables_get" id="get_EE_prev1">
+                                                                                                                <field name="VAR" id="EE_previous">EE Previous</field>
+                                                                                                              </block>
+                                                                                                            </value>
+                                                                                                            <value name="B">
+                                                                                                              <block type="math_number" id="EE_val1">
+                                                                                                                <field name="NUM">1</field>
+                                                                                                              </block>
+                                                                                                            </value>
+                                                                                                          </block>
+                                                                                                        </value>
+                                                                                                        <statement name="DO1">
+                                                                                                          <block type="variables_set" id="set_EE_div0.9_1">
+                                                                                                            <field name="VAR" id="EE_current">EE Current</field>
+                                                                                                            <value name="VALUE">
+                                                                                                              <block type="math_arithmetic" id="div0.9_1">
+                                                                                                                <field name="OP">DIVIDE</field>
                                                                                                                 <value name="A">
-                                                                                                                  <block type="variables_get">
-                                                                                                                    <field name="VAR" id="EE_current">EE Current</field>
-                                                                                                                  </block>
-                                                                                                                </value>
-                                                                                                                <value name="B">
-                                                                                                                  <block type="math_number">
+                                                                                                                  <block type="math_number" id="num1">
                                                                                                                     <field name="NUM">1</field>
                                                                                                                   </block>
                                                                                                                 </value>
+                                                                                                                <value name="B">
+                                                                                                                  <block type="math_number" id="denom0.9">
+                                                                                                                    <field name="NUM">0.9</field>
+                                                                                                                  </block>
+                                                                                                                </value>
                                                                                                               </block>
                                                                                                             </value>
-                                                                                                            <statement name="DO1">
-                                                                                                              <block type="variables_get">
+                                                                                                          </block>
+                                                                                                        </statement>
+                                                                                                        <value name="IF2">
+                                                                                                          <block type="logic_compare" id="EE_step3">
+                                                                                                            <field name="OP">EQ</field>
+                                                                                                            <value name="A">
+                                                                                                              <block type="variables_get" id="get_EE_prev2">
                                                                                                                 <field name="VAR" id="EE_previous">EE Previous</field>
                                                                                                               </block>
-                                                                                                            </statement>
-                                                                                                            <value name="IF2">
-                                                                                                              <block type="logic_compare">
-                                                                                                                <field name="OP">EQ</field>
-                                                                                                                <value name="A">
-                                                                                                                  <block type="variables_get">
-                                                                                                                    <field name="VAR" id="EE_current">EE Current</field>
-                                                                                                                  </block>
-                                                                                                                </value>
-                                                                                                                <value name="B">
-                                                                                                                  <block type="math_number">
-                                                                                                                    <field name="NUM">2</field>
-                                                                                                                  </block>
-                                                                                                                </value>
-                                                                                                              </block>
                                                                                                             </value>
-                                                                                                            <statement name="DO2">
-                                                                                                              <block type="math_arithmetic">
+                                                                                                            <value name="B">
+                                                                                                              <block type="math_arithmetic" id="div0.9_1_val">
                                                                                                                 <field name="OP">DIVIDE</field>
                                                                                                                 <value name="A">
-                                                                                                                  <block type="variables_get">
-                                                                                                                    <field name="VAR" id="EE_previous">EE Previous</field>
+                                                                                                                  <block type="math_number">
+                                                                                                                    <field name="NUM">1</field>
                                                                                                                   </block>
                                                                                                                 </value>
                                                                                                                 <value name="B">
@@ -1541,27 +1512,192 @@
                                                                                                                   </block>
                                                                                                                 </value>
                                                                                                               </block>
-                                                                                                            </statement>
-                                                                                                            <value name="IF3">
-                                                                                                              <block type="logic_compare">
-                                                                                                                <field name="OP">EQ</field>
+                                                                                                            </value>
+                                                                                                          </block>
+                                                                                                        </value>
+                                                                                                        <statement name="DO2">
+                                                                                                          <block type="variables_set" id="set_EE_div0.9_2">
+                                                                                                            <field name="VAR" id="EE_current">EE Current</field>
+                                                                                                            <value name="VALUE">
+                                                                                                              <block type="math_arithmetic" id="div0.9_2">
+                                                                                                                <field name="OP">DIVIDE</field>
                                                                                                                 <value name="A">
-                                                                                                                  <block type="variables_get">
-                                                                                                                    <field name="VAR" id="EE_current">EE Current</field>
+                                                                                                                  <block type="math_arithmetic" id="get_div0.9_1">
+                                                                                                                    <field name="OP">DIVIDE</field>
+                                                                                                                    <value name="A">
+                                                                                                                      <block type="math_number">
+                                                                                                                        <field name="NUM">1</field>
+                                                                                                                      </block>
+                                                                                                                    </value>
+                                                                                                                    <value name="B">
+                                                                                                                      <block type="math_number">
+                                                                                                                        <field name="NUM">0.9</field>
+                                                                                                                      </block>
+                                                                                                                    </value>
                                                                                                                   </block>
                                                                                                                 </value>
                                                                                                                 <value name="B">
-                                                                                                                  <block type="math_number">
-                                                                                                                    <field name="NUM">3</field>
+                                                                                                                  <block type="math_number" id="denom0.9_2">
+                                                                                                                    <field name="NUM">0.9</field>
                                                                                                                   </block>
                                                                                                                 </value>
                                                                                                               </block>
                                                                                                             </value>
-                                                                                                            <statement name="DO3">
-                                                                                                              <block type="math_arithmetic">
+                                                                                                          </block>
+                                                                                                        </statement>
+                                                                                                        <value name="IF3">
+                                                                                                          <block type="logic_compare" id="EE_step4">
+                                                                                                            <field name="OP">EQ</field>
+                                                                                                            <value name="A">
+                                                                                                              <block type="variables_get" id="get_EE_prev3">
+                                                                                                                <field name="VAR" id="EE_previous">EE Previous</field>
+                                                                                                              </block>
+                                                                                                            </value>
+                                                                                                            <value name="B">
+                                                                                                              <block type="math_arithmetic" id="div0.9_2_val">
                                                                                                                 <field name="OP">DIVIDE</field>
                                                                                                                 <value name="A">
-                                                                                                                  <block type="variables_get">
+                                                                                                                  <block type="math_arithmetic">
+                                                                                                                    <field name="OP">DIVIDE</field>
+                                                                                                                    <value name="A">
+                                                                                                                      <block type="math_number">
+                                                                                                                        <field name="NUM">1</field>
+                                                                                                                      </block>
+                                                                                                                    </value>
+                                                                                                                    <value name="B">
+                                                                                                                      <block type="math_number">
+                                                                                                                        <field name="NUM">0.9</field>
+                                                                                                                      </block>
+                                                                                                                    </value>
+                                                                                                                  </block>
+                                                                                                                </value>
+                                                                                                                <value name="B">
+                                                                                                                  <block type="math_number">
+                                                                                                                    <field name="NUM">0.9</field>
+                                                                                                                  </block>
+                                                                                                                </value>
+                                                                                                              </block>
+                                                                                                            </value>
+                                                                                                          </block>
+                                                                                                        </value>
+                                                                                                        <statement name="DO3">
+                                                                                                          <block type="variables_set" id="set_EE_div0.9_3">
+                                                                                                            <field name="VAR" id="EE_current">EE Current</field>
+                                                                                                            <value name="VALUE">
+                                                                                                              <block type="math_arithmetic" id="div0.9_3">
+                                                                                                                <field name="OP">DIVIDE</field>
+                                                                                                                <value name="A">
+                                                                                                                  <block type="math_arithmetic" id="get_div0.9_2">
+                                                                                                                    <field name="OP">DIVIDE</field>
+                                                                                                                    <value name="A">
+                                                                                                                      <block type="math_arithmetic">
+                                                                                                                        <field name="OP">DIVIDE</field>
+                                                                                                                        <value name="A">
+                                                                                                                          <block type="math_number">
+                                                                                                                            <field name="NUM">1</field>
+                                                                                                                          </block>
+                                                                                                                        </value>
+                                                                                                                        <value name="B">
+                                                                                                                          <block type="math_number">
+                                                                                                                            <field name="NUM">0.9</field>
+                                                                                                                          </block>
+                                                                                                                        </value>
+                                                                                                                      </block>
+                                                                                                                    </value>
+                                                                                                                    <value name="B">
+                                                                                                                      <block type="math_number">
+                                                                                                                        <field name="NUM">0.9</field>
+                                                                                                                      </block>
+                                                                                                                    </value>
+                                                                                                                  </block>
+                                                                                                                </value>
+                                                                                                                <value name="B">
+                                                                                                                  <block type="math_number" id="denom0.9_3">
+                                                                                                                    <field name="NUM">0.9</field>
+                                                                                                                  </block>
+                                                                                                                </value>
+                                                                                                              </block>
+                                                                                                            </value>
+                                                                                                          </block>
+                                                                                                        </statement>
+                                                                                                        <value name="IF4">
+                                                                                                          <block type="logic_compare" id="EE_step5">
+                                                                                                            <field name="OP">EQ</field>
+                                                                                                            <value name="A">
+                                                                                                              <block type="variables_get" id="get_EE_prev4">
+                                                                                                                <field name="VAR" id="EE_previous">EE Previous</field>
+                                                                                                              </block>
+                                                                                                            </value>
+                                                                                                            <value name="B">
+                                                                                                              <block type="math_arithmetic" id="div0.9_3_val">
+                                                                                                                <field name="OP">DIVIDE</field>
+                                                                                                                <value name="A">
+                                                                                                                  <block type="math_arithmetic">
+                                                                                                                    <field name="OP">DIVIDE</field>
+                                                                                                                    <value name="A">
+                                                                                                                      <block type="math_arithmetic">
+                                                                                                                        <field name="OP">DIVIDE</field>
+                                                                                                                        <value name="A">
+                                                                                                                          <block type="math_number">
+                                                                                                                            <field name="NUM">1</field>
+                                                                                                                          </block>
+                                                                                                                        </value>
+                                                                                                                        <value name="B">
+                                                                                                                          <block type="math_number">
+                                                                                                                            <field name="NUM">0.9</field>
+                                                                                                                          </block>
+                                                                                                                        </value>
+                                                                                                                      </block>
+                                                                                                                    </value>
+                                                                                                                    <value name="B">
+                                                                                                                      <block type="math_number">
+                                                                                                                        <field name="NUM">0.9</field>
+                                                                                                                      </block>
+                                                                                                                    </value>
+                                                                                                                  </block>
+                                                                                                                </value>
+                                                                                                                <value name="B">
+                                                                                                                  <block type="math_number">
+                                                                                                                    <field name="NUM">0.9</field>
+                                                                                                                  </block>
+                                                                                                                </value>
+                                                                                                              </block>
+                                                                                                            </value>
+                                                                                                          </block>
+                                                                                                        </value>
+                                                                                                        <statement name="DO4">
+                                                                                                          <block type="variables_set" id="set_EE_div0.8">
+                                                                                                            <field name="VAR" id="EE_current">EE Current</field>
+                                                                                                            <value name="VALUE">
+                                                                                                              <block type="math_arithmetic" id="div0.8">
+                                                                                                                <field name="OP">DIVIDE</field>
+                                                                                                                <value name="A">
+                                                                                                                  <block type="variables_get" id="get_EE_prev5">
+                                                                                                                    <field name="VAR" id="EE_previous">EE Previous</field>
+                                                                                                                  </block>
+                                                                                                                </value>
+                                                                                                                <value name="B">
+                                                                                                                  <block type="math_number" id="denom0.8">
+                                                                                                                    <field name="NUM">0.8</field>
+                                                                                                                  </block>
+                                                                                                                </value>
+                                                                                                              </block>
+                                                                                                            </value>
+                                                                                                          </block>
+                                                                                                        </statement>
+                                                                                                        <value name="IF5">
+                                                                                                          <block type="logic_compare" id="EE_step6">
+                                                                                                            <field name="OP">EQ</field>
+                                                                                                            <value name="A">
+                                                                                                              <block type="variables_get" id="get_EE_prev6">
+                                                                                                                <field name="VAR" id="EE_previous">EE Previous</field>
+                                                                                                              </block>
+                                                                                                            </value>
+                                                                                                            <value name="B">
+                                                                                                              <block type="math_arithmetic" id="div0.8_val">
+                                                                                                                <field name="OP">DIVIDE</field>
+                                                                                                                <value name="A">
+                                                                                                                  <block type="variables_get" id="get_EE_prev_val">
                                                                                                                     <field name="VAR" id="EE_previous">EE Previous</field>
                                                                                                                   </block>
                                                                                                                 </value>
@@ -1571,207 +1707,67 @@
                                                                                                                   </block>
                                                                                                                 </value>
                                                                                                               </block>
-                                                                                                            </statement>
-                                                                                                            <value name="IF4">
-                                                                                                              <block type="logic_compare">
-                                                                                                                <field name="OP">EQ</field>
-                                                                                                                <value name="A">
-                                                                                                                  <block type="variables_get">
-                                                                                                                    <field name="VAR" id="EE_current">EE Current</field>
-                                                                                                                  </block>
-                                                                                                                </value>
-                                                                                                                <value name="B">
-                                                                                                                  <block type="math_number">
-                                                                                                                    <field name="NUM">4</field>
-                                                                                                                  </block>
-                                                                                                                </value>
-                                                                                                              </block>
                                                                                                             </value>
-                                                                                                            <statement name="DO4">
-                                                                                                              <block type="math_arithmetic">
+                                                                                                          </block>
+                                                                                                        </value>
+                                                                                                        <statement name="DO5">
+                                                                                                          <block type="variables_set" id="set_EE_div0.7">
+                                                                                                            <field name="VAR" id="EE_current">EE Current</field>
+                                                                                                            <value name="VALUE">
+                                                                                                              <block type="math_arithmetic" id="div0.7">
                                                                                                                 <field name="OP">DIVIDE</field>
                                                                                                                 <value name="A">
-                                                                                                                  <block type="variables_get">
+                                                                                                                  <block type="variables_get" id="get_EE_prev7">
                                                                                                                     <field name="VAR" id="EE_previous">EE Previous</field>
                                                                                                                   </block>
                                                                                                                 </value>
                                                                                                                 <value name="B">
-                                                                                                                  <block type="math_number">
+                                                                                                                  <block type="math_number" id="denom0.7">
                                                                                                                     <field name="NUM">0.7</field>
                                                                                                                   </block>
                                                                                                                 </value>
                                                                                                               </block>
-                                                                                                            </statement>
-                                                                                                            <value name="IF5">
-                                                                                                              <block type="logic_compare">
-                                                                                                                <field name="OP">EQ</field>
-                                                                                                                <value name="A">
-                                                                                                                  <block type="variables_get">
-                                                                                                                    <field name="VAR" id="EE_current">EE Current</field>
-                                                                                                                  </block>
-                                                                                                                </value>
-                                                                                                                <value name="B">
-                                                                                                                  <block type="math_number">
-                                                                                                                    <field name="NUM">5</field>
-                                                                                                                  </block>
-                                                                                                                </value>
-                                                                                                              </block>
-                                                                                                            </value>
-                                                                                                            <statement name="DO5">
-                                                                                                              <block type="math_arithmetic">
-                                                                                                                <field name="OP">MULTIPLY</field>
-                                                                                                                <value name="A">
-                                                                                                                  <block type="variables_get">
-                                                                                                                    <field name="VAR" id="EE_previous">EE Previous</field>
-                                                                                                                  </block>
-                                                                                                                </value>
-                                                                                                                <value name="B">
-                                                                                                                  <block type="math_number">
-                                                                                                                    <field name="NUM">1.2</field>
-                                                                                                                  </block>
-                                                                                                                </value>
-                                                                                                              </block>
-                                                                                                            </statement>
-                                                                                                            <value name="IF6">
-                                                                                                              <block type="logic_compare">
-                                                                                                                <field name="OP">EQ</field>
-                                                                                                                <value name="A">
-                                                                                                                  <block type="variables_get">
-                                                                                                                    <field name="VAR" id="EE_current">EE Current</field>
-                                                                                                                  </block>
-                                                                                                                </value>
-                                                                                                                <value name="B">
-                                                                                                                  <block type="math_number">
-                                                                                                                    <field name="NUM">6</field>
-                                                                                                                  </block>
-                                                                                                                </value>
-                                                                                                              </block>
-                                                                                                            </value>
-                                                                                                            <statement name="DO6">
-                                                                                                              <block type="math_arithmetic">
-                                                                                                                <field name="OP">MULTIPLY</field>
-                                                                                                                <value name="A">
-                                                                                                                  <block type="variables_get">
-                                                                                                                    <field name="VAR" id="EE_previous">EE Previous</field>
-                                                                                                                  </block>
-                                                                                                                </value>
-                                                                                                                <value name="B">
-                                                                                                                  <block type="math_number">
-                                                                                                                    <field name="NUM">1.2</field>
-                                                                                                                  </block>
-                                                                                                                </value>
-                                                                                                              </block>
-                                                                                                            </statement>
-                                                                                                            <statement name="ELSE">
-                                                                                                              <block type="math_arithmetic">
-                                                                                                                <field name="OP">MULTIPLY</field>
-                                                                                                                <value name="A">
-                                                                                                                  <block type="variables_get">
-                                                                                                                    <field name="VAR" id="EE_previous">EE Previous</field>
-                                                                                                                  </block>
-                                                                                                                </value>
-                                                                                                                <value name="B">
-                                                                                                                  <block type="math_number">
-                                                                                                                    <field name="NUM">1.2</field>
-                                                                                                                  </block>
-                                                                                                                </value>
-                                                                                                              </block>
-                                                                                                            </statement>
-                                                                                                          </block>
-                                                                                                        </value>
-                                                                                                      </block>
-                                                                                                    </next>
-                                                                                                  </block>
-                                                                                                </statement>
-                                                                                                <value name="IF3">
-                                                                                                  <block type="logic_operation" id="mode_4_to_10">
-                                                                                                    <field name="OP">AND</field>
-                                                                                                    <value name="A">
-                                                                                                      <block type="logic_compare" id="recovery_mode_ge_4">
-                                                                                                        <field name="OP">GTE</field>
-                                                                                                        <value name="A">
-                                                                                                          <block type="variables_get" id="get_recovery_mode_ge4">
-                                                                                                            <field name="VAR" id="recovery_mode">Recovery Mode</field>
-                                                                                                          </block>
-                                                                                                        </value>
-                                                                                                        <value name="B">
-                                                                                                          <block type="math_number" id="num_4">
-                                                                                                            <field name="NUM">4</field>
-                                                                                                          </block>
-                                                                                                        </value>
-                                                                                                      </block>
-                                                                                                    </value>
-                                                                                                    <value name="B">
-                                                                                                      <block type="logic_compare" id="recovery_mode_le_10">
-                                                                                                        <field name="OP">LTE</field>
-                                                                                                        <value name="A">
-                                                                                                          <block type="variables_get" id="get_recovery_mode_le10">
-                                                                                                            <field name="VAR" id="recovery_mode">Recovery Mode</field>
-                                                                                                          </block>
-                                                                                                        </value>
-                                                                                                        <value name="B">
-                                                                                                          <block type="math_number" id="num_10">
-                                                                                                            <field name="NUM">10</field>
-                                                                                                          </block>
-                                                                                                        </value>
-                                                                                                      </block>
-                                                                                                    </value>
-                                                                                                  </block>
-                                                                                                </value>
-                                                                                                <statement name="DO3">
-                                                                                                  <block type="variables_set" id="update_fib_temp_general">
-                                                                                                    <field name="VAR" id="fib_temp">Fib Temp</field>
-                                                                                                    <value name="VALUE">
-                                                                                                      <block type="variables_get" id="get_fib_current_general">
-                                                                                                        <field name="VAR" id="fib_current">Fib Current</field>
-                                                                                                      </block>
-                                                                                                    </value>
-                                                                                                    <next>
-                                                                                                      <block type="variables_set" id="update_fib_current_general">
-                                                                                                        <field name="VAR" id="fib_current">Fib Current</field>
-                                                                                                        <value name="VALUE">
-                                                                                                          <block type="math_arithmetic" id="calc_next_fib_general">
-                                                                                                            <field name="OP">ADD</field>
-                                                                                                            <value name="A">
-                                                                                                              <block type="variables_get" id="get_fib_prev_general">
-                                                                                                                <field name="VAR" id="fib_prev">Fib Previous</field>
-                                                                                                              </block>
-                                                                                                            </value>
-                                                                                                            <value name="B">
-                                                                                                              <block type="variables_get" id="get_fib_temp_general">
-                                                                                                                <field name="VAR" id="fib_temp">Fib Temp</field>
-                                                                                                              </block>
                                                                                                             </value>
                                                                                                           </block>
-                                                                                                        </value>
-                                                                                                        <next>
-                                                                                                          <block type="variables_set" id="update_fib_prev_general">
-                                                                                                            <field name="VAR" id="fib_prev">Fib Previous</field>
+                                                                                                        </statement>
+                                                                                                        <statement name="ELSE">
+                                                                                                          <block type="variables_set" id="set_EE_1.2">
+                                                                                                            <field name="VAR" id="EE_current">EE Current</field>
                                                                                                             <value name="VALUE">
-                                                                                                              <block type="variables_get" id="get_fib_temp_prev_general">
-                                                                                                                <field name="VAR" id="fib_temp">Fib Temp</field>
-                                                                                                              </block>
-                                                                                                            </value>
-                                                                                                            <next>
-                                                                                                              <block type="variables_set" id="set_fib_stake_general">
-                                                                                                                <field name="VAR" id="LmU[8ZH:2aZ)m-5^SQ#w">Initial Amount</field>
-                                                                                                                <value name="VALUE">
-                                                                                                                  <block type="math_arithmetic" id="calc_fib_stake_general">
-                                                                                                                    <field name="OP">MULTIPLY</field>
-                                                                                                                    <value name="A">
-                                                                                                                      <block type="variables_get" id="get_base_recovery_general">
-                                                                                                                        <field name="VAR" id="base_recovery_amount">Base Recovery Amount</field>
-                                                                                                                      </block>
-                                                                                                                    </value>
-                                                                                                                    <value name="B">
-                                                                                                                      <block type="variables_get" id="get_updated_fib_current_general">
-                                                                                                                        <field name="VAR" id="fib_current">Fib Current</field>
-                                                                                                                      </block>
-                                                                                                                    </value>
+                                                                                                              <block type="math_arithmetic" id="mult_1.2">
+                                                                                                                <field name="OP">MULTIPLY</field>
+                                                                                                                <value name="A">
+                                                                                                                  <block type="variables_get" id="get_EE_prev8">
+                                                                                                                    <field name="VAR" id="EE_previous">EE Previous</field>
+                                                                                                                  </block>
+                                                                                                                </value>
+                                                                                                                <value name="B">
+                                                                                                                  <block type="math_number" id="EE_val1.2">
+                                                                                                                    <field name="NUM">1.2</field>
                                                                                                                   </block>
                                                                                                                 </value>
                                                                                                               </block>
-                                                                                                            </next>
+                                                                                                            </value>
+                                                                                                          </block>
+                                                                                                        </statement>
+                                                                                                        <next>
+                                                                                                          <block type="variables_set" id="set_EE_stake">
+                                                                                                            <field name="VAR" id="LmU[8ZH:2aZ)m-5^SQ#w">Initial Amount</field>
+                                                                                                            <value name="VALUE">
+                                                                                                              <block type="math_arithmetic" id="calc_EE_stake">
+                                                                                                                <field name="OP">MULTIPLY</field>
+                                                                                                                <value name="A">
+                                                                                                                  <block type="variables_get" id="get_base_EE">
+                                                                                                                    <field name="VAR" id="base_recovery_amount">Base Recovery Amount</field>
+                                                                                                                  </block>
+                                                                                                                </value>
+                                                                                                                <value name="B">
+                                                                                                                  <block type="variables_get" id="get_EE_current_val">
+                                                                                                                    <field name="VAR" id="EE_current">EE Current</field>
+                                                                                                                  </block>
+                                                                                                                </value>
+                                                                                                              </block>
+                                                                                                            </value>
                                                                                                           </block>
                                                                                                         </next>
                                                                                                       </block>
@@ -2059,5 +2055,39 @@
         </next>
       </block>
     </statement>
+  </block>
+  <block type="math_random_int" id="iJLtsW%8bTq5}K}Xp4%^" disabled="true" x="0" y="7708">
+    <value name="FROM">
+      <shadow type="math_number" id="qAu|=CQpmum~k@-B(-XT">
+        <field name="NUM">1</field>
+      </shadow>
+    </value>
+    <value name="TO">
+      <shadow type="math_number" id="RJ(=0{gz.gZx83=rVjXm">
+        <field name="NUM">2</field>
+      </shadow>
+    </value>
+  </block>
+  <block type="math_number" id="base_amount_0.35" x="0" y="7796">
+    <field name="NUM">0.4</field>
+  </block>
+  <block type="text_print" id="^Y[?gG:sPKn8gYw[fkX}" disabled="true" x="0" y="7884">
+    <value name="TEXT">
+      <block type="text" id="PX`W_Hs69R_aAud_zA1r">
+        <field name="TEXT">Skipping trade </field>
+      </block>
+    </value>
+  </block>
+  <block type="math_number" id="num_3" disabled="true" x="0" y="7988">
+    <field name="NUM">3</field>
+  </block>
+  <block type="math_number" id="new_6loss_6" disabled="true" x="0" y="8076">
+    <field name="NUM">6</field>
+  </block>
+  <block type="math_number" id="new_14loss_14" disabled="true" x="0" y="8164">
+    <field name="NUM">14</field>
+  </block>
+  <block type="math_number" id="second_win" disabled="true" x="0" y="8252">
+    <field name="NUM">2</field>
   </block>
 </xml>
