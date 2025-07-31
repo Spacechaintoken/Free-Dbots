@@ -36,6 +36,14 @@
     <variable id="loss_14">Loss 14</variable>
     <variable id="loss_15">Loss 15</variable>
     <variable id="fib_temp">Fib Temp</variable>
+    <variable id="labouchere_sequence">Labouchère Sequence</variable>
+    <variable id="labouchere_mode">Labouchère Mode</variable>
+    <variable id="labouchere_base">Labouchère Base</variable>
+    <variable id="labouchere_first">First Number</variable>
+    <variable id="labouchere_last">Last Number</variable>
+    <variable id="split_list">Split List</variable>
+    <variable id="list_length">List Length</variable>
+    <variable id="new_sequence">New Sequence</variable>
   </variables>
   <block type="trade_definition" id="W(N}(0Q[6h1i!Y3j|Iwa" deletable="false" x="0" y="60">
     <statement name="TRADE_OPTIONS">
@@ -311,6 +319,56 @@
                                                                                                                                 <field name="NUM">0</field>
                                                                                                                               </block>
                                                                                                                             </value>
+                                                                                                                            <next>
+                                                                                                                              <block type="variables_set" id="init_labouchere_sequence">
+                                                                                                                                <field name="VAR" id="labouchere_sequence">Labouchère Sequence</field>
+                                                                                                                                <value name="VALUE">
+                                                                                                                                  <block type="text">
+                                                                                                                                    <field name="TEXT">1-2-3</field>
+                                                                                                                                  </block>
+                                                                                                                                </value>
+                                                                                                                                <next>
+                                                                                                                                  <block type="variables_set" id="init_labouchere_mode">
+                                                                                                                                    <field name="VAR" id="labouchere_mode">Labouchère Mode</field>
+                                                                                                                                    <value name="VALUE">
+                                                                                                                                      <block type="math_number">
+                                                                                                                                        <field name="NUM">0</field>
+                                                                                                                                      </block>
+                                                                                                                                    </value>
+                                                                                                                                    <next>
+                                                                                                                                      <block type="variables_set" id="init_labouchere_base">
+                                                                                                                                        <field name="VAR" id="labouchere_base">Labouchère Base</field>
+                                                                                                                                        <value name="VALUE">
+                                                                                                                                          <block type="math_number">
+                                                                                                                                            <field name="NUM">0</field>
+                                                                                                                                          </block>
+                                                                                                                                        </value>
+                                                                                                                                        <next>
+                                                                                                                                          <block type="variables_set" id="init_labouchere_first">
+                                                                                                                                            <field name="VAR" id="labouchere_first">First Number</field>
+                                                                                                                                            <value name="VALUE">
+                                                                                                                                              <block type="math_number">
+                                                                                                                                                <field name="NUM">0</field>
+                                                                                                                                              </block>
+                                                                                                                                            </value>
+                                                                                                                                            <next>
+                                                                                                                                              <block type="variables_set" id="init_labouchere_last">
+                                                                                                                                                <field name="VAR" id="labouchere_last">Last Number</field>
+                                                                                                                                                <value name="VALUE">
+                                                                                                                                                  <block type="math_number">
+                                                                                                                                                    <field name="NUM">0</field>
+                                                                                                                                                  </block>
+                                                                                                                                                </value>
+                                                                                                                                              </block>
+                                                                                                                                            </next>
+                                                                                                                                          </block>
+                                                                                                                                        </next>
+                                                                                                                                      </block>
+                                                                                                                                    </next>
+                                                                                                                                  </block>
+                                                                                                                                </next>
+                                                                                                                              </block>
+                                                                                                                            </next>
                                                                                                                           </block>
                                                                                                                         </next>
                                                                                                                       </block>
@@ -477,444 +535,223 @@
                               </shadow>
                             </value>
                             <next>
-                              <block type="controls_if" id="set_recovery_stake">
-                                <mutation xmlns="http://www.w3.org/1999/xhtml" elseif="1" else="1"></mutation>
-                                <value name="IF0">
-                                  <block type="logic_compare" id="check_recovery_count_1">
-                                    <field name="OP">EQ</field>
-                                    <value name="A">
-                                      <block type="variables_get" id="get_recovery_count_1">
-                                        <field name="VAR" id="recovery_count">Recovery Count</field>
-                                      </block>
-                                    </value>
-                                    <value name="B">
-                                      <block type="math_number" id="recovery_count_1">
-                                        <field name="NUM">1</field>
-                                      </block>
-                                    </value>
+                              <block type="variables_set" id="set_recovery_multiplier_1">
+                                <field name="VAR" id="recovery_multiplier">Recovery Multiplier</field>
+                                <value name="VALUE">
+                                  <block type="math_number" id="multiplier_1">
+                                    <field name="NUM">1</field>
                                   </block>
                                 </value>
-                                <statement name="DO0">
-                                  <block type="variables_set" id="set_recovery_multiplier_1">
-                                    <field name="VAR" id="recovery_multiplier">Recovery Multiplier</field>
+                                <next>
+                                  <block type="variables_set" id="set_stake_recovery1">
+                                    <field name="VAR" id="LmU[8ZH:2aZ)m-5^SQ#w">Initial Amount</field>
                                     <value name="VALUE">
-                                      <block type="math_number" id="multiplier_1">
-                                        <field name="NUM">1</field>
-                                      </block>
-                                    </value>
-                                    <next>
-                                      <block type="variables_set" id="set_stake_recovery1">
-                                        <field name="VAR" id="LmU[8ZH:2aZ)m-5^SQ#w">Initial Amount</field>
-                                        <value name="VALUE">
-                                          <block type="math_arithmetic" id="calculate_recovery1">
-                                            <field name="OP">MULTIPLY</field>
-                                            <value name="A">
-                                              <block type="variables_get" id="get_new_losses1">
-                                                <field name="VAR" id="new_losses">New Losses</field>
-                                              </block>
-                                            </value>
-                                            <value name="B">
-                                              <block type="variables_get" id="get_recovery_multiplier1">
-                                                <field name="VAR" id="recovery_multiplier">Recovery Multiplier</field>
-                                              </block>
-                                            </value>
-                                          </block>
-                                        </value>
-                                      </block>
-                                    </next>
-                                  </block>
-                                </statement>
-                                <value name="IF1">
-                                  <block type="logic_compare" id="check_recovery_count_2">
-                                    <field name="OP">EQ</field>
-                                    <value name="A">
-                                      <block type="variables_get" id="get_recovery_count_2">
-                                        <field name="VAR" id="recovery_count">Recovery Count</field>
-                                      </block>
-                                    </value>
-                                    <value name="B">
-                                      <block type="math_number" id="recovery_count_2">
-                                        <field name="NUM">2</field>
-                                      </block>
-                                    </value>
-                                  </block>
-                                </value>
-                                <statement name="DO1">
-                                  <block type="variables_set" id="set_recovery_multiplier_2">
-                                    <field name="VAR" id="recovery_multiplier">Recovery Multiplier</field>
-                                    <value name="VALUE">
-                                      <block type="math_number" id="multiplier_2">
-                                        <field name="NUM">1</field>
-                                      </block>
-                                    </value>
-                                    <next>
-                                      <block type="variables_set" id="set_stake_recovery2">
-                                        <field name="VAR" id="LmU[8ZH:2aZ)m-5^SQ#w">Initial Amount</field>
-                                        <value name="VALUE">
-                                          <block type="math_arithmetic" id="calculate_recovery2">
-                                            <field name="OP">MULTIPLY</field>
-                                            <value name="A">
-                                              <block type="variables_get" id="get_new_losses2">
-                                                <field name="VAR" id="new_losses">New Losses</field>
-                                              </block>
-                                            </value>
-                                            <value name="B">
-                                              <block type="variables_get" id="get_recovery_multiplier2">
-                                                <field name="VAR" id="recovery_multiplier">Recovery Multiplier</field>
-                                              </block>
-                                            </value>
-                                          </block>
-                                        </value>
-                                      </block>
-                                    </next>
-                                  </block>
-                                </statement>
-                                <statement name="ELSE">
-                                  <block type="controls_if" id="handle_recovery_3">
-                                    <mutation xmlns="http://www.w3.org/1999/xhtml" else="1"></mutation>
-                                    <value name="IF0">
-                                      <block type="logic_compare" id="is_recovery_3">
-                                        <field name="OP">EQ</field>
+                                      <block type="math_arithmetic" id="calculate_recovery1">
+                                        <field name="OP">MULTIPLY</field>
                                         <value name="A">
-                                          <block type="variables_get" id="get_recovery_count_3">
-                                            <field name="VAR" id="recovery_count">Recovery Count</field>
+                                          <block type="variables_get" id="get_new_losses1">
+                                            <field name="VAR" id="new_losses">New Losses</field>
                                           </block>
                                         </value>
                                         <value name="B">
-                                          <block type="math_number" id="recovery_count_3">
-                                            <field name="NUM">3</field>
-                                          </block>
-                                        </value>
-                                      </block>
-                                    </value>
-                                    <statement name="DO0">
-                                      <block type="variables_set" id="set_recovery_mode_3">
-                                        <field name="VAR" id="recovery_mode">Recovery Mode</field>
-                                        <value name="VALUE">
-                                          <block type="math_number" id="recovery_mode_1">
-                                            <field name="NUM">1</field>
-                                          </block>
-                                        </value>
-                                        <next>
-                                          <block type="variables_set" id="set_fib_prev_3">
-                                            <field name="VAR" id="fib_prev">Fib Previous</field>
-                                            <value name="VALUE">
-                                              <block type="math_number" id="fib_prev_1">
-                                                <field name="NUM">1</field>
-                                              </block>
-                                            </value>
-                                            <next>
-                                              <block type="variables_set" id="set_fib_current_3">
-                                                <field name="VAR" id="fib_current">Fib Current</field>
-                                                <value name="VALUE">
-                                                  <block type="math_number" id="fib_current_1">
-                                                    <field name="NUM">1</field>
-                                                  </block>
-                                                </value>
-                                                <next>
-                                                  <block type="variables_set" id="set_base_recovery_after_3">
-                                                    <field name="VAR" id="base_recovery_amount">Base Recovery Amount</field>
-                                                    <value name="VALUE">
-                                                      <block type="variables_get" id="H+SVT0|e%#dBqjGq!!O*">
-                                                        <field name="VAR" id="new_losses">New Losses</field>
-                                                      </block>
-                                                    </value>
-                                                    <next>
-                                                      <block type="variables_set" id="set_stake_base_after_3">
-                                                        <field name="VAR" id="LmU[8ZH:2aZ)m-5^SQ#w">Initial Amount</field>
-                                                        <value name="VALUE">
-                                                          <block type="math_arithmetic" id="calc_fib_stake_3">
-                                                            <field name="OP">MULTIPLY</field>
-                                                            <value name="A">
-                                                              <block type="variables_get" id="get_base_recovery_3">
-                                                                <field name="VAR" id="base_recovery_amount">Base Recovery Amount</field>
-                                                              </block>
-                                                            </value>
-                                                            <value name="B">
-                                                              <block type="variables_get" id="get_fib_current_3">
-                                                                <field name="VAR" id="fib_current">Fib Current</field>
-                                                              </block>
-                                                            </value>
-                                                          </block>
-                                                        </value>
-                                                        <next>
-                                                          <!-- START: Added recovery count reset for level 3 -->
-                                                          <block type="variables_set" id="reset_recovery_count_after_3">
-                                                            <field name="VAR" id="recovery_count">Recovery Count</field>
-                                                            <value name="VALUE">
-                                                              <block type="math_number" id="zero_recovery_count">
-                                                                <field name="NUM">0</field>
-                                                              </block>
-                                                            </value>
-                                                          </block>
-                                                          <!-- END: Added recovery count reset for level 3 -->
-                                                        </next>
-                                                      </block>
-                                                    </next>
-                                                  </block>
-                                                </next>
-                                              </block>
-                                            </next>
-                                          </block>
-                                        </next>
-                                      </block>
-                                    </statement>
-                                    <statement name="ELSE">
-                                      <block type="variables_set" id="reset_recovery_after_max">
-                                        <field name="VAR" id="recovery_count">Recovery Count</field>
-                                        <value name="VALUE">
-                                          <block type="math_number" id="recovery_count_0_max">
-                                            <field name="NUM">0</field>
-                                          </block>
-                                        </value>
-                                        <next>
-                                          <block type="variables_set" id="reset_multiplier_after_max">
+                                          <block type="variables_get" id="get_recovery_multiplier1">
                                             <field name="VAR" id="recovery_multiplier">Recovery Multiplier</field>
-                                            <value name="VALUE">
-                                              <block type="math_number" id="multiplier_0_max">
-                                                <field name="NUM">0</field>
-                                              </block>
-                                            </value>
-                                            <next>
-                                              <block type="variables_set" id="set_base_stake">
-                                                <field name="VAR" id="LmU[8ZH:2aZ)m-5^SQ#w">Initial Amount</field>
-                                                <value name="VALUE">
-                                                  <block type="math_number" id="base_amount">
-                                                    <field name="NUM">0.35</field>
-                                                  </block>
-                                                </value>
-                                              </block>
-                                            </next>
-                                          </block>
-                                        </next>
-                                      </block>
-                                    </statement>
-                                  </block>
-                                </statement>
-                                <next>
-                                  <block type="variables_set" id="reset_consec_wins">
-                                    <field name="VAR" id="consecutive_wins">Consecutive Wins</field>
-                                    <value name="VALUE">
-                                      <block type="math_number" id="zero_wins">
-                                        <field name="NUM">0</field>
-                                      </block>
-                                    </value>
-                                    <next>
-                                      <block type="variables_set" id="reset_new_losses">
-                                        <field name="VAR" id="new_losses">New Losses</field>
-                                        <value name="VALUE">
-                                          <block type="math_number" id="zero_new_loss">
-                                            <field name="NUM">0</field>
                                           </block>
                                         </value>
                                       </block>
-                                    </next>
+                                    </value>
                                   </block>
                                 </next>
                               </block>
                             </next>
                           </block>
                         </statement>
-                        <statement name="ELSE">
-                          <block type="variables_set" id="set_normal_stake_win">
-                            <field name="VAR" id="LmU[8ZH:2aZ)m-5^SQ#w">Initial Amount</field>
-                            <value name="VALUE">
-                              <block type="variables_get" id="get_win_amount">
-                                <field name="VAR" id=".}isBXha4T:t(WP]tqFt">Win Amount</field>
+                        <value name="IF1">
+                          <block type="logic_compare" id="check_recovery_count_2">
+                            <field name="OP">EQ</field>
+                            <value name="A">
+                              <block type="variables_get" id="get_recovery_count_2">
+                                <field name="VAR" id="recovery_count">Recovery Count</field>
+                              </block>
+                            </value>
+                            <value name="B">
+                              <block type="math_number" id="recovery_count_2">
+                                <field name="NUM">2</field>
                               </block>
                             </value>
                           </block>
-                        </statement>
-                        <next>
-                          <block type="variables_set" id="reset_consec_losses_win">
-                            <field name="VAR" id="consecutive_losses">Consecutive Losses</field>
+                        </value>
+                        <statement name="DO1">
+                          <block type="variables_set" id="set_recovery_multiplier_2">
+                            <field name="VAR" id="recovery_multiplier">Recovery Multiplier</field>
                             <value name="VALUE">
-                              <block type="math_number" id="zero_losses_win">
-                                <field name="NUM">0</field>
+                              <block type="math_number" id="multiplier_2">
+                                <field name="NUM">1</field>
                               </block>
                             </value>
                             <next>
-                              <block type="variables_set" id="reset_loss_1_win">
-                                <field name="VAR" id="loss_1">Loss 1</field>
+                              <block type="variables_set" id="set_stake_recovery2">
+                                <field name="VAR" id="LmU[8ZH:2aZ)m-5^SQ#w">Initial Amount</field>
                                 <value name="VALUE">
-                                  <block type="math_number" id="zero_loss1_win">
-                                    <field name="NUM">0</field>
+                                  <block type="math_arithmetic" id="calculate_recovery2">
+                                    <field name="OP">MULTIPLY</field>
+                                    <value name="A">
+                                      <block type="variables_get" id="get_new_losses2">
+                                        <field name="VAR" id="new_losses">New Losses</field>
+                                      </block>
+                                    </value>
+                                    <value name="B">
+                                      <block type="variables_get" id="get_recovery_multiplier2">
+                                        <field name="VAR" id="recovery_multiplier">Recovery Multiplier</field>
+                                      </block>
+                                    </value>
+                                  </block>
+                                </value>
+                              </block>
+                            </next>
+                          </block>
+                        </statement>
+                        <statement name="ELSE">
+                          <block type="controls_if" id="handle_recovery_3">
+                            <mutation xmlns="http://www.w3.org/1999/xhtml" else="1"></mutation>
+                            <value name="IF0">
+                              <block type="logic_compare" id="is_recovery_3">
+                                <field name="OP">EQ</field>
+                                <value name="A">
+                                  <block type="variables_get" id="get_recovery_count_3">
+                                    <field name="VAR" id="recovery_count">Recovery Count</field>
+                                  </block>
+                                </value>
+                                <value name="B">
+                                  <block type="math_number" id="recovery_count_3">
+                                    <field name="NUM">3</field>
+                                  </block>
+                                </value>
+                              </block>
+                            </value>
+                            <statement name="DO0">
+                              <!-- LABOUCHÈRE RECOVERY START -->
+                              <block type="variables_set" id="set_labouchere_mode">
+                                <field name="VAR" id="labouchere_mode">Labouchère Mode</field>
+                                <value name="VALUE">
+                                  <block type="math_number" id="labouchere_mode_on">
+                                    <field name="NUM">1</field>
                                   </block>
                                 </value>
                                 <next>
-                                  <block type="variables_set" id="reset_loss_2_win">
-                                    <field name="VAR" id="loss_2">Loss 2</field>
+                                  <block type="variables_set" id="set_labouchere_sequence">
+                                    <field name="VAR" id="labouchere_sequence">Labouchère Sequence</field>
                                     <value name="VALUE">
-                                      <block type="math_number" id="zero_loss2_win">
-                                        <field name="NUM">0</field>
+                                      <block type="text">
+                                        <field name="TEXT">1-2-3</field>
                                       </block>
                                     </value>
                                     <next>
-                                      <block type="variables_set" id="reset_loss_3_win">
-                                        <field name="VAR" id="loss_3">Loss 3</field>
+                                      <block type="variables_set" id="set_labouchere_base">
+                                        <field name="VAR" id="labouchere_base">Labouchère Base</field>
                                         <value name="VALUE">
-                                          <block type="math_number" id="zero_loss3_win">
-                                            <field name="NUM">0</field>
+                                          <block type="math_arithmetic">
+                                            <field name="OP">DIVIDE</field>
+                                            <value name="A">
+                                              <block type="variables_get" id="get_new_losses">
+                                                <field name="VAR" id="new_losses">New Losses</field>
+                                              </block>
+                                            </value>
+                                            <value name="B">
+                                              <block type="math_number">
+                                                <field name="NUM">6</field>
+                                              </block>
+                                            </value>
                                           </block>
                                         </value>
                                         <next>
-                                          <block type="variables_set" id="reset_loss_4_win">
-                                            <field name="VAR" id="loss_4">Loss 4</field>
-                                            <value name="VALUE">
-                                              <block type="math_number" id="zero_loss4_win">
-                                                <field name="NUM">0</field>
+                                          <block type="text_split" id="split_sequence">
+                                            <field name="VARIABLE" id="split_list">Split List</field>
+                                            <value name="TEXT">
+                                              <block type="variables_get" id="get_labouchere_sequence">
+                                                <field name="VAR" id="labouchere_sequence">Labouchère Sequence</field>
+                                              </block>
+                                            </value>
+                                            <value name="DELIM">
+                                              <block type="text">
+                                                <field name="TEXT">-</field>
                                               </block>
                                             </value>
                                             <next>
-                                              <block type="variables_set" id="reset_loss_5_win">
-                                                <field name="VAR" id="loss_5">Loss 5</field>
-                                                <value name="VALUE">
-                                                  <block type="math_number" id="zero_loss5_win">
+                                              <block type="list_get" id="get_first_num">
+                                                <field name="VARIABLE" id="labouchere_first">First Number</field>
+                                                <value name="LIST">
+                                                  <block type="variables_get" id="get_split_list">
+                                                    <field name="VAR" id="split_list">Split List</field>
+                                                  </block>
+                                                </value>
+                                                <value name="INDEX">
+                                                  <block type="math_number">
                                                     <field name="NUM">0</field>
                                                   </block>
                                                 </value>
                                                 <next>
-                                                  <block type="variables_set" id="reset_loss_6_win">
-                                                    <field name="VAR" id="loss_6">Loss 6</field>
-                                                    <value name="VALUE">
-                                                      <block type="math_number" id="zero_loss6_win">
-                                                        <field name="NUM">0</field>
+                                                  <block type="list_length" id="get_list_length">
+                                                    <field name="VARIABLE" id="list_length">List Length</field>
+                                                    <value name="LIST">
+                                                      <block type="variables_get" id="get_split_list2">
+                                                        <field name="VAR" id="split_list">Split List</field>
                                                       </block>
                                                     </value>
                                                     <next>
-                                                      <block type="variables_set" id="reset_loss_7_win">
-                                                        <field name="VAR" id="loss_7">Loss 7</field>
-                                                        <value name="VALUE">
-                                                          <block type="math_number" id="zero_loss7_win">
-                                                            <field name="NUM">0</field>
+                                                      <block type="math_arithmetic" id="calc_last_index">
+                                                        <field name="OP">MINUS</field>
+                                                        <value name="A">
+                                                          <block type="variables_get" id="get_list_length">
+                                                            <field name="VAR" id="list_length">List Length</field>
+                                                          </block>
+                                                        </value>
+                                                        <value name="B">
+                                                          <block type="math_number">
+                                                            <field name="NUM">1</field>
                                                           </block>
                                                         </value>
                                                         <next>
-                                                          <block type="variables_set" id="reset_loss_8_win">
-                                                            <field name="VAR" id="loss_8">Loss 8</field>
-                                                            <value name="VALUE">
-                                                              <block type="math_number" id="zero_loss8_win">
-                                                                <field name="NUM">0</field>
+                                                          <block type="list_get" id="get_last_num">
+                                                            <field name="VARIABLE" id="labouchere_last">Last Number</field>
+                                                            <value name="LIST">
+                                                              <block type="variables_get" id="get_split_list3">
+                                                                <field name="VAR" id="split_list">Split List</field>
+                                                              </block>
+                                                            </value>
+                                                            <value name="INDEX">
+                                                              <block type="variables_get" id="get_last_index">
+                                                                <field name="VAR" id="calc_last_index_output">Result</field>
                                                               </block>
                                                             </value>
                                                             <next>
-                                                              <block type="variables_set" id="reset_loss_9_win">
-                                                                <field name="VAR" id="loss_9">Loss 9</field>
+                                                              <block type="variables_set" id="set_stake_labouchere">
+                                                                <field name="VAR" id="LmU[8ZH:2aZ)m-5^SQ#w">Initial Amount</field>
                                                                 <value name="VALUE">
-                                                                  <block type="math_number" id="zero_loss9_win">
-                                                                    <field name="NUM">0</field>
-                                                                  </block>
-                                                                </value>
-                                                                <next>
-                                                                  <block type="variables_set" id="reset_loss_10_win">
-                                                                    <field name="VAR" id="loss_10">Loss 10</field>
-                                                                    <value name="VALUE">
-                                                                      <block type="math_number" id="zero_loss10_win">
-                                                                        <field name="NUM">0</field>
-                                                                      </block>
-                                                                    </value>
-                                                                    <next>
-                                                                      <block type="variables_set" id="reset_loss_11_win">
-                                                                        <field name="VAR" id="loss_11">Loss 11</field>
-                                                                        <value name="VALUE">
-                                                                          <block type="math_number" id="zero_loss11_win">
-                                                                            <field name="NUM">0</field>
+                                                                  <block type="math_arithmetic">
+                                                                    <field name="OP">MULTIPLY</field>
+                                                                    <value name="A">
+                                                                      <block type="math_arithmetic">
+                                                                        <field name="OP">ADD</field>
+                                                                        <value name="A">
+                                                                          <block type="variables_get" id="get_first_num">
+                                                                            <field name="VAR" id="labouchere_first">First Number</field>
                                                                           </block>
                                                                         </value>
-                                                                        <next>
-                                                                          <block type="variables_set" id="reset_loss_12_win">
-                                                                            <field name="VAR" id="loss_12">Loss 12</field>
-                                                                            <value name="VALUE">
-                                                                              <block type="math_number" id="zero_loss12_win">
-                                                                                <field name="NUM">0</field>
-                                                                              </block>
-                                                                            </value>
-                                                                            <next>
-                                                                              <block type="variables_set" id="reset_loss_13_win">
-                                                                                <field name="VAR" id="loss_13">Loss 13</field>
-                                                                                <value name="VALUE">
-                                                                                  <block type="math_number" id="zero_loss13_win">
-                                                                                    <field name="NUM">0</field>
-                                                                                  </block>
-                                                                                </value>
-                                                                                <next>
-                                                                                  <block type="variables_set" id="reset_loss_14_win">
-                                                                                    <field name="VAR" id="loss_14">Loss 14</field>
-                                                                                    <value name="VALUE">
-                                                                                      <block type="math_number" id="zero_loss14_win">
-                                                                                        <field name="NUM">0</field>
-                                                                                      </block>
-                                                                                    </value>
-                                                                                    <next>
-                                                                                      <block type="variables_set" id="reset_loss_15_win">
-                                                                                        <field name="VAR" id="loss_15">Loss 15</field>
-                                                                                        <value name="VALUE">
-                                                                                          <block type="math_number" id="zero_loss15_win">
-                                                                                            <field name="NUM">0</field>
-                                                                                          </block>
-                                                                                        </value>
-                                                                                        <next>
-                                                                                          <block type="variables_set" id="reset_fib_prev_win">
-                                                                                            <field name="VAR" id="fib_prev">Fib Previous</field>
-                                                                                            <value name="VALUE">
-                                                                                              <block type="math_number" id="reset_fib_prev_num">
-                                                                                                <field name="NUM">1</field>
-                                                                                              </block>
-                                                                                            </value>
-                                                                                            <next>
-                                                                                              <block type="variables_set" id="reset_fib_current_win">
-                                                                                                <field name="VAR" id="fib_current">Fib Current</field>
-                                                                                                <value name="VALUE">
-                                                                                                  <block type="math_number" id="reset_fib_current_num">
-                                                                                                    <field name="NUM">1</field>
-                                                                                                  </block>
-                                                                                                </value>
-                                                                                                <next>
-                                                                                                  <block type="variables_set" id="reset_fib_temp_win">
-                                                                                                    <field name="VAR" id="fib_temp">Fib Temp</field>
-                                                                                                    <value name="VALUE">
-                                                                                                      <block type="math_number" id="reset_fib_temp_num">
-                                                                                                        <field name="NUM">0</field>
-                                                                                                      </block>
-                                                                                                    </value>
-                                                                                                    <next>
-                                                                                                      <block type="variables_set" id="reset_recovery_mode_win">
-                                                                                                        <field name="VAR" id="recovery_mode">Recovery Mode</field>
-                                                                                                        <value name="VALUE">
-                                                                                                          <block type="math_number" id="reset_recovery_mode_num">
-                                                                                                            <field name="NUM">0</field>
-                                                                                                          </block>
-                                                                                                        </value>
-                                                                                                        <next>
-                                                                                                          <block type="variables_set" id="reset_base_recovery_win">
-                                                                                                            <field name="VAR" id="base_recovery_amount">Base Recovery Amount</field>
-                                                                                                            <value name="VALUE">
-                                                                                                              <block type="math_number" id="reset_base_recovery_num">
-                                                                                                                <field name="NUM">0</field>
-                                                                                                              </block>
-                                                                                                            </value>
-                                                                                                          </block>
-                                                                                                        </next>
-                                                                                                      </block>
-                                                                                                    </next>
-                                                                                                  </block>
-                                                                                                </next>
-                                                                                              </block>
-                                                                                            </next>
-                                                                                          </block>
-                                                                                        </next>
-                                                                                      </block>
-                                                                                    </next>
-                                                                                  </block>
-                                                                                </next>
-                                                                              </block>
-                                                                            </next>
+                                                                        <value name="B">
+                                                                          <block type="variables_get" id="get_last_num">
+                                                                            <field name="VAR" id="labouchere_last">Last Number</field>
                                                                           </block>
-                                                                        </next>
+                                                                        </value>
                                                                       </block>
-                                                                    </next>
+                                                                    </value>
+                                                                    <value name="B">
+                                                                      <block type="variables_get" id="get_labouchere_base">
+                                                                        <field name="VAR" id="labouchere_base">Labouchère Base</field>
+                                                                      </block>
+                                                                    </value>
                                                                   </block>
-                                                                </next>
+                                                                </value>
                                                               </block>
                                                             </next>
                                                           </block>
@@ -932,7 +769,213 @@
                                   </block>
                                 </next>
                               </block>
-                            </next>
+                              <!-- LABOUCHÈRE RECOVERY END -->
+                            </statement>
+                            <statement name="ELSE">
+                              <block type="controls_if" id="handle_labouchere_win">
+                                <mutation xmlns="http://www.w3.org/1999/xhtml" else="1"></mutation>
+                                <value name="IF0">
+                                  <block type="logic_compare" id="is_labouchere_mode">
+                                    <field name="OP">EQ</field>
+                                    <value name="A">
+                                      <block type="variables_get" id="get_labouchere_mode">
+                                        <field name="VAR" id="labouchere_mode">Labouchère Mode</field>
+                                      </block>
+                                    </value>
+                                    <value name="B">
+                                      <block type="math_number" id="labouchere_mode_num">
+                                        <field name="NUM">1</field>
+                                      </block>
+                                    </value>
+                                  </block>
+                                </value>
+                                <statement name="DO0">
+                                  <block type="text_split" id="split_sequence_win">
+                                    <field name="VARIABLE" id="split_list">Split List</field>
+                                    <value name="TEXT">
+                                      <block type="variables_get" id="get_labouchere_sequence_win">
+                                        <field name="VAR" id="labouchere_sequence">Labouchère Sequence</field>
+                                      </block>
+                                    </value>
+                                    <value name="DELIM">
+                                      <block type="text">
+                                        <field name="TEXT">-</field>
+                                      </block>
+                                    </value>
+                                    <next>
+                                      <block type="list_length" id="get_list_length_win">
+                                        <field name="VARIABLE" id="list_length">List Length</field>
+                                        <value name="LIST">
+                                          <block type="variables_get" id="get_split_list_win">
+                                            <field name="VAR" id="split_list">Split List</field>
+                                          </block>
+                                        </value>
+                                        <next>
+                                          <block type="controls_if" id="check_sequence_length">
+                                            <mutation xmlns="http://www.w3.org/1999/xhtml" else="1"></mutation>
+                                            <value name="IF0">
+                                              <block type="logic_compare" id="is_sequence_gt2">
+                                                <field name="OP">GT</field>
+                                                <value name="A">
+                                                  <block type="variables_get" id="get_list_length_win">
+                                                    <field name="VAR" id="list_length">List Length</field>
+                                                  </block>
+                                                </value>
+                                                <value name="B">
+                                                  <block type="math_number">
+                                                    <field name="NUM">2</field>
+                                                  </block>
+                                                </value>
+                                              </block>
+                                            </value>
+                                            <statement name="DO0">
+                                              <block type="list_sublist" id="get_sublist">
+                                                <field name="VARIABLE" id="new_sequence">New Sequence</field>
+                                                <value name="LIST">
+                                                  <block type="variables_get" id="get_split_list_sublist">
+                                                    <field name="VAR" id="split_list">Split List</field>
+                                                  </block>
+                                                </value>
+                                                <value name="AT1">
+                                                  <block type="math_number">
+                                                    <field name="NUM">1</field>
+                                                  </block>
+                                                </value>
+                                                <value name="AT2">
+                                                  <block type="math_arithmetic">
+                                                    <field name="OP">MINUS</field>
+                                                    <value name="A">
+                                                      <block type="variables_get" id="get_list_length_win2">
+                                                        <field name="VAR" id="list_length">List Length</field>
+                                                      </block>
+                                                    </value>
+                                                    <value name="B">
+                                                      <block type="math_number">
+                                                        <field name="NUM">2</field>
+                                                      </block>
+                                                    </value>
+                                                  </block>
+                                                </value>
+                                                <next>
+                                                  <block type="text_join" id="create_new_sequence">
+                                                    <field name="VARIABLE" id="labouchere_sequence">Labouchère Sequence</field>
+                                                    <value name="DELIM">
+                                                      <block type="text">
+                                                        <field name="TEXT">-</field>
+                                                      </block>
+                                                    </value>
+                                                    <value name="LIST">
+                                                      <block type="variables_get" id="get_new_sequence">
+                                                        <field name="VAR" id="new_sequence">New Sequence</field>
+                                                      </block>
+                                                    </value>
+                                                    <next>
+                                                      <block type="variables_set" id="set_stake_new_sequence">
+                                                        <field name="VAR" id="LmU[8ZH:2aZ)m-5^SQ#w">Initial Amount</field>
+                                                        <value name="VALUE">
+                                                          <block type="math_arithmetic">
+                                                            <field name="OP">MULTIPLY</field>
+                                                            <value name="A">
+                                                              <block type="math_arithmetic">
+                                                                <field name="OP">ADD</field>
+                                                                <value name="A">
+                                                                  <block type="list_get">
+                                                                    <field name="VARIABLE" id="labouchere_first">First Number</field>
+                                                                    <value name="LIST">
+                                                                      <block type="variables_get" id="get_new_sequence2">
+                                                                        <field name="VAR" id="new_sequence">New Sequence</field>
+                                                                      </block>
+                                                                    </value>
+                                                                    <value name="INDEX">
+                                                                      <block type="math_number">
+                                                                        <field name="NUM">0</field>
+                                                                      </block>
+                                                                    </value>
+                                                                  </block>
+                                                                </value>
+                                                                <value name="B">
+                                                                  <block type="list_get">
+                                                                    <field name="VARIABLE" id="labouchere_last">Last Number</field>
+                                                                    <value name="LIST">
+                                                                      <block type="variables_get" id="get_new_sequence3">
+                                                                        <field name="VAR" id="new_sequence">New Sequence</field>
+                                                                      </block>
+                                                                    </value>
+                                                                    <value name="INDEX">
+                                                                      <block type="math_arithmetic">
+                                                                        <field name="OP">MINUS</field>
+                                                                        <value name="A">
+                                                                          <block type="list_length">
+                                                                            <field name="VARIABLE" id="list_length">List Length</field>
+                                                                            <value name="LIST">
+                                                                              <block type="variables_get" id="get_new_sequence4">
+                                                                                <field name="VAR" id="new_sequence">New Sequence</field>
+                                                                              </block>
+                                                                            </value>
+                                                                          </block>
+                                                                        </value>
+                                                                        <value name="B">
+                                                                          <block type="math_number">
+                                                                            <field name="NUM">1</field>
+                                                                          </block>
+                                                                        </value>
+                                                                      </block>
+                                                                    </value>
+                                                                  </block>
+                                                                </value>
+                                                              </block>
+                                                            </value>
+                                                            <value name="B">
+                                                              <block type="variables_get" id="get_labouchere_base2">
+                                                                <field name="VAR" id="labouchere_base">Labouchère Base</field>
+                                                              </block>
+                                                            </value>
+                                                          </block>
+                                                        </value>
+                                                      </block>
+                                                    </next>
+                                                  </block>
+                                                </next>
+                                              </block>
+                                            </statement>
+                                            <statement name="ELSE">
+                                              <block type="variables_set" id="reset_labouchere">
+                                                <field name="VAR" id="labouchere_mode">Labouchère Mode</field>
+                                                <value name="VALUE">
+                                                  <block type="math_number">
+                                                    <field name="NUM">0</field>
+                                                  </block>
+                                                </value>
+                                                <next>
+                                                  <block type="variables_set" id="reset_stake_base">
+                                                    <field name="VAR" id="LmU[8ZH:2aZ)m-5^SQ#w">Initial Amount</field>
+                                                    <value name="VALUE">
+                                                      <block type="math_number">
+                                                        <field name="NUM">0.35</field>
+                                                      </block>
+                                                    </value>
+                                                  </block>
+                                                </next>
+                                              </block>
+                                            </statement>
+                                          </block>
+                                        </next>
+                                      </block>
+                                    </next>
+                                  </block>
+                                </statement>
+                                <statement name="ELSE">
+                                  <block type="variables_set" id="set_normal_stake_win">
+                                    <field name="VAR" id="LmU[8ZH:2aZ)m-5^SQ#w">Initial Amount</field>
+                                    <value name="VALUE">
+                                      <block type="variables_get" id="get_win_amount">
+                                        <field name="VAR" id=".}isBXha4T:t(WP]tqFt">Win Amount</field>
+                                      </block>
+                                    </value>
+                                  </block>
+                                </statement>
+                              </block>
+                            </statement>
                           </block>
                         </next>
                       </block>
@@ -1036,436 +1079,409 @@
                                   </block>
                                 </value>
                                 <next>
-                                  <block type="variables_set" id="shift_loss_1">
-                                    <field name="VAR" id="loss_1">Loss 1</field>
-                                    <value name="VALUE">
-                                      <block type="variables_get" id="get_loss_2">
-                                        <field name="VAR" id="loss_2">Loss 2</field>
+                                  <block type="controls_if" id="labouchere_loss_check">
+                                    <mutation xmlns="http://www.w3.org/1999/xhtml" else="1"></mutation>
+                                    <value name="IF0">
+                                      <block type="logic_compare" id="is_labouchere_mode_loss">
+                                        <field name="OP">EQ</field>
+                                        <value name="A">
+                                          <block type="variables_get" id="get_labouchere_mode_loss">
+                                            <field name="VAR" id="labouchere_mode">Labouchère Mode</field>
+                                          </block>
+                                        </value>
+                                        <value name="B">
+                                          <block type="math_number" id="labouchere_mode_loss_num">
+                                            <field name="NUM">1</field>
+                                          </block>
+                                        </value>
                                       </block>
                                     </value>
-                                    <next>
-                                      <block type="variables_set" id="shift_loss_2">
-                                        <field name="VAR" id="loss_2">Loss 2</field>
-                                        <value name="VALUE">
-                                          <block type="variables_get" id="get_loss_3">
-                                            <field name="VAR" id="loss_3">Loss 3</field>
+                                    <statement name="DO0">
+                                      <block type="text_append" id="append_loss_amount">
+                                        <field name="VARIABLE" id="labouchere_sequence">Labouchère Sequence</field>
+                                        <value name="TEXT">
+                                          <block type="text">
+                                            <field name="TEXT">-</field>
+                                          </block>
+                                        </value>
+                                        <value name="APPEND">
+                                          <block type="math_round">
+                                            <field name="OP">ROUND</field>
+                                            <value name="NUM">
+                                              <block type="math_arithmetic">
+                                                <field name="OP">DIVIDE</field>
+                                                <value name="A">
+                                                  <block type="math_single">
+                                                    <field name="OP">ABS</field>
+                                                    <value name="NUM">
+                                                      <block type="read_details">
+                                                        <field name="DETAIL_INDEX">4</field>
+                                                      </block>
+                                                    </value>
+                                                  </block>
+                                                </value>
+                                                <value name="B">
+                                                  <block type="variables_get" id="get_labouchere_base_loss">
+                                                    <field name="VAR" id="labouchere_base">Labouchère Base</field>
+                                                  </block>
+                                                </value>
+                                              </block>
+                                            </value>
                                           </block>
                                         </value>
                                         <next>
-                                          <block type="variables_set" id="shift_loss_3">
-                                            <field name="VAR" id="loss_3">Loss 3</field>
-                                            <value name="VALUE">
-                                              <block type="variables_get" id="get_loss_4">
-                                                <field name="VAR" id="loss_4">Loss 4</field>
+                                          <block type="text_split" id="split_sequence_loss">
+                                            <field name="VARIABLE" id="split_list">Split List</field>
+                                            <value name="TEXT">
+                                              <block type="variables_get" id="get_labouchere_sequence_loss">
+                                                <field name="VAR" id="labouchere_sequence">Labouchère Sequence</field>
+                                              </block>
+                                            </value>
+                                            <value name="DELIM">
+                                              <block type="text">
+                                                <field name="TEXT">-</field>
                                               </block>
                                             </value>
                                             <next>
-                                              <block type="variables_set" id="shift_loss_4">
-                                                <field name="VAR" id="loss_4">Loss 4</field>
-                                                <value name="VALUE">
-                                                  <block type="variables_get" id="get_loss_5">
-                                                    <field name="VAR" id="loss_5">Loss 5</field>
+                                              <block type="list_get" id="get_first_num_loss">
+                                                <field name="VARIABLE" id="labouchere_first">First Number</field>
+                                                <value name="LIST">
+                                                  <block type="variables_get" id="get_split_list_loss">
+                                                    <field name="VAR" id="split_list">Split List</field>
+                                                  </block>
+                                                </value>
+                                                <value name="INDEX">
+                                                  <block type="math_number">
+                                                    <field name="NUM">0</field>
                                                   </block>
                                                 </value>
                                                 <next>
-                                                  <block type="variables_set" id="shift_loss_5">
-                                                    <field name="VAR" id="loss_5">Loss 5</field>
-                                                    <value name="VALUE">
-                                                      <block type="variables_get" id="get_loss_6">
-                                                        <field name="VAR" id="loss_6">Loss 6</field>
+                                                  <block type="list_length" id="get_list_length_loss">
+                                                    <field name="VARIABLE" id="list_length">List Length</field>
+                                                    <value name="LIST">
+                                                      <block type="variables_get" id="get_split_list_loss2">
+                                                        <field name="VAR" id="split_list">Split List</field>
                                                       </block>
                                                     </value>
                                                     <next>
-                                                      <block type="variables_set" id="shift_loss_6">
-                                                        <field name="VAR" id="loss_6">Loss 6</field>
-                                                        <value name="VALUE">
-                                                          <block type="variables_get" id="get_loss_7">
-                                                            <field name="VAR" id="loss_7">Loss 7</field>
+                                                      <block type="math_arithmetic" id="calc_last_index_loss">
+                                                        <field name="OP">MINUS</field>
+                                                        <value name="A">
+                                                          <block type="variables_get" id="get_list_length_loss">
+                                                            <field name="VAR" id="list_length">List Length</field>
+                                                          </block>
+                                                        </value>
+                                                        <value name="B">
+                                                          <block type="math_number">
+                                                            <field name="NUM">1</field>
                                                           </block>
                                                         </value>
                                                         <next>
-                                                          <block type="variables_set" id="shift_loss_7">
-                                                            <field name="VAR" id="loss_7">Loss 7</field>
-                                                            <value name="VALUE">
-                                                              <block type="variables_get" id="get_loss_8">
-                                                                <field name="VAR" id="loss_8">Loss 8</field>
+                                                          <block type="list_get" id="get_last_num_loss">
+                                                            <field name="VARIABLE" id="labouchere_last">Last Number</field>
+                                                            <value name="LIST">
+                                                              <block type="variables_get" id="get_split_list_loss3">
+                                                                <field name="VAR" id="split_list">Split List</field>
+                                                              </block>
+                                                            </value>
+                                                            <value name="INDEX">
+                                                              <block type="variables_get" id="get_last_index_loss">
+                                                                <field name="VAR" id="calc_last_index_loss_output">Result</field>
                                                               </block>
                                                             </value>
                                                             <next>
-                                                              <block type="variables_set" id="shift_loss_8">
-                                                                <field name="VAR" id="loss_8">Loss 8</field>
+                                                              <block type="variables_set" id="set_stake_loss_labouchere">
+                                                                <field name="VAR" id="LmU[8ZH:2aZ)m-5^SQ#w">Initial Amount</field>
                                                                 <value name="VALUE">
-                                                                  <block type="variables_get" id="get_loss_9">
-                                                                    <field name="VAR" id="loss_9">Loss 9</field>
-                                                                  </block>
-                                                                </value>
-                                                                <next>
-                                                                  <block type="variables_set" id="shift_loss_9">
-                                                                    <field name="VAR" id="loss_9">Loss 9</field>
-                                                                    <value name="VALUE">
-                                                                      <block type="variables_get" id="get_loss_10">
-                                                                        <field name="VAR" id="loss_10">Loss 10</field>
-                                                                      </block>
-                                                                    </value>
-                                                                    <next>
-                                                                      <block type="variables_set" id="shift_loss_10">
-                                                                        <field name="VAR" id="loss_10">Loss 10</field>
-                                                                        <value name="VALUE">
-                                                                          <block type="variables_get" id="get_loss_11">
-                                                                            <field name="VAR" id="loss_11">Loss 11</field>
+                                                                  <block type="math_arithmetic">
+                                                                    <field name="OP">MULTIPLY</field>
+                                                                    <value name="A">
+                                                                      <block type="math_arithmetic">
+                                                                        <field name="OP">ADD</field>
+                                                                        <value name="A">
+                                                                          <block type="variables_get" id="get_first_num_loss2">
+                                                                            <field name="VAR" id="labouchere_first">First Number</field>
                                                                           </block>
                                                                         </value>
-                                                                        <next>
-                                                                          <block type="variables_set" id="shift_loss_11">
-                                                                            <field name="VAR" id="loss_11">Loss 11</field>
-                                                                            <value name="VALUE">
-                                                                              <block type="variables_get" id="get_loss_12">
-                                                                                <field name="VAR" id="loss_12">Loss 12</field>
-                                                                              </block>
-                                                                            </value>
-                                                                            <next>
-                                                                              <block type="variables_set" id="shift_loss_12">
-                                                                                <field name="VAR" id="loss_12">Loss 12</field>
-                                                                                <value name="VALUE">
-                                                                                  <block type="variables_get" id="get_loss_13">
-                                                                                    <field name="VAR" id="loss_13">Loss 13</field>
-                                                                                  </block>
-                                                                                </value>
-                                                                                <next>
-                                                                                  <block type="variables_set" id="shift_loss_13">
-                                                                                    <field name="VAR" id="loss_13">Loss 13</field>
-                                                                                    <value name="VALUE">
-                                                                                      <block type="variables_get" id="get_loss_14">
-                                                                                        <field name="VAR" id="loss_14">Loss 14</field>
-                                                                                      </block>
-                                                                                    </value>
-                                                                                    <next>
-                                                                                      <block type="variables_set" id="shift_loss_14">
-                                                                                        <field name="VAR" id="loss_14">Loss 14</field>
-                                                                                        <value name="VALUE">
-                                                                                          <block type="variables_get" id="get_loss_15">
-                                                                                            <field name="VAR" id="loss_15">Loss 15</field>
-                                                                                          </block>
-                                                                                        </value>
-                                                                                        <next>
-                                                                                          <block type="variables_set" id="set_current_loss">
-                                                                                            <field name="VAR" id="loss_15">Loss 15</field>
-                                                                                            <value name="VALUE">
-                                                                                              <block type="math_single" id="abs_current_loss">
-                                                                                                <field name="OP">ABS</field>
-                                                                                                <value name="NUM">
-                                                                                                  <block type="read_details" id="read_current_loss">
-                                                                                                    <field name="DETAIL_INDEX">4</field>
-                                                                                                  </block>
-                                                                                                </value>
-                                                                                              </block>
-                                                                                            </value>
-                                                                                            <next>
-                                                                                              <block type="controls_if" id="fibonacci_recovery_condition">
-                                                                                                <mutation xmlns="http://www.w3.org/1999/xhtml" elseif="10" else="1"></mutation>
-                                                                                                <value name="IF0">
-                                                                                                  <block type="logic_compare" id="check_7_losses">
-                                                                                                    <field name="OP">EQ</field>
-                                                                                                    <value name="A">
-                                                                                                      <block type="variables_get" id="get_consec_losses">
-                                                                                                        <field name="VAR" id="consecutive_losses">Consecutive Losses</field>
-                                                                                                      </block>
-                                                                                                    </value>
-                                                                                                    <value name="B">
-                                                                                                      <block type="math_number" id="num_7">
-                                                                                                        <field name="NUM">7</field>
-                                                                                                      </block>
-                                                                                                    </value>
-                                                                                                  </block>
-                                                                                                </value>
-                                                                                                <statement name="DO0">
-                                                                                                  <block type="variables_set" id="set_recovery_mode">
-                                                                                                    <field name="VAR" id="recovery_mode">Recovery Mode</field>
-                                                                                                    <value name="VALUE">
-                                                                                                      <block type="math_number" id="recovery_mode_on">
-                                                                                                        <field name="NUM">1</field>
-                                                                                                      </block>
-                                                                                                    </value>
-                                                                                                    <next>
-                                                                                                      <block type="variables_set" id="set_base_recovery_amount">
-                                                                                                        <field name="VAR" id="base_recovery_amount">Base Recovery Amount</field>
-                                                                                                        <value name="VALUE">
-                                                                                                          <block type="math_arithmetic" id="sum_step1">
-                                                                                                            <field name="OP">ADD</field>
-                                                                                                            <value name="A">
-                                                                                                              <block type="variables_get" id="get_loss9">
-                                                                                                                <field name="VAR" id="loss_9">Loss 9</field>
-                                                                                                              </block>
-                                                                                                            </value>
-                                                                                                            <value name="B">
-                                                                                                              <block type="math_arithmetic" id="sum_step2">
-                                                                                                                <field name="OP">MINUS</field>
-                                                                                                                <value name="A">
-                                                                                                                  <block type="variables_get" id="get_loss10">
-                                                                                                                    <field name="VAR" id="loss_10">Loss 10</field>
-                                                                                                                  </block>
-                                                                                                                </value>
-                                                                                                                <value name="B">
-                                                                                                                  <block type="math_arithmetic" id="sum_step3">
-                                                                                                                    <field name="OP">ADD</field>
-                                                                                                                    <value name="A">
-                                                                                                                      <block type="variables_get" id="get_loss11">
-                                                                                                                        <field name="VAR" id="loss_11">Loss 11</field>
-                                                                                                                      </block>
-                                                                                                                    </value>
-                                                                                                                    <value name="B">
-                                                                                                                      <block type="math_arithmetic" id="sum_step4">
-                                                                                                                        <field name="OP">MINUS</field>
-                                                                                                                        <value name="A">
-                                                                                                                          <block type="variables_get" id="get_loss12">
-                                                                                                                            <field name="VAR" id="loss_12">Loss 12</field>
-                                                                                                                          </block>
-                                                                                                                        </value>
-                                                                                                                        <value name="B">
-                                                                                                                          <block type="math_arithmetic" id="sum_step5">
-                                                                                                                            <field name="OP">ADD</field>
-                                                                                                                            <value name="A">
-                                                                                                                              <block type="variables_get" id="get_loss13">
-                                                                                                                                <field name="VAR" id="loss_13">Loss 13</field>
-                                                                                                                              </block>
-                                                                                                                            </value>
-                                                                                                                            <value name="B">
-                                                                                                                              <block type="math_arithmetic" id="sum_step6">
-                                                                                                                                <field name="OP">MINUS</field>
-                                                                                                                                <value name="A">
-                                                                                                                                  <block type="variables_get" id="get_loss14">
-                                                                                                                                    <field name="VAR" id="loss_14">Loss 14</field>
-                                                                                                                                  </block>
-                                                                                                                                </value>
-                                                                                                                                <value name="B">
-                                                                                                                                  <block type="variables_get" id="get_loss15">
-                                                                                                                                    <field name="VAR" id="loss_15">Loss 15</field>
-                                                                                                                                  </block>
-                                                                                                                                </value>
-                                                                                                                              </block>
-                                                                                                                            </value>
-                                                                                                                          </block>
-                                                                                                                        </value>
-                                                                                                                      </block>
-                                                                                                                    </value>
-                                                                                                                  </block>
-                                                                                                                </value>
-                                                                                                              </block>
-                                                                                                            </value>
-                                                                                                          </block>
-                                                                                                        </value>
-                                                                                                        <next>
-                                                                                                          <block type="variables_set" id="set_first_fib_stake">
-                                                                                                            <field name="VAR" id="LmU[8ZH:2aZ)m-5^SQ#w">Initial Amount</field>
-                                                                                                            <value name="VALUE">
-                                                                                                              <block type="math_arithmetic" id="calc_first_fib_stake">
-                                                                                                                <field name="OP">MULTIPLY</field>
-                                                                                                                <value name="A">
-                                                                                                                  <block type="variables_get" id="get_base_recovery">
-                                                                                                                    <field name="VAR" id="base_recovery_amount">Base Recovery Amount</field>
-                                                                                                                  </block>
-                                                                                                                </value>
-                                                                                                                <value name="B">
-                                                                                                                  <block type="variables_get" id="get_fib_current">
-                                                                                                                    <field name="VAR" id="fib_current">Fib Current</field>
-                                                                                                                  </block>
-                                                                                                                </value>
-                                                                                                              </block>
-                                                                                                            </value>
-                                                                                                          </block>
-                                                                                                        </next>
-                                                                                                      </block>
-                                                                                                    </next>
-                                                                                                  </block>
-                                                                                                </statement>
-                                                                                                <value name="IF1">
-                                                                                                  <block type="logic_compare" id="check_in_recovery">
-                                                                                                    <field name="OP">EQ</field>
-                                                                                                    <value name="A">
-                                                                                                      <block type="variables_get" id="get_recovery_mode">
-                                                                                                        <field name="VAR" id="recovery_mode">Recovery Mode</field>
-                                                                                                      </block>
-                                                                                                    </value>
-                                                                                                    <value name="B">
-                                                                                                      <block type="math_number" id="num_1">
-                                                                                                        <field name="NUM">1</field>
-                                                                                                      </block>
-                                                                                                    </value>
-                                                                                                  </block>
-                                                                                                </value>
-                                                                                                <statement name="DO1">
-                                                                                                  <block type="variables_set" id="update_fib_temp">
-                                                                                                    <field name="VAR" id="fib_temp">Fib Temp</field>
-                                                                                                    <value name="VALUE">
-                                                                                                      <block type="variables_get" id="get_fib_current_temp">
-                                                                                                        <field name="VAR" id="fib_current">Fib Current</field>
-                                                                                                      </block>
-                                                                                                    </value>
-                                                                                                    <next>
-                                                                                                      <block type="variables_set" id="update_fib_current">
-                                                                                                        <field name="VAR" id="fib_current">Fib Current</field>
-                                                                                                        <value name="VALUE">
-                                                                                                          <block type="math_arithmetic" id="calc_next_fib">
-                                                                                                            <field name="OP">ADD</field>
-                                                                                                            <value name="A">
-                                                                                                              <block type="variables_get" id="get_fib_prev">
-                                                                                                                <field name="VAR" id="fib_prev">Fib Previous</field>
-                                                                                                              </block>
-                                                                                                            </value>
-                                                                                                            <value name="B">
-                                                                                                              <block type="variables_get" id="get_fib_current_old">
-                                                                                                                <field name="VAR" id="fib_temp">Fib Temp</field>
-                                                                                                              </block>
-                                                                                                            </value>
-                                                                                                          </block>
-                                                                                                        </value>
-                                                                                                        <next>
-                                                                                                          <block type="variables_set" id="update_fib_prev">
-                                                                                                            <field name="VAR" id="fib_prev">Fib Previous</field>
-                                                                                                            <value name="VALUE">
-                                                                                                              <block type="variables_get" id="get_fib_temp">
-                                                                                                                <field name="VAR" id="fib_temp">Fib Temp</field>
-                                                                                                              </block>
-                                                                                                            </value>
-                                                                                                            <next>
-                                                                                                              <block type="variables_set" id="set_fib_stake">
-                                                                                                                <field name="VAR" id="LmU[8ZH:2aZ)m-5^SQ#w">Initial Amount</field>
-                                                                                                                <value name="VALUE">
-                                                                                                                  <block type="math_arithmetic" id="calc_fib_stake">
-                                                                                                                    <field name="OP">MULTIPLY</field>
-                                                                                                                    <value name="A">
-                                                                                                                      <block type="variables_get" id="get_base_recovery_again">
-                                                                                                                        <field name="VAR" id="base_recovery_amount">Base Recovery Amount</field>
-                                                                                                                      </block>
-                                                                                                                    </value>
-                                                                                                                    <value name="B">
-                                                                                                                      <block type="variables_get" id="get_updated_fib_current">
-                                                                                                                        <field name="VAR" id="fib_current">Fib Current</field>
-                                                                                                                      </block>
-                                                                                                                    </value>
-                                                                                                                  </block>
-                                                                                                                </value>
-                                                                                                              </block>
-                                                                                                            </next>
-                                                                                                          </block>
-                                                                                                        </next>
-                                                                                                      </block>
-                                                                                                    </next>
-                                                                                                  </block>
-                                                                                                </statement>
-                                                                                                <value name="IF2">
-                                                                                                  <block type="logic_compare" id="O`N|,QmXtp)8_9do%6Y;">
-                                                                                                    <field name="OP">EQ</field>
-                                                                                                    <value name="A">
-                                                                                                      <block type="variables_get" id="Q6yr5;;2wdk`h/b{9Z5W">
-                                                                                                        <field name="VAR" id="recovery_mode">Recovery Mode</field>
-                                                                                                      </block>
-                                                                                                    </value>
-                                                                                                    <value name="B">
-                                                                                                      <block type="math_number" id="Q,DCOu*he(SvJ,uv,Mu2">
-                                                                                                        <field name="NUM">2</field>
-                                                                                                      </block>
-                                                                                                    </value>
-                                                                                                  </block>
-                                                                                                </value>
-                                                                                                <statement name="DO2">
-                                                                                                  <block type="variables_set" id="update_fib_temp2">
-                                                                                                    <field name="VAR" id="fib_temp">Fib Temp</field>
-                                                                                                    <value name="VALUE">
-                                                                                                      <block type="variables_get" id="get_fib_current_temp2">
-                                                                                                        <field name="VAR" id="fib_current">Fib Current</field>
-                                                                                                      </block>
-                                                                                                    </value>
-                                                                                                    <next>
-                                                                                                      <block type="variables_set" id="update_fib_current2">
-                                                                                                        <field name="VAR" id="fib_current">Fib Current</field>
-                                                                                                        <value name="VALUE">
-                                                                                                          <block type="math_arithmetic" id="calc_next_fib2">
-                                                                                                            <field name="OP">ADD</field>
-                                                                                                            <value name="A">
-                                                                                                              <block type="variables_get" id="get_fib_prev2">
-                                                                                                                <field name="VAR" id="fib_prev">Fib Previous</field>
-                                                                                                              </block>
-                                                                                                            </value>
-                                                                                                            <value name="B">
-                                                                                                              <block type="variables_get" id="get_fib_current_old2">
-                                                                                                                <field name="VAR" id="fib_temp">Fib Temp</field>
-                                                                                                              </block>
-                                                                                                            </value>
-                                                                                                          </block>
-                                                                                                        </value>
-                                                                                                        <next>
-                                                                                                          <block type="variables_set" id="update_fib_prev2">
-                                                                                                            <field name="VAR" id="fib_prev">Fib Previous</field>
-                                                                                                            <value name="VALUE">
-                                                                                                              <block type="variables_get" id="get_fib_temp2">
-                                                                                                                <field name="VAR" id="fib_temp">Fib Temp</field>
-                                                                                                              </block>
-                                                                                                            </value>
-                                                                                                            <next>
-                                                                                                              <block type="variables_set" id="set_fib_stake2">
-                                                                                                                <field name="VAR" id="LmU[8ZH:2aZ)m-5^SQ#w">Initial Amount</field>
-                                                                                                                <value name="VALUE">
-                                                                                                                  <block type="math_arithmetic" id="calc_fib_stake2">
-                                                                                                                    <field name="OP">MULTIPLY</field>
-                                                                                                                    <value name="A">
-                                                                                                                      <block type="variables_get" id="get_base_recovery_again2">
-                                                                                                                        <field name="VAR" id="base_recovery_amount">Base Recovery Amount</field>
-                                                                                                                      </block>
-                                                                                                                    </value>
-                                                                                                                    <value name="B">
-                                                                                                                      <block type="variables_get" id="get_updated_fib_current2">
-                                                                                                                        <field name="VAR" id="fib_current">Fib Current</field>
-                                                                                                                      </block>
-                                                                                                                    </value>
-                                                                                                                  </block>
-                                                                                                                </value>
-                                                                                                              </block>
-                                                                                                            </next>
-                                                                                                          </block>
-                                                                                                        </next>
-                                                                                                      </block>
-                                                                                                    </next>
-                                                                                                  </block>
-                                                                                                </statement>
-                                                                                                <value name="IF3">
-                                                                                                  <block type="logic_compare" id="xp-mF7zxgnaf0[~4udhR">
-                                                                                                    <field name="OP">EQ</field>
-                                                                                                    <value name="A">
-                                                                                                      <block type="variables_get" id="@5}db]H(*@uupYasRreN">
-                                                                                                        <field name="VAR" id="recovery_mode">Recovery Mode</field>
-                                                                                                      </block>
-                                                                                                    </value>
-                                                                                                    <value name="B">
-                                                                                                      <block type="math_number" id="ujoL^nL1DWePto^KB4~W">
-                                                                                                        <field name="NUM">3</field>
-                                                                                                      </block>
-                                                                                                    </value>
-                                                                                                  </block>
-                                                                                                </value>
-                                                                                                <statement name="DO3">
-                                                                                                  <block type="variables_set" id="update_fib_temp3">
-                                                                                                    <field name="VAR" id="fib_temp">Fib Temp</field>
-                                                                                                    <value name="VALUE">
-                                                                                                      <block type="variables_get" id="get_fib_current_temp3">
-                                                                                                        <field name="VAR" id="fib_current">Fib Current</field>
-                                                                                                      </block>
-                                                                                                    </value>
-                                                                                                    <next>
-                                                                                                      <block type="variables_set" id="update_fib_current3">
-                                                                                                        <field name="VAR" id="fib_current">Fib Current</field>
-                                                                                                        <value name="VALUE">
-                                                                                                          <block type="math_arithmetic" id="calc_next_fib3">
-                                                                                                            <field name="OP">ADD</field>
-                                                                                                            <value name="A">
-                                                                                                              <block type="variables_get" id="get_fib_prev3">
-                                                                                                                <field name="VAR" id="fib_prev">Fib Previous</field>
-                                                                                                              </block>
-                                                                                                            </value>
-                                                                                                            <value name="B">
-                                                                                                              <block type="variables_get" id="get_fib_current_old3">
-                                                                                                                <field name="VAR" id="fib_temp">Fib Temp</field>
-                                                                                                              </block>
-                                                                                                            </value>
-                                                                                                          </block>
-                        
+                                                                        <value name="B">
+                                                                          <block type="variables_get" id="get_last_num_loss2">
+                                                                            <field name="VAR" id="labouchere_last">Last Number</field>
+                                                                          </block>
+                                                                        </value>
+                                                                      </block>
+                                                                    </value>
+                                                                    <value name="B">
+                                                                      <block type="variables_get" id="get_labouchere_base_loss2">
+                                                                        <field name="VAR" id="labouchere_base">Labouchère Base</field>
+                                                                      </block>
+                                                                    </value>
+                                                                  </block>
+                                                                </value>
+                                                              </block>
+                                                            </next>
+                                                          </block>
+                                                        </next>
+                                                      </block>
+                                                    </next>
+                                                  </block>
+                                                </next>
+                                              </block>
+                                            </next>
+                                          </block>
+                                        </next>
+                                      </block>
+                                    </statement>
+                                    <statement name="ELSE">
+                                      <!-- Existing loss handling code -->
+                                      <block type="variables_set" id="set_normal_stake_loss">
+                                        <field name="VAR" id="LmU[8ZH:2aZ)m-5^SQ#w">Initial Amount</field>
+                                        <value name="VALUE">
+                                          <block type="math_number" id="base_stake">
+                                            <field name="NUM">0.35</field>
+                                          </block>
+                                        </value>
+                                      </block>
+                                    </statement>
+                                  </block>
+                                </next>
+                              </block>
+                            </next>
+                          </block>
+                        </next>
+                      </block>
+                    </next>
+                  </block>
+                </next>
+              </block>
+            </next>
+          </block>
+        </statement>
+        <next>
+          <block type="text_join" id="Awm,_7YjX}j`^j0L@6`C">
+            <field name="VARIABLE" id="OqkY*.00B2j]PDsQDMDo">text4</field>
+            <statement name="STACK">
+              <block type="text_statement" id="$n6J:~ZYlxl,3(~?^e29">
+                <value name="TEXT">
+                  <shadow type="text" id="r.wvvH_Q/x#V?Pk;/L`F">
+                    <field name="TEXT"></field>
+                  </shadow>
+                  <block type="text" id="k1D]5mH|f(pEpZ_U.UUs">
+                    <field name="TEXT">Total Profit: </field>
+                  </block>
+                </value>
+                <next>
+                  <block type="text_statement" id="g]7)%kW2(gPBu-nB{R~/">
+                    <value name="TEXT">
+                      <shadow type="text" id="*S#,!-j6;XPk^sUL4!:t">
+                        <field name="TEXT"></field>
+                      </shadow>
+                      <block type="total_profit" id="#Lv}Zn+ugy}q-1B@~VYK"></block>
+                    </value>
+                  </block>
+                </next>
+              </block>
+            </statement>
+            <next>
+              <block type="notify" id="Quu7$[*?GhdVTgxmJg+3">
+                <field name="NOTIFICATION_TYPE">info</field>
+                <field name="NOTIFICATION_SOUND">silent</field>
+                <value name="MESSAGE">
+                  <block type="variables_get" id="p!SFeLU(+0,l6T-{{cF)">
+                    <field name="VAR" id="OqkY*.00B2j]PDsQDMDo">text4</field>
+                  </block>
+                </value>
+                <next>
+                  <block type="controls_if" id="profit_loss_check">
+                    <mutation xmlns="http://www.w3.org/1999/xhtml" elseif="1" else="1"></mutation>
+                    <value name="IF0">
+                      <block type="logic_compare" id="check_take_profit">
+                        <field name="OP">GTE</field>
+                        <value name="A">
+                          <block type="total_profit" id="total_profit_val"></block>
+                        </value>
+                        <value name="B">
+                          <block type="variables_get" id="get_take_profit">
+                            <field name="VAR" id="IuS7w^IfF%%reKqf6Qcq">Expected Profit</field>
+                          </block>
+                        </value>
+                      </block>
+                    </value>
+                    <statement name="DO0">
+                      <block type="text_print" id="print_take_profit">
+                        <value name="TEXT">
+                          <block type="text" id="take_profit_text">
+                            <field name="TEXT">Take Profit Target Reached. Stopping.</field>
+                          </block>
+                        </value>
+                      </block>
+                    </statement>
+                    <value name="IF1">
+                      <block type="logic_compare" id="check_total_loss">
+                        <field name="OP">LTE</field>
+                        <value name="A">
+                          <block type="total_profit" id="total_profit_val2"></block>
+                        </value>
+                        <value name="B">
+                          <block type="math_arithmetic" id="neg_total_loss">
+                            <field name="OP">MINUS</field>
+                            <value name="A">
+                              <block type="math_number" id="zero">
+                                <field name="NUM">0</field>
+                              </block>
+                            </value>
+                            <value name="B">
+                              <block type="variables_get" id="get_total_loss">
+                                <field name="VAR" id="]oGV^TW+pyAyI~)S*^8n">Max Loss Amount</field>
+                              </block>
+                            </value>
+                          </block>
+                        </value>
+                      </block>
+                    </value>
+                    <statement name="DO1">
+                      <block type="text_print" id="print_total_loss">
+                        <value name="TEXT">
+                          <block type="text" id="total_loss_text">
+                            <field name="TEXT">Total Loss Limit Reached. Stopping.</field>
+                          </block>
+                        </value>
+                      </block>
+                    </statement>
+                    <statement name="ELSE">
+                      <block type="timeout" id="timeout_continue">
+                        <statement name="TIMEOUTSTACK">
+                          <block type="trade_again" id="trade_again_block"></block>
+                        </statement>
+                        <value name="SECONDS">
+                          <block type="math_number" id="timeout_4_seconds">
+                            <field name="NUM">4</field>
+                          </block>
+                        </value>
+                      </block>
+                    </statement>
+                  </block>
+                </next>
+              </block>
+            </next>
+          </block>
+        </next>
+      </block>
+    </statement>
+  </block>
+  <block type="before_purchase" id="zejUj,s9[[qBFFN10v$j" deletable="false" x="0" y="2068">
+    <statement name="BEFOREPURCHASE_STACK">
+      <block type="ema_statement" id="#JBqQofbr`_%sL_!Yh?-">
+        <field name="VARIABLE" id="pI}UQ(kb./.`7x5^@eq`">ema</field>
+        <statement name="STATEMENT">
+          <block type="input_list" id="jY5(A%tP=T:3tA7[9}r+" deletable="false" movable="false">
+            <value name="INPUT_LIST">
+              <block type="ticks" id="6fGJ_D!$=_5rFe]E(OFi"></block>
+            </value>
+            <next>
+              <block type="period" id="TX5N3(R,!UF_518,_12p" deletable="false" movable="false">
+                <value name="PERIOD">
+                  <shadow type="math_number" id="9,:AF7gQ.1,rXe+L3drd">
+                    <field name="NUM">8</field>
+                  </shadow>
+                </value>
+              </block>
+            </next>
+          </block>
+        </statement>
+        <next>
+          <block type="variables_set" id="Vin]=vrzUy.cMu|JO1Dz">
+            <field name="VAR" id=",`Y]gHZe/MA.H+HvjCT0">EMA-8</field>
+            <value name="VALUE">
+              <block type="variables_get" id="$rn6Q8P{SpDnj/}^YM{O">
+                <field name="VAR" id="pI}UQ(kb./.`7x5^@eq`">ema</field>
+              </block>
+            </value>
+            <next>
+              <block type="text_join" id="V]=A5BUa*,3CZd]rR@4z">
+                <field name="VARIABLE" id="1#-k9aznVA607^7go@:W">text1</field>
+                <statement name="STACK">
+                  <block type="text_statement" id="eni=[Ls!#Tp;^jY`s(Bw">
+                    <value name="TEXT">
+                      <shadow type="text" id="1cQu@mX#HOjU_UVRQEJK">
+                        <field name="TEXT"></field>
+                      </shadow>
+                      <block type="text" id="?E(i?7]`tF6lrrj($#g3">
+                        <field name="TEXT">EMA-8: </field>
+                      </block>
+                    </value>
+                    <next>
+                      <block type="text_statement" id="*+xOyeev;6CnJ]6+kq0#">
+                        <value name="TEXT">
+                          <shadow type="text" id="8%mj6A-4*t`{fe7REyZ{">
+                            <field name="TEXT"></field>
+                          </shadow>
+                          <block type="variables_get" id="{.l.fXZwzGO}^dL*xPdK">
+                            <field name="VAR" id=",`Y]gHZe/MA.H+HvjCT0">EMA-8</field>
+                          </block>
+                        </value>
+                      </block>
+                    </next>
+                  </block>
+                </statement>
+                <next>
+                  <block type="notify" id="|1VFk!n9zGP27.+Vj]0w">
+                    <field name="NOTIFICATION_TYPE">success</field>
+                    <field name="NOTIFICATION_SOUND">silent</field>
+                    <value name="MESSAGE">
+                      <block type="variables_get" id="!vXWzBG{n_CDX^[Y,fUw">
+                        <field name="VAR" id="1#-k9aznVA607^7go@:W">text1</field>
+                      </block>
+                    </value>
+                    <next>
+                      <block type="controls_if" id="PZ-)eqscRe}`X8|HB$N:">
+                        <mutation xmlns="http://www.w3.org/1999/xhtml" else="1"></mutation>
+                        <value name="IF0">
+                          <block type="logic_compare" id="call_condition">
+                            <field name="OP">GTE</field>
+                            <value name="A">
+                              <block type="tick" id="Dj(D06bxqv4bp7(hL*d1"></block>
+                            </value>
+                            <value name="B">
+                              <block type="variables_get" id="T*^]Xqmh~u)*Y%NTn+h%">
+                                <field name="VAR" id=",`Y]gHZe/MA.H+HvjCT0">EMA-8</field>
+                              </block>
+                            </value>
+                          </block>
+                        </value>
+                        <statement name="DO0">
+                          <block type="purchase" id="#jr;_g=gW+`_i[JnWOj9">
+                            <field name="PURCHASE_LIST">CALL</field>
+                          </block>
+                        </statement>
+                        <statement name="ELSE">
+                          <block type="timeout" id="Vj[$[wp5/G{8H=_AO8z=">
+                            <statement name="TIMEOUTSTACK">
+                              <block type="notify" id="Xz7GH:`;sx4kUq~$`I;C">
+                                <field name="NOTIFICATION_TYPE">success</field>
+                                <field name="NOTIFICATION_SOUND">silent</field>
+                                <value name="MESSAGE">
+                                  <block type="variables_get" id="Ut*Ob~1o5L?QL#9RPq7k">
+                                    <field name="VAR" id="1#-k9aznVA607^7go@:W">text1</field>
+                                  </block>
+                                </value>
+                              </block>
+                            </statement>
+                            <value name="SECONDS">
+                              <block type="math_number" id="g3Q8`QqwreRo0nrQJv86">
+                                <field name="NUM">2</field>
+                              </block>
+                            </value>
+                          </block>
+                        </statement>
+                      </block>
+                    </next>
+                  </block>
+                </next>
+              </block>
+            </next>
+          </block>
+        </next>
+      </block>
+    </statement>
+  </block>
+</xml>
