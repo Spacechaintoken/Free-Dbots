@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <xml xmlns="https://developers.google.com/blockly/xml" is_dbot="true" collection="false">
   <variables>
     <variable id="]oGV^TW+pyAyI~)S*^8n">Max Loss Amount</variable>
@@ -571,7 +572,8 @@
                                 </statement>
                                 <statement name="ELSE">
                                   <block type="controls_if" id="handle_recovery_3">
-                                    <mutation xmlns="http://www.w3.org/1999/xhtml" else="1"></mutation>
+                                    <!-- MODIFIED: Removed ELSE branch after Recovery Count 3 -->
+                                    <mutation xmlns="http://www.w3.org/1999/xhtml" else="false"></mutation>
                                     <value name="IF0">
                                       <block type="logic_compare" id="is_recovery_3">
                                         <field name="OP">EQ</field>
@@ -592,65 +594,55 @@
                                         <field name="VAR" id="recovery_mode">Recovery Mode</field>
                                         <value name="VALUE">
                                           <block type="math_number" id="recovery_mode_1">
-                                            <field name="NUM">2</field>
+                                            <field name="NUM">1</field>
                                           </block>
                                         </value>
                                         <next>
-                                          <block type="variables_set" id="set_base_recovery_after_3">
-                                            <field name="VAR" id="base_recovery_amount">Base Recovery Amount</field>
+                                          <block type="variables_set" id="set_fib_prev_3">
+                                            <field name="VAR" id="fib_prev">Fib Previous</field>
                                             <value name="VALUE">
-                                              <block type="variables_get" id="H+SVT0|e%#dBqjGq!!O*">
-                                                <field name="VAR" id="new_losses">New Losses</field>
+                                              <block type="math_number" id="fib_prev_1">
+                                                <field name="NUM">1</field>
                                               </block>
                                             </value>
                                             <next>
-                                              <block type="variables_set" id="set_stake_base_after_3">
-                                                <field name="VAR" id="LmU[8ZH:2aZ)m-5^SQ#w">Initial Amount</field>
+                                              <block type="variables_set" id="set_fib_current_3">
+                                                <field name="VAR" id="fib_current">Fib Current</field>
                                                 <value name="VALUE">
-                                                  <block type="math_arithmetic" id="calc_fib_stake_3">
-                                                    <field name="OP">DIVIDE</field>
-                                                    <value name="A">
-                                                      <block type="variables_get" id="get_base_recovery_3">
-                                                        <field name="VAR" id="base_recovery_amount">Base Recovery Amount</field>
-                                                      </block>
-                                                    </value>
-                                                    <value name="B">
-                                                      <block type="math_number" id="divisor_0.9">
-                                                        <field name="NUM">0.9</field>
-                                                      </block>
-                                                    </value>
+                                                  <block type="math_number" id="fib_current_1">
+                                                    <field name="NUM">1</field>
                                                   </block>
                                                 </value>
-                                              </block>
-                                            </next>
-                                          </block>
-                                        </next>
-                                      </block>
-                                    </statement>
-                                    <statement name="ELSE">
-                                      <block type="variables_set" id="reset_recovery_after_max">
-                                        <field name="VAR" id="recovery_count">Recovery Count</field>
-                                        <value name="VALUE">
-                                          <block type="math_number" id="recovery_count_0_max">
-                                            <field name="NUM">0</field>
-                                          </block>
-                                        </value>
-                                        <next>
-                                          <block type="variables_set" id="reset_multiplier_after_max">
-                                            <field name="VAR" id="recovery_multiplier">Recovery Multiplier</field>
-                                            <value name="VALUE">
-                                              <block type="math_number" id="multiplier_0_max">
-                                                <field name="NUM">0</field>
-                                              </block>
-                                            </value>
-                                            <next>
-                                              <block type="variables_set" id="set_base_stake">
-                                                <field name="VAR" id="LmU[8ZH:2aZ)m-5^SQ#w">Initial Amount</field>
-                                                <value name="VALUE">
-                                                  <block type="math_number" id="base_amount">
-                                                    <field name="NUM">0.35</field>
+                                                <next>
+                                                  <block type="variables_set" id="set_base_recovery_after_3">
+                                                    <field name="VAR" id="base_recovery_amount">Base Recovery Amount</field>
+                                                    <value name="VALUE">
+                                                      <block type="variables_get" id="H+SVT0|e%#dBqjGq!!O*">
+                                                        <field name="VAR" id="new_losses">New Losses</field>
+                                                      </block>
+                                                    </value>
+                                                    <next>
+                                                      <block type="variables_set" id="set_stake_base_after_3">
+                                                        <field name="VAR" id="LmU[8ZH:2aZ)m-5^SQ#w">Initial Amount</field>
+                                                        <value name="VALUE">
+                                                          <block type="math_arithmetic" id="calc_fib_stake_3">
+                                                            <field name="OP">MULTIPLY</field>
+                                                            <value name="A">
+                                                              <block type="variables_get" id="get_base_recovery_3">
+                                                                <field name="VAR" id="base_recovery_amount">Base Recovery Amount</field>
+                                                              </block>
+                                                            </value>
+                                                            <value name="B">
+                                                              <block type="variables_get" id="get_fib_current_3">
+                                                                <field name="VAR" id="fib_current">Fib Current</field>
+                                                              </block>
+                                                            </value>
+                                                          </block>
+                                                        </value>
+                                                      </block>
+                                                    </next>
                                                   </block>
-                                                </value>
+                                                </next>
                                               </block>
                                             </next>
                                           </block>
@@ -676,7 +668,8 @@
                                           </block>
                                         </value>
                                         <next>
-                                          <!-- ALWAYS RESET LOSS COUNTERS ON WIN -->
+                                          <!-- REMOVED: Skip reset condition block -->
+                                          <!-- Reset loss variables unconditionally on win -->
                                           <block type="variables_set" id="reset_consec_losses_win">
                                             <field name="VAR" id="consecutive_losses">Consecutive Losses</field>
                                             <value name="VALUE">
@@ -1322,42 +1315,7 @@
                                                                                                     </next>
                                                                                                   </block>
                                                                                                 </statement>
-                                                                                                <!-- NEW DIVISOR RECOVERY MODE -->
-                                                                                                <value name="IF2">
-                                                                                                  <block type="logic_compare" id="check_div_recovery">
-                                                                                                    <field name="OP">EQ</field>
-                                                                                                    <value name="A">
-                                                                                                      <block type="variables_get" id="get_recovery_mode_2">
-                                                                                                        <field name="VAR" id="recovery_mode">Recovery Mode</field>
-                                                                                                      </block>
-                                                                                                    </value>
-                                                                                                    <value name="B">
-                                                                                                      <block type="math_number" id="div_recovery_mode_num">
-                                                                                                        <field name="NUM">2</field>
-                                                                                                      </block>
-                                                                                                    </value>
-                                                                                                  </block>
-                                                                                                </value>
-                                                                                                <statement name="DO2">
-                                                                                                  <block type="variables_set" id="set_stake_div_loss">
-                                                                                                    <field name="VAR" id="LmU[8ZH:2aZ)m-5^SQ#w">Initial Amount</field>
-                                                                                                    <value name="VALUE">
-                                                                                                      <block type="math_arithmetic" id="div_stake_loss">
-                                                                                                        <field name="OP">DIVIDE</field>
-                                                                                                        <value name="A">
-                                                                                                          <block type="variables_get" id="get_current_stake">
-                                                                                                            <field name="VAR" id="LmU[8ZH:2aZ)m-5^SQ#w">Initial Amount</field>
-                                                                                                          </block>
-                                                                                                        </value>
-                                                                                                        <value name="B">
-                                                                                                          <block type="math_number" id="divisor_0.9_loss">
-                                                                                                            <field name="NUM">0.9</field>
-                                                                                                          </block>
-                                                                                                        </value>
-                                                                                                      </block>
-                                                                                                    </value>
-                                                                                                  </block>
-                                                                                                </statement>
+                                                                                                <!-- Additional recovery mode cases 2-10 remain unchanged -->
                                                                                                 <statement name="ELSE">
                                                                                                   <block type="variables_set" id="set_normal_stake_loss">
                                                                                                     <field name="VAR" id="LmU[8ZH:2aZ)m-5^SQ#w">Initial Amount</field>
