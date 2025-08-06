@@ -910,8 +910,6 @@
               </block>
             </next>
           </block>
-          
-          <!-- ========= ADAPTIVE TIMEOUT ========= -->
           <next>
             <block type="variables_set">
               <field name="VAR" id="timeout_duration">Timeout Duration</field>
