@@ -363,53 +363,92 @@
                               </block>
                             </statement>
                             <next>
-                              <block type="controls_if" id="ml)BM;_]:,.pu#`[)F!v">
+                              <block type="controls_if" id="recovery_win_reset">
                                 <value name="IF0">
-                                  <block type="logic_compare" id="b-w)m87wH:!t-v@l}qa:">
+                                  <block type="logic_compare" id="check_recovery_mode_win">
                                     <field name="OP">EQ</field>
                                     <value name="A">
-                                      <block type="variables_get" id="O@.cVVN`viow35h2Y(?N">
-                                        <field name="VAR" id="consecutive_wins">Consecutive Wins</field>
+                                      <block type="variables_get" id="get_recovery_mode_win">
+                                        <field name="VAR" id="recovery_mode">Recovery Mode</field>
                                       </block>
                                     </value>
                                     <value name="B">
-                                      <block type="math_number" id="u{!rme8~IiV:tZ%cGjRG">
-                                        <field name="NUM">2</field>
+                                      <block type="math_number" id="recovery_mode_active">
+                                        <field name="NUM">1</field>
                                       </block>
                                     </value>
                                   </block>
                                 </value>
                                 <statement name="DO0">
-                                  <block type="variables_set" id="9SPf`,%Wamz+M$eYh.[8">
+                                  <block type="variables_set" id="reset_stake_after_recovery_win">
                                     <field name="VAR" id="LmU[8ZH:2aZ)m-5^SQ#w">Initial Amount</field>
                                     <value name="VALUE">
-                                      <block type="math_number" id="iX/.[YkLIWJ.+g;@g*Gw">
+                                      <block type="math_number" id="base_stake_after_recovery">
                                         <field name="NUM">0.35</field>
                                       </block>
                                     </value>
                                     <next>
-                                      <block type="variables_set" id="+F2d62.~a/jItd|njs#v">
-                                        <field name="VAR" id="consecutive_losses">Consecutive Losses</field>
+                                      <block type="variables_set" id="reset_recovery_mode_win">
+                                        <field name="VAR" id="recovery_mode">Recovery Mode</field>
                                         <value name="VALUE">
-                                          <block type="math_number" id="yxk1[E#0E!E[giheZl/+">
+                                          <block type="math_number" id="disable_recovery_mode">
                                             <field name="NUM">0</field>
                                           </block>
                                         </value>
-                                        <next>
-                                          <block type="notify" id="V`d![.Fp,9QvSiInJ,NZ">
-                                            <field name="NOTIFICATION_TYPE">warn</field>
-                                            <field name="NOTIFICATION_SOUND">announcement</field>
-                                            <value name="MESSAGE">
-                                              <block type="text" id=")$-cSM4.QJKmMja?#AC;">
-                                                <field name="TEXT">Reset: Back to base stake after 2 consecutive wins </field>
-                                              </block>
-                                            </value>
-                                          </block>
-                                        </next>
                                       </block>
                                     </next>
                                   </block>
                                 </statement>
+                                <next>
+                                  <block type="controls_if" id="ml)BM;_]:,.pu#`[)F!v">
+                                    <value name="IF0">
+                                      <block type="logic_compare" id="b-w)m87wH:!t-v@l}qa:">
+                                        <field name="OP">EQ</field>
+                                        <value name="A">
+                                          <block type="variables_get" id="O@.cVVN`viow35h2Y(?N">
+                                            <field name="VAR" id="consecutive_wins">Consecutive Wins</field>
+                                          </block>
+                                        </value>
+                                        <value name="B">
+                                          <block type="math_number" id="u{!rme8~IiV:tZ%cGjRG">
+                                            <field name="NUM">2</field>
+                                          </block>
+                                        </value>
+                                      </block>
+                                    </value>
+                                    <statement name="DO0">
+                                      <block type="variables_set" id="9SPf`,%Wamz+M$eYh.[8">
+                                        <field name="VAR" id="LmU[8ZH:2aZ)m-5^SQ#w">Initial Amount</field>
+                                        <value name="VALUE">
+                                          <block type="math_number" id="iX/.[YkLIWJ.+g;@g*Gw">
+                                            <field name="NUM">0.35</field>
+                                          </block>
+                                        </value>
+                                        <next>
+                                          <block type="variables_set" id="+F2d62.~a/jItd|njs#v">
+                                            <field name="VAR" id="consecutive_losses">Consecutive Losses</field>
+                                            <value name="VALUE">
+                                              <block type="math_number" id="yxk1[E#0E!E[giheZl/+">
+                                                <field name="NUM">0</field>
+                                              </block>
+                                            </value>
+                                            <next>
+                                              <block type="notify" id="V`d![.Fp,9QvSiInJ,NZ">
+                                                <field name="NOTIFICATION_TYPE">warn</field>
+                                                <field name="NOTIFICATION_SOUND">announcement</field>
+                                                <value name="MESSAGE">
+                                                  <block type="text" id=")$-cSM4.QJKmMja?#AC;">
+                                                    <field name="TEXT">Reset: Back to base stake after 2 consecutive wins </field>
+                                                  </block>
+                                                </value>
+                                              </block>
+                                            </next>
+                                          </block>
+                                        </next>
+                                      </block>
+                                    </statement>
+                                  </block>
+                                </next>
                               </block>
                             </next>
                           </block>
@@ -515,93 +554,142 @@
                                   </block>
                                 </value>
                                 <next>
-                                  <block type="controls_if" id="tiered_recovery">
+                                  <block type="controls_if" id="recovery_loss_reset">
                                     <value name="IF0">
-                                      <block type="logic_compare" id="HdZ0ELY+{t.d,]L$dRlO">
+                                      <block type="logic_compare" id="check_recovery_mode_loss">
                                         <field name="OP">EQ</field>
                                         <value name="A">
-                                          <block type="variables_get" id="0`aFb.h/@dJWp;404DtQ">
-                                            <field name="VAR" id="consecutive_losses">Consecutive Losses</field>
+                                          <block type="variables_get" id="get_recovery_mode_loss">
+                                            <field name="VAR" id="recovery_mode">Recovery Mode</field>
                                           </block>
                                         </value>
                                         <value name="B">
-                                          <block type="math_number" id="aU=,5!8P8ZsTb=HHG,bX">
-                                            <field name="NUM">3</field>
+                                          <block type="math_number" id="recovery_mode_active_loss">
+                                            <field name="NUM">1</field>
                                           </block>
                                         </value>
                                       </block>
                                     </value>
                                     <statement name="DO0">
-                                      <block type="controls_if" id="calculate_recovery">
-                                        <mutation else="1"></mutation>
-                                        <value name="IF0">
-                                          <block type="logic_compare" id="check_min_amount">
-                                            <field name="OP">LT</field>
-                                            <value name="A">
-                                              <block type="math_arithmetic" id="calc_recovery_stake">
-                                                <field name="OP">DIVIDE</field>
-                                                <value name="A">
-                                                  <block type="variables_get" id="get_unrecovered">
-                                                    <field name="VAR" id="unrecovered_loss">Unrecovered Loss</field>
-                                                  </block>
-                                                </value>
-                                                <value name="B">
-                                                  <block type="math_number" id="recovery_factor">
-                                                    <field name="NUM">0.9</field>
-                                                  </block>
-                                                </value>
-                                              </block>
-                                            </value>
-                                            <value name="B">
-                                              <block type="math_number" id="min_stake">
-                                                <field name="NUM">0.35</field>
-                                              </block>
-                                            </value>
+                                      <block type="variables_set" id="reset_stake_after_recovery_loss">
+                                        <field name="VAR" id="LmU[8ZH:2aZ)m-5^SQ#w">Initial Amount</field>
+                                        <value name="VALUE">
+                                          <block type="math_number" id="base_stake_after_loss">
+                                            <field name="NUM">0.35</field>
                                           </block>
                                         </value>
-                                        <statement name="DO0">
-                                          <block type="variables_set" id="set_initial_amount">
-                                            <field name="VAR" id="LmU[8ZH:2aZ)m-5^SQ#w">Initial Amount</field>
-                                            <value name="VALUE">
-                                              <block type="math_number" id="use_min_stake">
-                                                <field name="NUM">0.35</field>
-                                              </block>
-                                            </value>
-                                          </block>
-                                        </statement>
-                                        <statement name="ELSE">
-                                          <block type="variables_set" id="set_recovery_amount">
-                                            <field name="VAR" id="LmU[8ZH:2aZ)m-5^SQ#w">Initial Amount</field>
-                                            <value name="VALUE">
-                                              <block type="math_arithmetic" id="calc_net_recovery">
-                                                <field name="OP">DIVIDE</field>
-                                                <value name="A">
-                                                  <block type="variables_get" id="get_net_loss">
-                                                    <field name="VAR" id="unrecovered_loss">Unrecovered Loss</field>
-                                                  </block>
-                                                </value>
-                                                <value name="B">
-                                                  <block type="math_number" id="recovery_divisor">
-                                                    <field name="NUM">0.9</field>
-                                                  </block>
-                                                </value>
-                                              </block>
-                                            </value>
-                                          </block>
-                                        </statement>
                                         <next>
-                                          <block type="notify" id="URN)lwC3{-k8rO0inp`=">
-                                            <field name="NOTIFICATION_TYPE">info</field>
-                                            <field name="NOTIFICATION_SOUND">silent</field>
-                                            <value name="MESSAGE">
-                                              <block type="text" id="EZw9D]5Byf6J$DMh7$GE">
-                                                <field name="TEXT">Recovery: Net loss recovery activated</field>
+                                          <block type="variables_set" id="reset_recovery_mode_loss">
+                                            <field name="VAR" id="recovery_mode">Recovery Mode</field>
+                                            <value name="VALUE">
+                                              <block type="math_number" id="disable_recovery_mode_loss">
+                                                <field name="NUM">0</field>
                                               </block>
                                             </value>
                                           </block>
                                         </next>
                                       </block>
                                     </statement>
+                                    <next>
+                                      <block type="controls_if" id="tiered_recovery">
+                                        <value name="IF0">
+                                          <block type="logic_compare" id="HdZ0ELY+{t.d,]L$dRlO">
+                                            <field name="OP">EQ</field>
+                                            <value name="A">
+                                              <block type="variables_get" id="0`aFb.h/@dJWp;404DtQ">
+                                                <field name="VAR" id="consecutive_losses">Consecutive Losses</field>
+                                              </block>
+                                            </value>
+                                            <value name="B">
+                                              <block type="math_number" id="aU=,5!8P8ZsTb=HHG,bX">
+                                                <field name="NUM">3</field>
+                                              </block>
+                                            </value>
+                                          </block>
+                                        </value>
+                                        <statement name="DO0">
+                                          <block type="variables_set" id="set_recovery_mode">
+                                            <field name="VAR" id="recovery_mode">Recovery Mode</field>
+                                            <value name="VALUE">
+                                              <block type="math_number" id="enable_recovery_mode">
+                                                <field name="NUM">1</field>
+                                              </block>
+                                            </value>
+                                            <next>
+                                              <block type="controls_if" id="calculate_recovery">
+                                                <mutation else="1"></mutation>
+                                                <value name="IF0">
+                                                  <block type="logic_compare" id="check_min_amount">
+                                                    <field name="OP">LT</field>
+                                                    <value name="A">
+                                                      <block type="math_arithmetic" id="calc_recovery_stake">
+                                                        <field name="OP">DIVIDE</field>
+                                                        <value name="A">
+                                                          <block type="variables_get" id="get_unrecovered">
+                                                            <field name="VAR" id="unrecovered_loss">Unrecovered Loss</field>
+                                                          </block>
+                                                        </value>
+                                                        <value name="B">
+                                                          <block type="math_number" id="recovery_factor">
+                                                            <field name="NUM">0.9</field>
+                                                          </block>
+                                                        </value>
+                                                      </block>
+                                                    </value>
+                                                    <value name="B">
+                                                      <block type="math_number" id="min_stake">
+                                                        <field name="NUM">0.35</field>
+                                                      </block>
+                                                    </value>
+                                                  </block>
+                                                </value>
+                                                <statement name="DO0">
+                                                  <block type="variables_set" id="set_initial_amount">
+                                                    <field name="VAR" id="LmU[8ZH:2aZ)m-5^SQ#w">Initial Amount</field>
+                                                    <value name="VALUE">
+                                                      <block type="math_number" id="use_min_stake">
+                                                        <field name="NUM">0.35</field>
+                                                      </block>
+                                                    </value>
+                                                  </block>
+                                                </statement>
+                                                <statement name="ELSE">
+                                                  <block type="variables_set" id="set_recovery_amount">
+                                                    <field name="VAR" id="LmU[8ZH:2aZ)m-5^SQ#w">Initial Amount</field>
+                                                    <value name="VALUE">
+                                                      <block type="math_arithmetic" id="calc_net_recovery">
+                                                        <field name="OP">DIVIDE</field>
+                                                        <value name="A">
+                                                          <block type="variables_get" id="get_net_loss">
+                                                            <field name="VAR" id="unrecovered_loss">Unrecovered Loss</field>
+                                                          </block>
+                                                        </value>
+                                                        <value name="B">
+                                                          <block type="math_number" id="recovery_divisor">
+                                                            <field name="NUM">0.9</field>
+                                                          </block>
+                                                        </value>
+                                                      </block>
+                                                    </value>
+                                                  </block>
+                                                </statement>
+                                                <next>
+                                                  <block type="notify" id="URN)lwC3{-k8rO0inp`=">
+                                                    <field name="NOTIFICATION_TYPE">info</field>
+                                                    <field name="NOTIFICATION_SOUND">silent</field>
+                                                    <value name="MESSAGE">
+                                                      <block type="text" id="EZw9D]5Byf6J$DMh7$GE">
+                                                        <field name="TEXT">Recovery: Net loss recovery activated</field>
+                                                      </block>
+                                                    </value>
+                                                  </block>
+                                                </next>
+                                              </block>
+                                            </next>
+                                          </block>
+                                        </statement>
+                                      </block>
+                                    </next>
                                   </block>
                                 </next>
                               </block>
